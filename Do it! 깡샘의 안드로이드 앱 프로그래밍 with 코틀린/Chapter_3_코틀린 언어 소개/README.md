@@ -116,6 +116,7 @@ lateinit var data3: String   // 성공!
 lateinit 키워드로 선언한 변수는 동시에 초깃값을 할당하지 않아도 되지만, 2가지의 규칙을 지켜야 한다.
 <br>
 　　1. lateinit은 <b>var 키워드로 선언한 변수</b>에만 사용할 수 있다.
+<br>
 　　2. Int, Long, Short, Double, Float, Boolean, Byte 타입에는 사용할 수 없다.
 <br>
 <br>

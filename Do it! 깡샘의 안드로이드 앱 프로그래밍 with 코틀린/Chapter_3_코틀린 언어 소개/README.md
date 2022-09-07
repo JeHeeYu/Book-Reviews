@@ -74,3 +74,71 @@ fun main() {
   data = 20   // 성공!
 }
 </pre>
+### 타입 지정과 타입 추론
+코틀린에서 변수명 뒤에 콜론(:)을 추가해 타입을 명시할 수 있다.
+<br>
+대입하는 값에 따라 타입을 유추(타입 추론)할 수 있을 때는 생략할 수 있다.
+<pre>
+val data1: Int = 10   // 명시적으로 Int 타입 선언
+val data2 = 10        // 할당 값이 Int 타입이므로 자동으로 Int 타입 설정
+</pre>
+### 초깃값 할당
+코틀린에서 최상위에 선언한 변수나 클래스의 멤버 변수는 선언과 동시에 초깃값을 할당해야 한다.
+<br>
+함수 내부에서 선언한 변수는 선언과 동시에 초깃값을 할당하지 않아도 된다.
+<br>
+대신 변수를 이용하려고 하면 값을 할당하고 이용해야 한다.
+<pre>
+val data1: Int      // 오류!
+val data2 = 10      // 성공!
+
+fun someFun() {
+  val data3: Int
+  println("data3 : $data3")     // 오류!
+  data3 = 10
+  println("data3 : $data3")     // 성공!
+}
+
+class User {
+  val data4: Int        // 오류!
+  val data5: Int = 10   // 성공!
+
+}
+</pre>
+### 초기화 미루기
+변수를 선언하고 초깃값을 할당할 수 없는 경우에 사용하며, <b>lateinit</b> 키워드와 <b>lazy</b> 키워드를 사용한다.
+lateinit 키워드는 <b>초깃값을 할당할 것임을 명시적으로 선언</b> 할 때 사용한다.
+<pre>
+lateinit var data1: Int      // 오류!
+lateinit val data2: String   // 오류!
+lateinit var data3: String   // 성공!
+</pre>
+lateinit 키워드로 선언한 변수는 동시에 초깃값을 할당하지 않아도 되지만, 2가지의 규칙을 지켜야 한다.
+<br>
+　　1. lateinit은 <b>var 키워드로 선언한 변수</b>에만 사용할 수 있다.
+　　2. Int, Long, Short, Double, Float, Boolean, Byte 타입에는 사용할 수 없다.
+<br>
+<br>
+lazy 키워드는 by lazy { } 형식으로 선언한다.
+<br>
+소스에서 변수가 최초로 이용되는 순간 중괄호로 묶은 부분이 자동으로 실행되어, 그 결괏값이 변수의 초깃값으로 할당된다.
+<br>
+lazy 문의 중괄호 부분을 여러 줄로 작성하면 마지막 줄의 실행 결과가 변수의 초깃값이 된다.
+<pre>
+val data4: Int by lazy {
+  println("in lazy...")
+  10
+}
+
+fun main() {
+  println("in main...")
+  println(data4 + 10)
+  println(data4 + 10)
+}
+
+===== 실행 결과 ====
+in main...
+in lazy...
+20
+20
+</pre>

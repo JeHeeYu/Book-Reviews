@@ -1,6 +1,4 @@
 # 읽은 기술 서적 관련 내용 정리
-
-## Programing Language
 ||||||
 |:---:|:---:|:---:|:---:|:---:|
 |<img src="https://user-images.githubusercontent.com/87363461/188297802-a5194e29-27c6-430d-8520-24957e6eb35b.JPG" width="160" height="200">|<img src="https://user-images.githubusercontent.com/87363461/188298069-326e218c-2fd7-454b-97d1-416fcffa07ca.PNG" width="160" height="200">|<img src="https://user-images.githubusercontent.com/87363461/188312633-fa972fea-d3fd-4655-b5bb-52a8f6d8d1d5.JPG" width="160" height="200">|

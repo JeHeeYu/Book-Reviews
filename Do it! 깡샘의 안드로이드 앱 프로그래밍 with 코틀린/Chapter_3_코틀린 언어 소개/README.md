@@ -34,3 +34,28 @@ NULL과 관련된 오류를 사전에 잡을 수 있기 때문에, 보다 안전
 코틀린 언어가 제공하는 코루틴(Coroutines)이라는 기법을 이용하면 비동기 프로그래밍을 간소화할 수 있다.
 <br>
 네트워크 연동이나 데이터베이스 갱신과 같은 작업 시 프로그램을 간단하고 효율적으로 작성할 수 있다.
+## 코틀린의 파일 구성
+코틀린은 '.kt'  확장자를 가지며, package와 import 구문이 있다.
+<pre>
+package com.example.test3
+</pre>
+package 구문은 이 파일을 컴파일했을 때 만들어지는 클래스 파일의 위치를 나타낸다.
+<br>
+package 구문은 맨 처음 한 줄로 선언되며, 이 경우 com/example/test3 폴더에 생성된다.
+<br>
+<br>
+package 이름은 kt 파일의 위치와 상관없는 별도의 이름으로도 선언할 수 있다.
+<br>
+예를 들어, User.kt 파일이 com/example/test3에 있더라도, package ch3 처럼 선언할 수 있다.
+<br>
+물론 이렇게 선언했을 때 컴파일된 클래스 파일은 ch3 폴더에 생성된다.
+<br>
+<pre>
+import java.text.SimpleDateFormat
+import java.util.*
+</pre>
+import 구문은 package 구문 아래에 여러 줄 작성할 수 있다.
+<br>
+그리고 어떤 파일에 선언한 멤버(변수, 함수, 클래스)를 다른 코틀린 파일에서 참조할 때
+<br>
+두 파일을 같은 package로 선언했다면 import 구문 없이 사용할 수 있다.

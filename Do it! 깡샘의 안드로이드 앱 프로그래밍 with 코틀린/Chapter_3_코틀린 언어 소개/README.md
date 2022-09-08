@@ -399,3 +399,147 @@ mapOf() 함수를 이용해 Map 객체를 만들고 <String, String>처럼 제�
 따라서 Map 객체에 대입되는 데이터와 키의 값은 모두 String 타입이 된다.
 <br>
 결과와 같이 Pair 객체로 표현할 수도 있고, '키 to 값'의 형태로 대입할 수 있다.
+## 조건문과 반복문
+### if 조건문
+if~else 조건문은 결괏값을 반환하는 표현식으로도 사용할 수 있다.
+<pre>
+fun main() {
+    var data = 10
+    val result = if (data > 0) {
+        println("data > 0")
+        true
+    }
+    else {
+        println("data <= 0")
+        false
+    }
+    
+    println(result)
+}
+
+===== 실행 결과 =====
+data > 0
+true
+</pre>
+### when 조건문
+when 조건문에서 () 안에 넣은 데이터가 조건, 조건에 맞는 각 구문이 실행된다.
+<br>
+<br>
+정수 타입이 아닌 다른 타입도 지정할 수 있고, 타입으로도 지정할 수 있다.
+<br>
+또한 데이터의 범위로 지정할 수도  데이터를 명시하지 않고 조건만 명시할 수 있다.
+<pre>
+fun main() {
+    var data1 = 10
+    var data2 = "Hello"
+    
+    
+    when (data1) {      // Int 형 지정
+        10 -> println("data is 10")
+        20 -> println("data is 20")
+        else -> {
+            println("Data is Not Valid Data")
+        }
+    }
+    
+    when (data1) {      // 범위형 지정
+        in 1..10 -> println("data is 1..10")
+        else -> {
+            	println("Data is Not Valid Data")
+        }
+    }
+    
+    when (data2) {      // 문자열 지정
+    "Hello" -> println("data is Hello")
+    "World" -> println("data is World")
+    }
+    
+    when (data2) {      // String 형 지정
+    is String -> println("data is String")
+    else -> {
+        	println("data is not String")
+    	}
+    }
+    
+    when {
+        data1 <= 0 -> println("data is <= 0")
+        data1 > 100 -> println("data is > 100")
+        else -> println("data is valid")
+    }
+}
+
+===== 실행 결과 =====
+data is 10
+data is 1..10
+data is Hello
+data is String
+data is valid
+</pre>
+## for 반복문
+for 반복문에서는 주로 범위 연산자인 in을 사용한다.
+<br>
+또한 범위를 다양하게 지정할 수 있다.
+<pre>
+fun main() {
+    var data1: Int = 0
+    var data2: Int = 0
+    var data3: Int = 0
+    var data4: Int = 0
+    
+    for(i in 1..10) {       // 1부터 10까지 1씩 증가
+        data1 += i
+    }
+    
+    println(data1)
+    
+    for(i in 1 until 10) {    // 1부터 9까지 1씩 증가(마지막 숫자 미포함)
+        data2 += i
+    }
+    
+    println(data2)
+    
+    for(i in 2..10 step 2) {    // 2부터 10까지 2씩 증가
+        data3 += i
+    }
+    
+    println(data3)
+    
+    for(i in 10 downTo 1) {     // 10부터 1까지 1씩 감소
+        data4 += i
+    }
+    
+    println(data4)
+}
+
+===== 실행 결과 =====
+55
+45
+30
+55
+</pre>
+증감 조건을 숫자로 명시하지 않고 컬렉션 타입의 개수로도 반복할 수 있다.
+<br>
+indices는 컬렉션 타입의 인덱스 값을 의미하므로 for문을 반복하면서 0, 1, 2 값을 i에 대입한다.
+<br>
+만약 인덱스와 실제 데이터를 함께 가져오려면 withIndex() 함수를 사용한다.
+<pre>
+fun main() {
+    var data1 = arrayOf<Int>(10, 20, 30)
+    
+    for(i in data1.indices) {
+        print(data1[i])
+        if(i !== data1.size - 1) print(", ")
+    }
+    
+    println()
+    
+    for((index, value) in data1.withIndex()) {			// index의 값이 value에 할당
+        print(value)
+        if (index !== data1.size - 1) print(", ")
+    }
+}
+
+===== 실행 결과 =====
+10, 20, 30
+10, 20, 30
+</pre>

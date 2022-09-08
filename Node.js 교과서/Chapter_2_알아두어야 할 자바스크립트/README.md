@@ -282,4 +282,10 @@ async function FindAndSaveUser(Users) {
 </pre>
 위와 비교 시 코드가 상당히 짧아졌다. 함수 선언부를 일반 함수 대신 async function으로 교체하고, 프로미스 앞에 await을 붙였다.
 <br>
-이제 함수는 해당 프로미스가 resolove될 때까지 
+이제 함수는 해당 프로미스가 resolove될 때까지 기다린 뒤 다음 로직으로 넘어간다.
+<br>
+예를 들어, await Users.findOne({})이 resolve될 때까지 기다린 다음 user 변수를 초기화 한다.
+<br>
+<br>
+중첩되는 콜백 함수가 있을 경우 async/await 문법으로 바꾸는 것이 코드가 간결해지고 좋다.
+

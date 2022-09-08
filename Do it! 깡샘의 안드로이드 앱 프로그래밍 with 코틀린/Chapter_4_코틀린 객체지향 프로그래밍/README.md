@@ -42,7 +42,8 @@ name : Kim
 class User constructor() { }   // 주 생성자
 class User() { } // 키워드 생략 가능
 </pre>
-만약 클래스의 주 생성자를 선언하지 않으면 컴파일러가 매개변수가 없는 주 생성자를 자동으로 생성한다.
+만약 클래스의 주 생성자를 선언하지 않으면 컴파일러가 
+가 없는 주 생성자를 자동으로 생성한다.
 ### 주 생성자의 매개변수
 주 생성자를 선언할 때 필요에 따라 매개변수를 선언할 수도 있다.
 <br>
@@ -323,3 +324,170 @@ fun main() {
 }
 </pre>
 ## 클래스의 종류
+### 데이터 클래스
+데이터 클래스는 data 키워드로 선언하며, 자주 사용하는 데이터를 객체로 묶어 준다.
+<br>
+데이터 클래스는 VO(Value-Object) 클래스를 편하게 이용할 수 있게 해준다.
+<pre>
+class NonDataClass(val name: String, val email: String, val age: Int) { }	// data 키워드가 없음
+data class DataClass(val name: String, val email: String, val age: Int) { }	// data 키워드가 있음
+</pre>
+
+### equals()
+equals() 함수는 객체의 데이터를 비교하는 함수이다.
+<br>
+VO 클래스는 데이터를 주요하게 다루므로 객체의 데이터가 서로 같은지 비교할 때가 많다.
+<br>
+이때 equals() 함수를 사용한다.
+<pre>
+class NonDataClass(val name: String, val email: String, val age: Int) { }
+data class DataClass(val name: String, val email: String, val age: Int) { }
+
+fun main() {
+    val non1 = NonDataClass("kkang", "a@a.com", 10)
+    val non2 = NonDataClass("kkang", "a@a.com", 10)
+    
+    val data1 = DataClass("kkang", "a@a.com", 10)
+    val data2 = DataClass("kkang", "a@a.com", 10)
+    
+    println("non data class equals : ${non1.equals(non2)}")
+    println("data class equals : ${data1.equals(data2)}")
+}
+
+===== 실행 결과 =====
+non data class equals : false
+data class equals : true
+</pre>
+equals() 함수로 일반 클래스의 객체를 비교하면 객체 자체를 비교하므로 결과는 false이다.
+<br>
+하지만 데이터 클래스의 객체를 비교하면 객체 자체가 아닌, 객체의 데이터를 비교하므로 true이다.
+<br>
+<br>
+데이터 클래스는 데이터를 다루는 데 편리한 기능을 제공하는 것이 주 목적이므로, 
+<br>
+주 생성자에 val, var 키워드로 매개변수를 선언해 클래스의 멤버 변수로 활용하는 것이 일반적이다.
+<br>
+이때 equals() 함수는 주 생성자에 선언한 멤버 변수의 데이터만 비교 대상으로 삼는다.
+<pre>
+data class DataClass(val name: String, val email: String, val age: Int) {
+    lateinit var address: String
+    constructor(name: String, email: String, age: Int, address: String): this(name, email, age) {
+        this.address = address
+    }
+}
+
+fun main() {
+	val obj1 = DataClass("kkang", "a@a.com", 10, "Seoul")
+    val obj2 = DataClass("kkang", "a@a.com", 10, "Busan")
+    
+    println("obj1.equals(obj2) : ${obj1.equals(obj2)}")
+}
+
+===== 실행 결과 =====
+obj1.equals(obj2) : true  // 매개 변수가 아닌 address를 비교했으므로 true 반환
+</pre>
+### toString()
+toString() 함수는 객체의 데이터를 반환하는 함수이다.
+<br>
+데이터 클래스를 사용하면서 객체가 가지는 값을 확인해야할 때가 많은데,
+<br>
+이때 데이터 클래스와 일반 클래스의 toString() 함수의 반환값이 다르다.
+<pre>
+fun main() {
+    class NonDataClass(val name: String, val email: String, val age: Int)
+	data class DataClass(val name: String, val email: String, val age: Int)
+    
+    val non = NonDataClass("kkang", "a@a.com", 10)
+    val data = DataClass("kkang", "a@a.com", 10)
+    
+    println("non data class toString : ${non.toString()}")
+    println("data class toString : ${data.toString()}")
+}
+
+===== 실행 결과 =====
+non data class toString : FileKt$main$NonDataClass@49c2faae
+data class toString : DataClass(name=kkang, email=a@a.com, age=10)
+</pre>
+일반 클래스로 생성한 객체의 toString() 함수는 의미 있는 값이 아니다.
+<br>
+반면 데이터 클래스의 경우 <b>객체가 포함하는 멤버 변수의 데이터를 출력한다.</b>
+<br>
+따라서 객체의 데이터를 확인할 때 유용하게 사용할 수 있다. 하지만, 주 생성자의 매개변수에만 선언된 데이터만 출력 대상이다.
+## 오브젝트 클래스
+코틀린에서 오브젝트는 익명 클래스(Anonymous Class)를 만들 목적으로 사용한다. 
+<br>
+익명 클래스는 말 그대로 이름이 없는 클래스이다.
+<br>
+클래스의 이름이 없으므로 클래스를 선언과 동시에 객체를 생성해야 하며, 그렇지 않을 시 객체를 생성할 수 없다.
+<br>
+<br>
+오브젝트 클래스는 선언과 동시에 객체를 생성한다는 의미로 object 키워드를 사용한다.
+<pre>
+val obj = object {
+    var data = 10
+    fun some() {
+        println("data : $data")
+    }
+}
+
+fun main() {
+    obj.data = 20	// 오류!
+    obj.some()		// 오류!
+}
+</pre>
+여기서 오류가 발생하는 이유는 클래스의 타입 때문이다. object 키워드로 클래스를 선언했지만, 타입을 명시하지 않았으므로
+<br>
+최상위 타입인 Any로 취급되는데, Any 클래스에 data, some()이 없어서 오류가 발생한다.
+<br>
+그래서 object { } 형태로 익명 클래스를 선언할 수는 있지만 보통은 타입까지 함께 입력해서 선언한다.
+<br>
+<br>
+오브젝트 클래스의 타입은 object 뒤에 콜론을 입력하고 그 뒤에 클래스의 상위 또는 인터페이스를 입력한다.
+<pre>
+open class Super {
+    open var data = 10
+    open fun some() {
+        println("i am super some() : $data")
+    }
+}
+
+val obj = object: Super() {
+    override var data = 20
+    override fun some() {
+        println("i am object some() : $data")
+    }
+}
+
+fun main() {
+    obj.data = 30	// 성공!
+    obj.some()		// 성공!
+}
+
+===== 실행 결과 =====
+i am object some() : 30
+</pre>
+
+## 컴패니언 클래스
+컴패니언 클래스는 멤버 변수나 함수를 클래스 이름으로 접근하고자 할 때 사용한다.
+<br>
+일반적으로 클래스의 멤버는 객체를 생성해서 접근하는데,  컴패니언 클래스는 객체를 생성하지 않더라도,
+<br>
+클래스 이름으로 특정 멤버를 이용할 수 있다.
+<br>
+<br>
+클래스의 이름으로 접근할 수 있게 companion 이라는 키워드로 선언해야 한다.
+<pre>
+class MyClass {
+    companion object {	// 컴패니언 클래스
+    var data = 10
+    fun some() {
+        println(data)
+    	}
+    }
+}
+
+fun main() {
+    MyClass.data = 20	// 오류!
+    MyClass.some()		// 오류!
+}
+</pre>

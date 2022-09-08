@@ -137,9 +137,121 @@ fun main() {
   println(data4 + 10)
 }
 
-===== 실행 결과 ====
+===== 실행 결과 =====
 in main...
 in lazy...
 20
 20
+</pre>
+## 데이터 타입
+<b>코틀린의 모든 변수는 객체</b>이다. 따라서 코틀린의 모든 타입은 <b>객체 타입</b>이다.
+<br>
+예를 들어, 정수 타입인 Int 타입은 기초 데이터 타입이 아닌 <b>클래스</b>이다.
+<pre>
+fun someFun() {
+  var data1: Int = 10
+  var data2: Int? = null    // null 대입 가능
+  
+  data1 = data + 10
+  data1 = data1.plus(10)    // 객체의 메서드 이용 가능
+}
+</pre>
+만약 Int 타입이 기초 데이터 타입이고, 클래스가 아니었다면 null을 대입할 수 없을 뿐만 아니라, 메소드를 이용할 수 없을 것이다.
+### 코틀린의 문자와 문자열
+Char는 코틀린에서 문자를 표현하는 타입으로, 작은따옴표(')로 감싸서 표현하고, Number 타입으로 표현할 수 없다.
+<pre>
+val a: Char = 'a'   // 성공!
+if(a == 1)          // 오류!
+</pre>
+문자열은 String 타입으로 표현하고, 큰따옴표("")나 삼중 따옴표(""")로 감싸서 표현한다.
+<br>
+삼중 따옴표는 키보드로 입력한 줄 바꿈이나 들여쓰기가 그대로 반영된다.(삼중 따옴표를 안쓸 거면 역슬래시(\)나 이스케이프 시퀀스 사용)
+<br>
+<br>
+코틀린에는 문자열 템플릿(String Template)가 있다.
+<br>
+문자열 템플릿이란 String 타입의 데이터에 변숫값이나 어떤 연산식의 결괏값을 포함하는 것을 말하며, $ 기호를 이용한다.
+<pre>
+fun main() {
+  fun sum(no: Int): Int {
+    var sum = 0
+    for (i in 1..no) {
+      sum += i
+  }
+  
+  val name: String = "kkang"
+  println("name : $name, sum : ${sum(10)}, plus : ${10 + 20}")
+}
+
+===== 실행 결과 =====
+name : kkang, sum : 55, plus : 30
+</pre>
+### Any (모든 타입 가능)
+Any는 코틀린에서 최상위 클래스이다. 모든 코틀린의 클래스는 Any의 하위 클래스이다.
+<br>
+따라서 Any 타입으로 선언한 변수에는 모든 타입의 데이터를 할당할 수 있다.
+<pre>
+val data1: Any = 10
+val data2: Any = "hello"
+
+class User
+val data3: Any = User()   // 성공!
+</pre>
+### Unit - 반환문이 없는 함수
+Unit은 다른 타입과 다르게 데이터의 형식이 아닌, 특수환 상황을 표현하려는 목적으로 사용한다.
+<br>
+Unit 타입으로 선언한 변수에는 Unit 객체만 대입할 수 있다. 따라서 Unit 타입으로 변수는 선언할 수 있지만 의미가 없다
+<br>
+<br>
+Unit은 주로 함수의 반환 타입으로 사용한다.
+<br>
+함수에서 반환문이 없을 경우 명시적으로 나타낼 때 Unit을 사용한다.
+<br>
+함수를 선언할 때 반환 타입을 생략하면 자동으로 Unit이 적용된다.
+<pre>
+val data1: Unit = Unit
+
+fun some(): Unit {
+  println(10 + 20)
+}
+
+
+fun some() {
+  println(10 + 20)      // Unit 타입이 자동으로 적용
+}
+</pre>
+### Nothing - null이나 예외를 반환하는 함수
+Nothing도 특수한 상황을 표현하는 타입이다.
+Nothing으로 선언한 변수에는 null만 데이터를 댕비할 수 있고, 변수로서의 데이터는 의미가 없다.
+<br>
+<br>
+Nothing도 Unit과 마찬가지로 함수 반환 타입에 사용된다.
+<br>
+Nothing은 반환 값이 null 또는 예외만 반환할 수 있다.
+<pre>
+val data1: Nothing? = null
+
+fun some1(): Nothing? {
+  return null
+}
+
+fun some2(): Nothing {
+  throw Exception()
+}
+</pre>
+### 널 허용과 불허용
+코틀린의 모든 타입은 객체이므로 변수에 null을 대입하여 사용할 수 있다. 
+<br
+코틀린에서 null을 대입할 수 있는 변수(널 허용, nullable)인지, 대입할 수 없는(널 불허용, not null)인지 명확하게 구분해서 선언해야 한다.
+<br>
+<br>
+null 구분 변수는 타입 뒤에 물음표(?)로 표시한다.
+<br>
+<b>타입 뒤에 물음표를 추가하면 널 허용</b> <b>타입 뒤에 물음표를 추가하지 않으면 널 불허용</b>이다.
+<pre>
+var data1: Int = 10
+data1 = null        // 오류!
+
+var data2: Int? = 10
+data2 = null        // 성공!
 </pre>

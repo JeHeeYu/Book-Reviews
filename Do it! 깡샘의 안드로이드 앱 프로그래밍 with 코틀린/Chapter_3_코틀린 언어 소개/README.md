@@ -255,3 +255,147 @@ data1 = null        // 오류!
 var data2: Int? = 10
 data2 = null        // 성공!
 </pre>
+## 코틀린 함수
+코틀린에서 함수는 fun이라는 키워드를 사용한다.
+<br>
+함수는 반환 타입을 선언할 수 있으며, 생략 시 자동으로 Unit 타입이 적용된다.
+<br>
+또한 함수의 매개변수에는 var나 val 키워드를 사용할 수 없으며, 자동으로 val이 적용된다.
+<pre>
+fun 함수명 (매개변수명 : 타입) : 반환 타입 { ... }
+
+// 함수 반환 타입 : Int 형 매개변수 : Int 형
+fun some(data1: Int): Int {
+  return data * 10
+}
+</pre>
+함수의 매개변수에는 기본값을 사용할 수 있다.
+<pre>
+fun some(data1 : Int, data2: Int = 10): Int {
+  return data1 * data2
+}
+</pre>
+함수의 매개변수가 여러 개일 때 호출하면 전달한 인자의 순서대로 할당한다.
+<br>
+그런데 호출할 때 매개변수를 명시적으로 지정하여 순서를 바꿀 수 있다. 
+<br>이러한 매개변수명을 지정하여 호출하는 것을 <b>명명된 매개변수(Named Parameter)</b> 라고 한다.
+<pre>
+some(data2 = 20, data1 = 10)
+</pre>
+## 컬렉션 타입(Collection Type)
+컬렉션 타입이란 여러 개의 데이터를 표현하는 방법이며, Array, List, Set, Map이 있다.
+### Array - 배열
+코틀린에서 배열은 Array 클래스로 표현한다.
+<br>
+Array 클래스의 생성자에서 첫 번째 매개변수는 배열의 크기, 두 번째 매개변수는 초깃값을 지정한다.
+<br>
+배열의 타입은 제너릭(선언하는 곳이 아닌, 이용하는 곳에서 타입을 지정)으로 표현한다.
+<br>
+<br>
+배열에 접근할 경우 대괄호([]) 또는 set, get 등을 이용할 수 있다.
+<pre>
+변수 타입 변수명: Array<타입> = Array(배열의 크기, { 매개변수 초깃값})
+
+fun main() {
+  val data1: Array<Int> = Array(3, { 0 })
+  data1[0] = 10
+  data1[1] = 20
+  data1.set(2, 30)    // 2번째 데이터를 30으로 설정
+  
+  println(
+      """
+  array size : ${data1.size}
+  array data : ${data1[0]}, ${data1[1]}, ${data.get(2)}   // get으로 2번째 데이터 가져옴
+  """
+  )
+}
+
+===== 실행 결과 =====
+array size : 3
+array data : 10, 20, 30
+</pre>
+### 기초 타입의 배열
+배열의 타입을 Array<Int>처럼 제너릭이 아닌, 기초 타입(Bool, Char, Byte 등..) 배열로 선언할 수 있다.
+<br>
+BooleanArray, CharArray, ByteArray 등과 같이 Array 앞에 기초 데이터 타입을 붙여 선언한다.
+<br>
+<br>
+또한 arrayOf()라는 함수를 이용하여 배열을 선언할 때 값을 할당할 수 있다.
+arrayOf() 함수도 기초 타입을 대상으로 하는 함수를 제공한다.
+<pre>
+val data1: IntArray = IntArray(3, { 0 })
+val data2: BooleanArray = BooleanArray(3, { false })
+
+
+val data3 = arrayOf<Int>(10, 20, 30)     // 크기가 3인 Int 배열에 10, 20, 30으로 할당
+val data4 = intArrayOf(1, 20, 30)
+val data5 = booleanArrayOf(true, false, true)
+</pre>
+### List, Set, Map
+List, Set, Map은 Collection 인터페이스를 타입으로 표현한 클래스이며, 통틀어 컬렉션 타입 클래스라고 한다.
+<br>
+<b>List</b> : 순서가 있는 데이터 집합으로, <b>중복을 허용</b>
+<br>
+<b>Set</b> : 순서가 없으며, <b>중복을 허용하지 않음</b>
+<br>
+<b>Map</b> : 키와 값으로 이루어진 데이터 집합으로 순서가 없으며, <b>중복을 허용하지 않음</b>
+<br>
+<br>
+Collection 타입의 클래스는 가변 클래스와 불변 클래스로 나뉜다.
+<b>
+<b>불변 클래스</b>란 초기에 데이터를 대입하면 더 이상 변경할 수 없는 타입이다.
+<br>
+<b>가변 클래스</b>란 초기에 데이터를 대입한 후에도 데이터를 추가하거나 변경할 수 있다.
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189092840-dd8973a7-1543-4416-85a6-ac317cdc1345.JPG" width="500" height="300">
+<br>
+List를 에로, 코틀린에서는 가변과 불변이라는 2가지 타입의 클래스를 제공한다.
+List는 불변 타입이므로, size(), get() 함수는 제공하나, add(), set() 함수는 제공하지 않는다.
+<br>
+<br>
+반면 MultableList는 가변 타입이므로, size(), get() 함수 이외에 add(), set() 함수도 허용한다.
+<pre>
+fun main() {
+    var list = listOf<Int>(10, 20, 30)
+    var mutableList = mutableListOf<Int>(10, 20, 30)
+    mutableList.add(3, 40)
+    mutableList.set(0, 50)
+    
+    println("""
+    
+    list size : ${list.size}
+    list data : {list[0]}, {list.get[1]}, {list.get[2]}
+    
+    mutableList size : ${mutableList.size}
+    mutableList data : {mutableList[0]}, {mutableList.get[1]}, {mutableList.get[2]}, {mutableList.get[3]}
+    """)
+}
+
+===== 실행 결과 =====
+list size : 3
+list data : {list[0]}, {list.get[1]}, {list.get[2]}
+    
+mutableList size : 4
+mutableList data : {mutableList[0]}, {mutableList.get[1]}, {mutableList.get[2]}, {mutableList.get[3]}
+</pre>
+Map 객체는 키와 값으로 이루어진 데이터의 집합으로, Map 객체의 키와 값은 Pair 객체를 이용하거나 '키 to 값' 형태로 이용한다.
+<pre>
+fun main() {
+    var map = mapOf<String, String>(Pair("one", "hello"), "two" to "world")
+    
+    println("""
+    
+    map size : ${map.size}
+    map data : {map.get["one"]}, {map.get["two"]}
+    """)
+}
+
+===== 실행 결과 =====
+map size : 2
+map data : {map.get["one"]}, {map.get["two"]}
+</pre>
+mapOf() 함수를 이용해 Map 객체를 만들고 <String, String>처럼 제네릭 타입을 지정했다.
+<br>
+따라서 Map 객체에 대입되는 데이터와 키의 값은 모두 String 타입이 된다.
+<br>
+결과와 같이 Pair 객체로 표현할 수도 있고, '키 to 값'의 형태로 대입할 수 있다.

@@ -202,3 +202,84 @@ Human.isHuman(newZero);
 코드들이 전반적으로 class안에 그룹화 되었다.
 <br>
 생성자 함수는 contructor 안으로, Human.isHuman 같은 클래스 함수는 static 키워드로 전환되었다.
+## 프로미스(Promise)
+자바스크립트와 노드에서는 주로 비동기를 접하고, 특히 이벤트 리스너를 사용할 때 콜백 함수를 자주 사용한다.
+<br>
+ES2015부터 자바스크립트와 노드 API들이 콜백 대신 프로미스 기반으로 재구성되어 콜백 지옥 현상을 극복했다.
+<pre>
+const condition = true;     // true면 resolve, false면 reject
+const promise = new Promise((resolve, reject) => {
+  if (condition) {
+    resolve('성공');
+  }
+  else {
+    reject('실패');
+  }
+});
+// 다른 코드가 들어갈 수 있음
+promise
+  .then((message) => {
+  console.log(message);   // 성공(resolove)한 경우 실행
+  })
+  .catch((error) => {
+    console.error(error); // 실패(reject)한 경우 실행
+  })
+  .finally(() => {    // 끝나고 무조건 실행
+    console.log('무조건');
+});
+</pre>
+new Promise로 프로미스를 생성할 수 있으며, 그 내부에 resolove와 reject를 매개변수로 갖는 콜백 함수를넣는다.
+<br>
+이렇게 만든 promise 변수에 then과 catch 메서드를 붙일 수 있다.
+<br>
+즉, 프로미스는 실행흔 바로 하되 결괏값은 나중에 받는 객체이다.
+<br>
+위 예제에서는 new Promise는 바로 실행되지만, 결괏값은 then을 붙였을 때 받게 된다.
+<br>
+프로미스 여러 개를 한 번에 실행할 수 있는 방법이 있다.
+<pre>
+const promise1 = Promise.resolve('성공1');
+const promise2 = Promise.resolve('성공2');
+
+Promise.all([promise1, promise2])
+  .then((result) => {
+    console.log(result);    // ['성공1', '성공2'];
+  })
+  .catch(error) => {
+    console.log(error);
+  });
+</pre>
+기존의 콜백 패턴이었다면 콜백을 여러 번 중첩해서 사용했을 부분을 Promise.all을 활용하면 간단히 할 수 있다.
+## async/await
+async/await은 노드 7.6 버전부터 지원되는 기능으로, EP2017에서 추가되었다.
+노드는 비동기 위주로 프로그래밍 하는데, 도움이 많이 된다.
+<pre>
+// 콜백으로 인해 코드가 여전히 길음
+function findAndSaveUser(Users) {
+  Users.findOne({})
+    .then((user) => {
+      user.name = 'zero';
+      return user.save();
+    })
+    .then((user) => {
+      return Users.findOne({ gender: 'm' });
+    })
+    .then((user) => {
+      // 생략
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+
+// async/await 문법을 이용해 변경 가능
+async function FindAndSaveUser(Users) {
+  let user = await Users.findOne({});
+  user.name = 'zero';
+  user = await user.save();
+  user = await Users.findOne({ gender: 'm' )};
+}
+</pre>
+위와 비교 시 코드가 상당히 짧아졌다. 함수 선언부를 일반 함수 대신 async function으로 교체하고, 프로미스 앞에 await을 붙였다.
+<br>
+이제 함수는 해당 프로미스가 resolove될 때까지 

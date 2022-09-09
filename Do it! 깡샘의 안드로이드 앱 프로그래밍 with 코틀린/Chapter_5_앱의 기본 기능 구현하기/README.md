@@ -45,3 +45,14 @@ Layout-XML 파일로 작성한 예제 코드이다.
 <br>
 [[XML 코드로 화면을 만드는 방법.kt]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_5_%EC%95%B1%EC%9D%98%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/XML%20%EC%BD%94%EB%93%9C%EB%A1%9C%20%ED%99%94%EB%A9%B4%EC%9D%84%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EB%B0%A9%EB%B2%95)
 <br>
+<br>
+액티비티 코드로 구현한 화면을 XML 파일로 구현한 예이다.
+<br>
+XML을 이용해 화면을 구현하면 액티비티 코드에 이 내용을 작성하지 않아도 된다.
+<br>
+하지만 코드에서 화면을 구현한 XML을 명시해 어떤 화면을 출력할 것인지 알려 주어야 한다.
+<br>
+<br>XML에서 화면을 구현하므로, 액티비티에 setContentView() 함수에 출력할 XML을 명시한다.
+<pre>
+setContentView(R.layout.activity_main)
+</pre>

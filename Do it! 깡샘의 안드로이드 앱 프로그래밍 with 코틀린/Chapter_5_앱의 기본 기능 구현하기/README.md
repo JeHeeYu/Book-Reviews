@@ -32,4 +32,12 @@
 <br>
 ### 액티비티 코드로 화면 구성
 액티비티에서 직접 코드로 만들려면 하기 예제를 참조한다.
-[액티비티에서 코드로 화면을 만드는 방법.kt](https://github.com/JeHeeYu/Book-Reviews/blob/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_5_%EC%95%B1%EC%9D%98%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/%EC%95%A1%ED%8B%B0%EB%B9%84%ED%8B%B0%EC%97%90%EC%84%9C%20%EC%BD%94%EB%93%9C%EB%A1%9C%20%ED%99%94%EB%A9%B4%EC%9D%84%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EB%B0%A9%EB%B2%95.kt)
+<br>
+[[액티비티에서 코드로 화면을 만드는 방법.kt]](https://github.com/JeHeeYu/Book-Reviews/blob/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_5_%EC%95%B1%EC%9D%98%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/%EC%95%A1%ED%8B%B0%EB%B9%84%ED%8B%B0%EC%97%90%EC%84%9C%20%EC%BD%94%EB%93%9C%EB%A1%9C%20%ED%99%94%EB%A9%B4%EC%9D%84%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EB%B0%A9%EB%B2%95.kt)
+<br>
+이 예제에서는 필요한 뷰 객체를 코드로 직접 생성하면서 크기, 출력, 데이터 등도 일일이 객체에 대입한다.
+<br>
+TextView 2개와 ImageView 1개를 추가한다.
+<br>
+그리고 LinearLayout 객체를 액티비티 컴포넌트 함수인 setContentView()로 전달해 화면에 출력한다.
+### 레이아웃 XML로 화면 구성하기

@@ -3,3 +3,11 @@
 OS : Windows
 <br>
 Tool : Android Studio
+## Auto Import
+<pre>
+1. File-Settings
+2. Editor-General-Auto Import
+3. Add unambiguous imports on the fly // Check
+4. Optimize imports on the fly // Check
+5. Apply
+</pre>

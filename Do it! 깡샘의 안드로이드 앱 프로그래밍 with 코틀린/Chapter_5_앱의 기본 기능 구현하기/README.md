@@ -174,3 +174,29 @@ LinearLayout의 width와 height는 match_parent 이므로 화면 전체가 된�
 첫 번째 버튼의 가로 크기를 wrap_content로 지정해 자신의 콘텐츠(버튼의 문자열)을 감쌀 정도의 크기,
 <br>
 두 번째 버튼은 가로 크기를 match_parent로 지정해 가로 전체가 된다.
+### 뷰의 간격 설정
+뷰의 간격은 margin과 padding 속성으로 설정하며, 기본 값이 있고 바꾸고 싶을 때 사용한다.
+<br>
+<b>margin</b> : 마진 속성은 뷰와 뷰 사이의 간격을 나타낸다.
+<br>
+<br>
+<b>padding</b> : 패딩 속성은 뷰의 콘텐츠와 테두리 사이의 간격을 나타낸다.
+<br>
+<br>
+마진, 패딩 속성을 이용하면 간격이 네 방향 모두 같은 크기로 설정된다.
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189465600-b72db64d-04cf-4301-be68-8c1b6f6e24c7.JPG" width="200" height="150">
+<br>
+<br>
+[[뷰의 간격]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_5_%EC%95%B1%EC%9D%98%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/%EB%B7%B0%EC%9D%98%20%EA%B0%84%EA%B2%A9)
+<br>
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189465709-76425dd9-0eae-4c3c-8796-5585e2741518.JPG" width="200" height="400">
+### 뷰의 표시 여부 설정
+뷰의 표시 여부 설정은 visibility 속성으로 설정하며, 값은 visible, invisible, gone 등이 있다.
+<br>
+<b>visible</b> : 뷰가 화면에 출력된다.
+<b>invisible</b> : 뷰가 화면에 출력되지 않지만, 자리는 차지한다.
+<b>visible</b> : 뷰가 화면에 출력되지 않고 자리도 차지하지 않는다.

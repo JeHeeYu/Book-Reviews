@@ -200,3 +200,20 @@ LinearLayout의 width와 height는 match_parent 이므로 화면 전체가 된�
 <b>visible</b> : 뷰가 화면에 출력된다.
 <b>invisible</b> : 뷰가 화면에 출력되지 않지만, 자리는 차지한다.
 <b>visible</b> : 뷰가 화면에 출력되지 않고 자리도 차지하지 않는다.
+<br>
+<br>
+[[표시 여부 설정]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_5_%EC%95%B1%EC%9D%98%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/%ED%91%9C%EC%8B%9C%20%EC%97%AC%EB%B6%80%20%EC%84%A4%EC%A0%95)
+<br>
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189477204-d3fb2597-368f-4c87-8fc8-a1a7bd22e0f1.JPG" width="200" height="400">
+<br>
+버튼 3개를 세로 방향으로 3번 출력했다.
+<br>
+invisible로 설정한 버튼은 자리는 차지하나, 출력되지 않았고, gone으로 설정한 버튼은 자리도 차지하지 않고 보이지도 않는다.
+<br>
+XML이 아닌 코드에서 visibility 속성을 제어하려면 View.VISIBLE이나 View.INBISIBLE로 설정하면 된다.
+## 텍스트 뷰
+TextView는 문자열을 화면에 출력하는 뷰이다.
+<br>

@@ -118,11 +118,7 @@ setContentView(R.layout.activity_main)
 id는 꼭 지정해야 하는 속성은 아니며, 뷰를 구별할 필요가 없을 때는 생략해도 된다.
 <br>
 <pre>
-<TextView
-    android:id="@+id/text1"   // id 속성 부여
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Hello" />
+android:id="@+id/text1" >  // id 속성 부여
 </pre>
 id 속성은 android:id="@+id/id"의 형태로 추가하며, text1이 id 값이다.
 <br>
@@ -134,3 +130,31 @@ XML에서 속성값이 @로 시작하면 R.java 파일읠 의미하며. text1이
 <br>
 <br>
 코드에서 R.java 파일의 상수 변수로 객체를 얻을 수 있으며, findViewById() 함수를 이용한다.
+<pre>
+// .kt File
+
+// 액티비티 화면 출력(뷰 객체 생성)
+setContentView(R.layout.activity_main)
+
+// id값으로 뷰 객체 획득
+val textView1: TextView = findViewById(R.id.text1)
+</pre>
+### 뷰의 크기를 지정하는 방법
+뷰를 레이아웃 XML에 등록하여 화면을 구성할 때 생략할 수 없는 속성이 크기이다.
+<br>
+이 크기를 설정하는 속성은 layout_width, layout_height이다.
+<pre>
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+</pre>
+layout_width, height 속성을 이용해 객체의 크기를 나타내는 속성으로, 3가지를 선택할 수 있다.
+<br>
+<b>match_parent</b> : 부모의 크기를 전체 뜻함
+<br>
+<br>
+<b>wrap_content</b> : 자신의 콘텐츠를 화면에 출력할 수 있는 적절한 크기
+<br>
+<br>
+<b>수치</b> : 가로세로 크기를 수치로 지정하며, 단위는 생략할 수 없다.(px, dp)
+<br>
+<br>

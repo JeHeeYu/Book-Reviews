@@ -59,3 +59,78 @@ setContentView(R.layout.activity_main)
 안드로이드에서 화면을 만들어 표시하는 컴포넌트는 액티비티이며, 액티비티가 실행되면서 뷰 클래스를 이용해 화면을 구성한다.
 <br>
 안드로이드는 TextView, ImageView, EditText 등 많은 뷰 클래스를 제공한다.
+### 뷰 객체의 계층 구조
+액티비티 화면을 구성할 때 사용하는 클래스는 모두 <b>View의 하위 클래스이다.</b>
+<br>
+그래서 화면 구성과 관련한 클래스를 통칭하여 <b>뷰 클래스</b>라고 한다.
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189462765-281cfd85-7705-4317-9b02-192047be3f82.JPG" width="400" height="200">
+<br>
+뷰 클래스의 계층 구조이다.
+<br>
+<b>View</b> : 모든 뷰 클래스의 최상위 클래스로, 액티비티는 View의 서브 클래스만 화면에 출력한다.
+<br>
+<br>
+<b>ViewGroup</b> : View의 하위 클래스지만, 자체 UI는 없어서 화면에 출력해도 아무것도 나오지 않는다.
+<br>
+다른 뷰 여러 개를 묶어서 제어할 목적으로 사용되는 그릇의 역할을 하는 클래스다.
+<br>
+일반적으로 컨테이너 기능을 담당한다고 하며, ViewGroup의 서브 클래스인 레이아웃 클래스를 사용한다.
+<br>
+<br>
+<b>TextView</b> : 특정 UI를 출력할 목적으로 사용하는 클래스로 문자열을 출력한다.
+<br>
+<br>
+객체의 계층 구조에서 중요한 역할을 하는 것이 레이아웃 클래스이다.
+<br>
+레이아웃 클래스만으로는 액티비티 화면에 출력되는 것이 없으나, TextView, ImageView등 
+<br>
+객체 여러 개를 담아 한꺼번에 제어할 목적으로 사용한다.
+<br>
+하기 예제 처럼 레이아웃 클래스 안에 다른 뷰를 포함해 화면을 구성한다.
+<br>
+[[레이아웃 클래스에 뷰 포함]](https://github.com/JeHeeYu/Book-Reviews/blob/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_5_%EC%95%B1%EC%9D%98%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83%20%ED%81%B4%EB%9E%98%EC%8A%A4%EC%97%90%20%EB%B7%B0%20%ED%8F%AC%ED%95%A8.kt)
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189463198-7c869463-2dc2-44e5-b39f-22ec0c946a5e.JPG" width="200" height="400">
+<br>
+이렇게 버튼 객체를 2개 생성하고, 이 객체를 묶어 한꺼번에 정렬, 출력 등 편리하게 제어할 수 있다.
+### 레이아웃 중첩
+뷰의 계층 구조는 레이아웃 객체를 중첩해서 복잡하게 구성할 수도 있다.
+<br>
+하기 예제는 레이아웃 객체 안에 레이아웃과 버튼을 중첩하는 예제이다.
+<br>
+[[레이아웃 중첩]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_5_%EC%95%B1%EC%9D%98%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83%20%EC%A4%91%EC%B2%A9)
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189463410-b2e512d9-679b-4fce-9b4a-8496b832b227.JPG" width="200" height="400">
+<br>
+이처럼 객체를 계층 구조로 만들어 이용하는 패턴을
+<br>컴포지트 패턴(Composite Pattern) 또는 문서 객체 모델(Document Object Model) 이라고 한다.
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189463506-c0a75baf-9d8c-49b9-acd9-d97b74f4b62c.JPG" width="350" height="200">
+<br>
+### 레이아웃 XML의 뷰를 코드에서 사용하기
+레이아웃 XML의 뷰를 코드에서 사용하기 위해서 객체에 id 속성을 부여해야 한다.
+<br>
+id는 꼭 지정해야 하는 속성은 아니며, 뷰를 구별할 필요가 없을 때는 생략해도 된다.
+<br>
+<pre>
+<TextView
+    android:id="@+id/text1"   // id 속성 부여
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Hello" />
+</pre>
+id 속성은 android:id="@+id/id"의 형태로 추가하며, text1이 id 값이다.
+<br>
+이 id 값으로 식별자를 구분해서 이용하는 것으로 값은 앱에서 유일해야 한다.
+<br>
+이처럼 XML에 id 속성을 추가하면 자동으로 R.java 파일에 상수 변수로 추가된다.
+<br>
+XML에서 속성값이 @로 시작하면 R.java 파일읠 의미하며. text1이라는 상수 변수를 추가하라는 의미이다.
+<br>
+<br>
+코드에서 R.java 파일의 상수 변수로 객체를 얻을 수 있으며, findViewById() 함수를 이용한다.

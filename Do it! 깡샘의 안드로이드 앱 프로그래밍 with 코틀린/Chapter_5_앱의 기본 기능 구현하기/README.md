@@ -158,3 +158,19 @@ layout_width, height 속성을 이용해 객체의 크기를 나타내는 속성
 <b>수치</b> : 가로세로 크기를 수치로 지정하며, 단위는 생략할 수 없다.(px, dp)
 <br>
 <br>
+[[크기 지정]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_5_%EC%95%B1%EC%9D%98%20%EA%B8%B0%EB%B3%B8%20%EA%B8%B0%EB%8A%A5%20%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/%ED%81%AC%EA%B8%B0%20%EC%A7%80%EC%A0%95)
+<br>
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189464473-7bc9137a-8738-470c-9978-466e38e38a38.JPG" width="200" height="400">
+<br>
+<br>
+Button 2개를 LinearLayout에 추가했다. Button의 상위 계층은 LinearLayout이다.
+<br>
+LinearLayout의 width와 height는 match_parent 이므로 화면 전체가 된다.
+<br>
+<br>
+첫 번째 버튼의 가로 크기를 wrap_content로 지정해 자신의 콘텐츠(버튼의 문자열)을 감쌀 정도의 크기,
+<br>
+두 번째 버튼은 가로 크기를 match_parent로 지정해 가로 전체가 된다.

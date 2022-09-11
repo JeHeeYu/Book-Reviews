@@ -217,3 +217,51 @@ XML이 아닌 코드에서 visibility 속성을 제어하려면 View.VISIBLE이�
 ## 텍스트 뷰
 TextView는 문자열을 화면에 출력하는 뷰이다.
 <br>
+### android:text
+TextView에 출력할 문자열을 지정한다.
+<pre>
+android:text="Hello World"
+android:text="@string/Hello" // 문자열 리소스 지정
+</pre>
+### android:textColor
+문자열의 색상을 지정하며 16진수 RGB값을 사용한다.
+<pre>
+android:textColor="#FF0000"
+</pre>
+### android:textSize
+문자열의 크기를 지정하며 단위는 px, dp, sp를 사용한다.
+<pre>
+android:textSize="20sp"
+android:textSize="20px"
+android:textSize="20dp"
+</pre>
+### android:textStyle
+문자열의 스타일을 지정하며, bold, italic, normal 에서 선택한다.
+<pre>
+android:textStyle="bold"
+android:textStyle="italic"
+android:textStyle="normal"
+</pre>
+### android:autoLink
+TextView에 출력할 문자열을 분석해 특정 형태의 문자열에 자동 링크를 추가해 준다.
+<br>
+문자열에 웹 주소가 포함되어 있을 때 해당 문자열의 링크 모양으로 표시한다.
+<br>
+속성 값으로 web, phone, email 등을 사용할 수 있고 여러 개를 사용할 경우 | 기호로 연결한다.
+<br>
+<pre>
+android:autoLink="web|email|phone"
+</pre>
+### android:ellipsize
+문자열이 긴 경우 문자열이 더 있다는 것을 표시하는 줄임표(...)를 보일 때 사용한다.
+<br>
+속성 값으로 end, middle, start 등을 설정할 수 있다.
+<br>
+start와 middle은 singLine="true" 속성으로 문자열을 한 줄로 출력했을 때만 적용된다.
+<pre>
+android:singleLine="true"
+android:ellipsize="middle"
+
+android:maxLines="3"
+android:ellipsize="end"
+</pre>

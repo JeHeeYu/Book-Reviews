@@ -443,4 +443,4 @@ tools:viewBindingIgnore="true"
 <br>
 [결과 화면]
 <br>
-<img src="https://user-images.githubusercontent.com/87363461/189572814-c3e6c17f-b79f-4e7f-9f99-73043e6448f8.JPG" width="200" height="400">
+<img src="https://user-images.githubusercontent.com/87363461/189576734-288b65f4-e6b0-4e9a-87b8-8783cd255685.JPG" width="200" height="400">

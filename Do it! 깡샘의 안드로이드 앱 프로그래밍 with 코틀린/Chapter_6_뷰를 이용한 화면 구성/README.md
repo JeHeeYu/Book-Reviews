@@ -293,3 +293,21 @@ android:maxWidth="100dp"
 android:maxHeight="100dp"
 android:adjustViewBounds="true"
 </pre>
+## 버튼, 체크박스 라디오 버튼
+버튼은 사용자 이벤트를 처리하고, 체크 박스는 다중 선택을, 라디오 버튼은 단일 선택을 제공하는 뷰이다.
+<br>
+<br>
+체크박스는 한 화면에 여러 개가 나오더라도 다중 선택을 제공하므로 서로 영향을 미치지 않는다.
+<br>
+<br>
+라디오 버튼은 화면에 여러 개가 나오면 선택할 수 있는 단일 선택이므로, 여러 개를 묶어서 처리한다.
+<br>
+이를 묵을 때 라디오 버튼을 RadioGroup과 함께 사용한다.
+<br>
+[[버튼 예제]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_6_%EB%B7%B0%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%ED%99%94%EB%A9%B4%20%EA%B5%AC%EC%84%B1/%ED%91%9C%EC%8B%9C%20%EC%97%AC%EB%B6%80%20%EC%84%A4%EC%A0%95)
+<br>
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189572814-c3e6c17f-b79f-4e7f-9f99-73043e6448f8.JPG" width="200" height="400">
+## 에디트 텍스트(Edit Text)

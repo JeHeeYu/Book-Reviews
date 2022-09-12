@@ -438,3 +438,9 @@ XML에서 android:id="@+id/visibleBtn이 있다면, 바인딩 객체에 visibleB
 tools:viewBindingIgnore="true"
 </pre>
 ## 마무리 실습
+[[마무리 실습]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_6_%EB%B7%B0%EB%A5%BC%20%EC%9D%B4%EC%9A%A9%ED%95%9C%20%ED%99%94%EB%A9%B4%20%EA%B5%AC%EC%84%B1/%EB%A7%88%EB%AC%B4%EB%A6%AC%20%EC%8B%A4%EC%8A%B5)
+<br>
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189572814-c3e6c17f-b79f-4e7f-9f99-73043e6448f8.JPG" width="200" height="400">

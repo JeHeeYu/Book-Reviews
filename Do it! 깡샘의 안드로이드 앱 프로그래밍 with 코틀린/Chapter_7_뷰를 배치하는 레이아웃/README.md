@@ -100,7 +100,6 @@ FrameLayout은 가로세로 방향으로 배치하지 않고, 상대 위치를 �
 FrameLayout은 똑같은 위치에 여러 뷰를 겹쳐서 놓고, 어떤 순간에 하나의 뷰만 출력할 때 사용한다.
 <br>
 뷰의 표시 여부를 설정하는 visibility 속성과 함께 사용한다.
-
 [[FrameLayout 예제]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_7_%EB%B7%B0%EB%A5%BC%20%EB%B0%B0%EC%B9%98%ED%95%98%EB%8A%94%20%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83/FrameLayout%20%EC%98%88%EC%A0%9C)
 <br>
 <br>
@@ -109,3 +108,42 @@ FrameLayout은 똑같은 위치에 여러 뷰를 겹쳐서 놓고, 어떤 순간
 <img src="https://user-images.githubusercontent.com/87363461/189582041-2ff6e641-af49-4792-ba8c-1f29477f1aa3.JPG" width="200" height="400">
 <img src="https://user-images.githubusercontent.com/87363461/189582093-67be86b8-201a-4fd8-926d-d4e511f0d26e.JPG" width="200" height="400">
 <img src="https://user-images.githubusercontent.com/87363461/189582112-50b24810-7ff9-4d0a-a55e-e869760d268d.JPG" width="200" height="400">
+## GridLayout - 표 형태로 배치
+GridLayout은 행과 열로 구성된 테이블 화면을 만드는 레이아웃 클래스다.
+<br>
+orientation 속성으로 가로 세로 방향으로 뷰를 나열하는데, 줄바꿈을 자동으로 해준다.
+<br>
+<br>
+orientation으로 방향을 설정하고 rowCount나 columnCount로 설정한 개수만큼 뷰를 추가한다.
+<pre>
+orientation : 방향 설정
+rowCount : 세로로 나열할 뷰 개수
+columnCount : 가로로 나열할 뷰 개수
+</pre>
+GridLayout에 layout_row나 layout_column 속성을 이용해 특정 뷰의 위치를 조정할 수 있다.
+<pre>
+layout_row : 뷰가 위치하는 세로 방향 인덱스
+layout_column : 뷰가 위치하는 가로 방향 인덱스
+</pre>
+특정 뷰의 크기를 확장해야 할 때는 layout_gravity 속성을 이용한다.
+<pre>
+layout_gravity="fill_horizontal"
+</pre>
+열이나 행을 병합하기 위해  layout_columnSpan, layout_rowSpan 속성을 이용한다.
+<pre>
+layout_columnSpan : 가로로 열 병합
+layout_rowSpan : 세로로 행 병합
+</pre>
+[[GridLayout 예제]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_7_%EB%B7%B0%EB%A5%BC%20%EB%B0%B0%EC%B9%98%ED%95%98%EB%8A%94%20%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83/GridLayout%20%EC%98%88%EC%A0%9C)
+<br>
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189584766-1bfd98f4-1f53-4282-873f-d5ebf3a53912.JPG" width="200" height="400">
+## 마무리 실습
+[[마무리 실습]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_7_%EB%B7%B0%EB%A5%BC%20%EB%B0%B0%EC%B9%98%ED%95%98%EB%8A%94%20%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83/%EB%A7%88%EB%AC%B4%EB%A6%AC%20%EC%8B%A4%EC%8A%B5)
+<br>
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189586956-787ad16c-e2e3-41c4-b631-d4a165578db0.JPG" width="200" height="400">

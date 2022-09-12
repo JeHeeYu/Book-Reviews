@@ -18,12 +18,8 @@ LinearLayout은 방향만 설정하면 뷰를 추가한 순서대로 나열한�
 <br>
 가로 방향으로 배치하는 LinearLayout에 세로로 배치하는 LinearLayout을 추가할 수 있다.
 <pre>
-<LinearLayout
-  android:orientation="horizontal" >
-  <LinearLayout
-    android:orientation="vertical" >
-  </LinearLayout>
-</LinearLayout>
+android:orientation="horizontal"
+    android:orientation="vertical"
 </pre>
 ### layout_width - 여백을 채우는 속성
 layout_weight 속성은 화면에 생기는 여백을 뷰로 채울 수 있는 속성이다.
@@ -53,3 +49,63 @@ gravity와 layout_gravity는 모두 뷰를 정렬하는 속성이지만, 정렬 
 [결과 화면]
 <br>
 <img src="https://user-images.githubusercontent.com/87363461/189579466-c1e8eefe-8264-4a6f-9760-c0d53547f82d.JPG" width="200" height="400">
+## RelativeLayout - 상대 위치로 배치
+RelativeLayout은 상대 뷰의 위치를 기준으로 정렬하는 레이아웃 클래스다.
+<br>
+즉, 화면에 이미 출력된 특정 뷰를 기준으로 방향이 지정하여 배치한다
+<br>
+이때 속성에 위치를 정해야 하고, 입력하는 값은 기준이 되는 뷰의 id이다.
+<pre>
+android:layout_above      // 기준 뷰의 위쪽에 배치
+android:layout_below      // 기준 뷰의 아래쪽에 배치
+android:layout_toLeftOf   // 기준 뷰의 왼쪽에 배치
+android:layout_toRightOf  // 기준 뷰의 오른쪽에 배치
+</pre>
+### align - 맞춤 정렬하는 속성
+align 속성은 상대 뷰의 어느 쪽에 맞춰서 정렬할지 정하는 속성으로,
+<br>
+기준이 되는 뷰의 id값으로 설정한다.
+<pre>
+android:layout_alignTop           // 기준 뷰와 위쪽을 맞춤
+android:layout_alignBotton        // 기준 뷰와 아래쪽을 맞춤
+android:layout_alignLeft          // 기준 뷰와 왼쪽을 맞춤
+android:layout_alignRight         // 기준 뷰와 오른쪽을 맞춤
+android:layout_alignBaseline      // 기준 뷰와 텍스트 기준선을 맞춤
+
+android:layout_alignParentTop           // 부모의 위쪽에 맞춤
+android:layout_alignParentBotton        // 부모의 아래쪽에 맞춤
+android:layout_alignParentLeft          // 부모의 왼쪽에 맞춤
+android:layout_alignParentRight         // 부모의 오른쪽에 맞춤
+android:layout_centerHorizontal         // 부모의 가로 방향 중앙에 맞춤
+android:layout_centerVertical           // 부모의 세로 방향에 주앙에 맞춤
+android:layout_centerInParent           // 부모의 가로, 세로 중앙에 맞춤
+</pre>
+[[그래비티 속성 예제]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_7_%EB%B7%B0%EB%A5%BC%20%EB%B0%B0%EC%B9%98%ED%95%98%EB%8A%94%20%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83/RelativeLayout%20%EC%98%88%EC%A0%9C)
+<br>
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189580988-547891ae-3585-4329-b0f9-d328c2524372.JPG" width="200" height="400">
+## FrameLayout - 겹쳐서 배치
+FrameLayout은 뷰를 겹쳐서 출력하는 레이아웃 클래스이다.
+<br>
+카드를 쌓듯이 뷰를 추가한 순서대로 위에 계속 겹쳐서 출력하는 레이아웃이다.
+<br>
+<br>
+FrameLayout은 가로세로 방향으로 배치하지 않고, 상대 위치를 조절하는 속성도 없다.
+<br>
+단순히 겹쳐서 출력하는 레이아웃이므로 특별한 속성이 없다.
+<br>
+<br>
+FrameLayout은 똑같은 위치에 여러 뷰를 겹쳐서 놓고, 어떤 순간에 하나의 뷰만 출력할 때 사용한다.
+<br>
+뷰의 표시 여부를 설정하는 visibility 속성과 함께 사용한다.
+
+[[FrameLayout 예제]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_7_%EB%B7%B0%EB%A5%BC%20%EB%B0%B0%EC%B9%98%ED%95%98%EB%8A%94%20%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83/FrameLayout%20%EC%98%88%EC%A0%9C)
+<br>
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189582041-2ff6e641-af49-4792-ba8c-1f29477f1aa3.JPG" width="200" height="400">
+<img src="https://user-images.githubusercontent.com/87363461/189582093-67be86b8-201a-4fd8-926d-d4e511f0d26e.JPG" width="200" height="400">
+<img src="https://user-images.githubusercontent.com/87363461/189582112-50b24810-7ff9-4d0a-a55e-e869760d268d.JPG" width="200" height="400">

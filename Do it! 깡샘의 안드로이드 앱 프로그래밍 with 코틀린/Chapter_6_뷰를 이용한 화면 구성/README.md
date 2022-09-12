@@ -1,5 +1,5 @@
 # Chapter_6_뷰를 이용한 화면 구성 정리 내용
-## 액티비티-뷰 구조
+## 액티비티-뷰(Activity View) 구조
 안드로이드 앱의 기본 구조는 <b>컴포넌트를 기반으로 한다.</b>
 <br>
 즉, 안드로이드 앱은 액티비티, 서비스, 브로드캐스트 리시버, 콘텐츠 프로바이더와 같은 컴포넌트를 적절하게 조합해서 만든다.
@@ -214,7 +214,7 @@ LinearLayout의 width와 height는 match_parent 이므로 화면 전체가 된�
 invisible로 설정한 버튼은 자리는 차지하나, 출력되지 않았고, gone으로 설정한 버튼은 자리도 차지하지 않고 보이지도 않는다.
 <br>
 XML이 아닌 코드에서 visibility 속성을 제어하려면 View.VISIBLE이나 View.INBISIBLE로 설정하면 된다.
-## 텍스트 뷰
+## 텍스트 뷰(Text View)
 TextView는 문자열을 화면에 출력하는 뷰이다.
 <br>
 ### android:text
@@ -264,4 +264,32 @@ android:ellipsize="middle"
 
 android:maxLines="3"
 android:ellipsize="end"
+</pre>
+## 이미지 뷰(Image View)
+이미지 뷰는 이미지를 화면에 출력하는 뷰이다.
+### android:src
+이미지 뷰에 출력할 이미지를 설정하는 속성으로, 리소스, 파일, 네트워크 등을 출력할 수 있다.
+<pre>
+android:src="@drawble/image"
+</pre>
+### android:maxWidth, maxHeight, adjustViewBounds
+이미지 뷰가 출력하는 속성으로 이미지의 최대 크기를 지정할 수 있다.
+<br>
+layout_width, layout_height 등 속성으로 설정하면 크기가 고정되어 있다.
+<br>
+이러한 상황에서 뷰에 넣을 이미지 크기가 다양하다면 뷰의 크기와 맞지 않는 상황이 발생한다.
+<br>
+<br>
+wrap_content로 지정하면 뷰의 크기가 지나치게 커지는 문제가 있다.
+<br>
+<br>
+이러한 문제를 해결하기 위해 이미지의 최대 크기를 지정해 준다.
+<br>
+maxWidth, maxHeight 속성은 android:adjustViewBounds 속성과 함께 사용해야 한다.
+<br>
+이 속성을 true로 설정 시 이미지의 가로세로 길이와 비례해 뷰의 크기를 맞춰준다.
+<pre>
+android:maxWidth="100dp"
+android:maxHeight="100dp"
+android:adjustViewBounds="true"
 </pre>

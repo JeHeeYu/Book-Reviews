@@ -68,8 +68,7 @@ B앱에서 A앱의 컴포넌트와 연동하는 코드만 잘 구현했다면 A 
 그런데 만약 A앱의 컴포넌트에 퍼미션을 설정하면 B앱에서 연동할 때 문제가 발생한다.
 <br>
 <br>
-<img src="https://
--images.githubusercontent.com/87363461/189881461-0bbbb59f-be89-4eb3-8c63-18f6f2cee481.JPG" width="400" height="200">
+<img src="https://user-images.githubusercontent.com/87363461/189881461-0bbbb59f-be89-4eb3-8c63-18f6f2cee481.JPG" width="400" height="200">
 <img src="https://user-images.githubusercontent.com/87363461/189881468-bf79c29e-6639-450d-b79f-c7d954abae19.JPG" width="400" height="200">
 <br>
 <br>
@@ -182,4 +181,354 @@ ActivityResultLauncher 객체는 registerForActivityResult() 함수를 호출해
 <pre>
 public final <I, O> ActivityResultLauncher<I> register
 ForActivityResult(@NonNull ActivityResultContract<I, O> contract, @NonNull ActivityResultCallback<O> callback)
+</pre>
+registerForActivityResult() 함수는 매개변수가 2개이다.
+<br>
+첫 번째는 어떤 요청인지를 나타내는 ActivityResultContract 타입 객체이며 다양한 요청에 대응하는 서브 클래스들이 있다.
+<br>
+대표적으로 다른 액티비티를 실행하고 결과를 돌려받을 때 StartActivityForResult,
+<br>
+퍼미션 허용을 요청할 때는 Requestpermission을 사용한다.
+<br>
+<br>
+두 번째 매개변수는 결과를 받았을 때 호출되는 콜백이다.
+<pre>
+// 퍼미선 요청 확인
+val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+    isGranted -> 
+    if(isGranged) { } // granted Callback
+    else { }    // denied Callback
+}
+
+// 퍼미션 요청 실행
+requestPermissionLaunch.launch("android.permission.ACCESS_FINE_LOCATION")
+</pre>
+requestForActivityResult() 함수로 ActivityResultLauncher 객체를 만들었다면,
+<br>
+필요한 곳에서 ActivityResultLaunch 객체의 launch() 함수를 호출하여 퍼미션 요청을 실행한다.
+<br>
+<br>
+요청 결과는 registerForActivityResult() 함수의 두 번째 매개변수로 등록한 콜백으로 전달된다.
+## 다이얼로그(Dialog) 종류
+다이얼로그란 사용자와 상호 작용하는 대화상자로 토스트, 날짜 또는 시간 입력, 커스텀 다이얼로그 등이 있다.
+### 토스트 메시지(Toast Message)
+토스트는 화면 아래쪽에 잠깐 보였다가 사라지는 문자열을 의미하며 사용자에게 간단한 메시지로 특정한 상황을 알릴 때 사용한다.
+<br>
+<br>
+토스트를 사용하는 대표적인 예가 뒤로가기 버튼을 눌렀을 때 종료 확인을 받을 때를 들 수 있다.
+<br>
+<br>
+토스트는 Toast의 makeTest() 함수로 만든다.
+<pre>
+open static fun makeText(context: Context!, text: CharSquence!, duration: Int): Toast!
+open static fun makeText(context: Context!, resId: Int, duration: Int): Toast!
+</pre>
+makeText() 함수의 두 번째 매개변수가 출력할 문자열이다.
+<br>
+세 번째 매개변수는 토스트가 화면에 출력되는 시간이다. 보통 하기의 상수를 사용한다.
+<ul>
+<li>val LENGTH_LONG: Int</li>
+<li>val LENGTH_SHORT: Int</li>
+</ul>
+Toast.LENGTH_SHORT는 일반적으로 3초 정도, Toast.LENGTH_LONG은 5초 정도의 시간을 의미한다.
+<br>
+토스트가 화면에 출력된 이후 시간이 지나면 자동으로 사라진다.
+<pre>
+// 토스트 출력 예제
+val toast = Toast.makeText(this, "종료하려면 한 번 더 누르세요", Toast.LENGTH_SHORT)
+toast.show()
+</pre>
+토스트는 makeText() 함수외에 하기의 세터 함수로도 만들 수 있다.
+<pre>
+open fun setDuration(duration: Int): Unit
+open fun setGravity(gravity: Int, xOffset: Int, yOffset: Int): Unit
+open fun setMargin(horizontalMargin: Float, verticalMargin: Float): Unit
+open fun setText(resId: Int): Unit
+</pre>
+setDuration(), setText() 함수를 이용하면 문자열이나 화면에 보이는 시간을 설정할 수 있다.
+<br>
+setGravity()나 setMargin() 함수를 이용하면 토스트가 뜨는 위치를 지정할 수 있다.
+
+### 토스트 콜백 함수
+토스트가 화면에 보이거나 사라지는 순간을 콜백으로 감지해 특정 로직을 수행할 수 있다.
+<br>
+이 콜백 기능은 API 레벨 30버전에서 추가되어 이후 버전부터 사용할 수 있다.
+<pre>
+// 콜백 기능 이용하기
+@RequiresApi(Build.VERSION_CODES.R)    // API 레벨 호환성 애너테이션
+fun showToast() {
+    val toast = Toast.makeText(this, "종료하려면 한 번 더 누르세요", Toast.LENGTH_SHORT)
+    toast.addCallback(object: Toast.Callback() {
+        override fun onToastHidden() {
+            super.onToastHidden()       // Toast가 사라질 때
+            Log.d("Toast", "Toast Hidden")
+        }
+        
+        override fun onToastShown() {     // 토스타가 나타날 때
+            super.OnToastShown()
+            Log.d("Toast", "Toast Show")
+        }
+    })
+    toast.show()
+}
+</pre>
+Toast.Callback 타입의 객체를 토스트 객체의 addCalback() 함수로 등록해주면 된다.
+<br>
+이렇게 하면 onToastShown(), oNToastHidden() 함수가 자동으로 호출된다.
+
+### 날짜 또는 시간 입력받기
+앱에서 사용자에게 날짜나 시간을 입력받는데 사용하는 다이얼로그를 <b>피커(Picker) 다이얼로그</b> 라고 한다.
+<br>
+날짜를 입력 받을 때는 <b>데이트 피커 다이얼로그(DatePickerDialog)</b>를,
+<br>
+시간을 입력받을 때는 <b>타임 피커 다이얼로그(TimePickerDialog)</b> 를 사용한다.
+<pre>
+// 데이트 피커 다이얼로그 생성자
+DatePickerDialog(context: Context, listener: DatePickerDialog.OnDateSetListener?,
+                 year: Int, month: Int, dayOfMonth: Int)
+</pre>
+두 번째 매개변수로 DatePickerDialog.OnDateSetListener 구현 객체를 등록하면 다이얼로그에서
+<br>
+사용자가 설정한 날짜를 콜백 함수로 얻을 수 있다.
+<br>
+<br>
+나머지 Int 타입의 매개변수느 처음에 보이는 날짜로, month 값은 0부터 11까지, 0은 1월을 의미한다.
+<pre>
+// 데이트 피커 다이얼로그 사용 예
+DatePickerDialog(this, object: DatePickerDialog.OnDateSetListener {
+    override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
+        Log.d("Date", "year : $p1, month : ${p2+1}, dayOfMonth : $p3")
+    }
+}, 2020, 8, 21).show()
+</pre>
+[실행 결과]
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189915286-621d1333-98e2-4178-a7c0-76d1b77bfa2c.JPG" width="200" height="400">
+<br>
+<pre>
+// 타임 피커 다이얼로그 생성자
+TimePickerDialog(context: Context!, listener: TimePickerDialog.OnTimeSetListener!,
+                 hourOfDay: Int, minute: Int, is24HourView: Boolean)
+</pre>
+두 번째 매개변수로 TimePickerDialog.OnTimeSetListener를 구현한 객체를 지정하면 사용자가<br>
+다이얼로그에서 설정한 시간을 얻을 수 있으며, 처음에 보일 시간을 Int 타입으로 설정할 수 있다.
+<br>
+<br>
+마지막 매개변수로 시간을 24시간과 12시간 형태 중에 어떤 것으로 출력할 것인지를 지정한다.
+<br>
+false로 지정할 경우 12시간 형태로 출력해 오전/오후 형태를 선택하는 부분이 보인다.
+<br>
+true로 지정할 경우 24시간 형태로 출력해 오전/오후 형태를 선택하는 부분이 없다.
+<pre>
+// 타임 피커 다이얼로그 사용 예
+TimePickerDialog(this, object: TimePickerDialog.OnTimeSetListener {
+    override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
+        Log.d("Time", "time : $p1, minute : $p2")
+    }
+}, 15, 0, true).show()
+</pre>
+[실행 결과]
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189916129-83ed9d8c-e9f3-434a-ab8b-cd76a937ce79.JPG" width="200" height="400">
+<br>
+<br>
+### 알림 창 띄우기
+안드로이드 다이얼로그의 기본은 AlertDialog로 단순한 메시지만 출력할 수도 있고, 다양한 화면을 출력할 수도 있다.
+<br>
+데이트 피커와 타임 피커도 AlertDialog의 하위 클래스로 각각의 화면에 데이트 피커와 타임 피커를 출력한 다이얼로그이다.
+<br>
+<br>
+알림 창은 크게 3가지 영역으로, 제목, 내용, 버튼 영역이 있다.
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189917022-00075d09-39e7-4e4a-b159-54b9af77424b.JPG" width="300" height="150">
+<br>
+<br>
+이 3가지의 영역은 항상 보이는 것은 아니며, 알림 창을 설정할 때 제목과 버튼 정보를 지정하지 않으면 내용 영역만 출력된다.
+<br>
+<br>
+알림 창의 생성자는 접근 제한자가 protected로 선언돼서 객체를 직접 생성할 수 없다.
+<br>
+대신 AlertDialog.Builder를 제공하므로 이 빌더를 이용해서 알림 창을 만든다.
+<br>
+먼저 AlertDialog.Builder를 생성하고 빌더의 세터 함수로 알림 창의 정보를 지정한다.
+<pre>
+// 알림 창 빌더
+AlertDialog.Builder(context: Context!)
+
+// 알림 창에 아이콘 제목과 내용을 지정하는 함수들
+open fun setIcon(iconId: Int): AlertDialog.Builder!
+open fun setTitle(title: CharSequence!): AlertDialog.Builder!
+open fun setMessage(message: CharSequence!): AlertDialog.Builder!
+</pre>
+setIcon() 함수는 제목 영역에 아이콘을 출력한다.
+<br>
+<br>
+setTitle() 함수는 제목 문자열을 출력한다.
+<br>
+<br>
+setMessage() 함수는 내용 영역에 간단한 문자열을 출력할 때 사용한다.
+<pre>
+// 알림 창에 버튼을 지정하는 함수
+open fun setPositiveButton(text: CharSequence!, listener: DialogInterface.OnclickListener!): AlertDialog.Builder!
+open fun setNegativeButton(text: CharSequence!, listener: DialogInterface.OnclickListener!): AlertDialog.Builder!
+open fun setNeturalButton(text: CharSequence!, listener: DialogInterface.OnclickListener!): AlertDialog.Builder!
+</pre>
+각 함수의 첫 번째 매개변수는 버튼의 문자열이다.
+<br>
+<br>
+두 번째 매개변수는 사용자가 버튼을 클릭했을 때 처리할 이벤트 핸들러이다.
+<br>
+만약 버튼을 클릭했을 때 처리할 내용이 없다면 두 번째 매개변수에 null을 대입한다. 그러면 클릭 후 창이 닫힌다.
+<br>
+<br>
+알림 창의 버튼은 최대 3개까지만 추가할 수 있으며, 함수를 중복 호출하면 버튼은 중복되어 하나만 나타난다.
+<pre>
+// 알림 창 띄우기
+AlertDialog.Builder(this).run {
+    setTitle("test dialog")
+    setIcon(android.R.drawable.ic_dialog_info)
+    setMessage("정말 종료하시겠습니까?")
+    setPositiveButton("OK", null)
+    setNegativeButton("Cancel", null)
+    setNeturalButton("More", null)
+    setPositiveButton("YES", null)    // 중복 호출해도 마지막 함수만 호출됨
+    setNegativeButton("NO", null)     // 중복 호출해도 마지막 함수만 호출됨
+    show()
+}
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/189919216-56d3b05b-0a81-4fbb-a7e3-6cea381ac3f9.JPG" width="300" height="150">
+<br>
+<br>
+버튼 함수를 3개로 구분하는 이유는 이벤트 핸들러에서 어떤 버튼이 클릭되었는지 구분하기 위해서이다.
+<br>
+각 이벤트에 해당하는 이벤트 핸들러를 따로 만들 수도 있지만 한 알림 창의 버튼 이벤트를 하나의
+<br>
+이벤트 핸들러에서 모두 처리할 수 있다.
+<br>
+<br>
+이때 어떤 버튼이 클릭되었는지를 구분해야 하는데, 셋 중 어떤 함수를 사용했는지에 따라 이벤트 핸들러에
+<br>
+전달되는 매개변수값이 달라서 그 값으로 구분한다.
+<pre>
+// 버튼의 이벤트 핸들러 등록
+val eventHandler = object : DialogInterface.OnClickListener {
+    override fun onClick(p): DialogInterface?, p1: Int) {
+        if (p1 == DialogInterface.BUTTON_POSITIVE) {
+            Log.d("Button", "Positive Button Click")
+        }
+        else {
+            Log.d("Button", "Negative Button Click")
+        }
+    }
+}
+
+setPositiveButton("OK", eventHandler)     // 이벤트 핸들러 등록
+setNegativeButton("OK", eventHandler)     // 이벤트 핸들러 등록
+</pre>
+알림 창을 클릭했을 때 호출되는 OnClick() 함수의 두 번째 매개변수가 이벤트가 발생한 버튼을 알려준다.
+<br>
+setPositiveButton() 함수로 만든 버튼은 이벤트 구분자가 DialogInterface.BUTTON_POSITIVE로 지정된다.
+<br>
+setNegativeButton() 함수로 만든 버튼은 이벤트 구분자가 DialogInterface.BUTTON_NEGATIVE로 지정된다.
+<br>
+따라서 이 값으로 버튼을 구분해 적절하게 처리해 주면 된다.
+<br>
+<br>
+알림 창의 내용을 출력하는 setMessage() 함수 말고도 다양한 함수가 있다.
+<pre>
+// 알림 창의 내용을 출력하는 함수
+open fun setItems(items: Array<CharSequence>!, listener: DialogInterface.OnClickListener!): AlertDialog.Builder!
+open fun setMultiChoiceItems(items: Array<CharSequence>!, checkedItems: BooleanArray!, 
+                             listener:DialogInterface.OnMultiChoiceClickListener!): AlertDialog.Builder!
+open fun setSingleChoiceItems(items: Array<CharSequence>!, checkedItem: Int, listener: DialogInterface.OnClickListener!)
+                              : AlertDialog.Builder!
+</pre>
+위 함수는 목록을 제공하고 이 중 하나를 선택받는 알림 창이다.
+<br>
+<br>
+setItems() 함수의 두 번째 매개변수는 항목을 선택할 때의 이벤트 핸들러이며,
+<br>
+사용자가 항목을 선택하면 onClick() 함수가 자동으로 호출된다.
+<br>
+사용자가 선택한 항목의 인덱스는 onClick() 함수의 두 번째 매개변수로 전달된다.
+<pre>
+// setItems() 예제
+val items = arrayOf<String>("사과", "복숭아", "수박", "딸기")
+AlertDialog.Builder(this).run {
+    setTitle("items test")
+    setIcon(android.R.drawable.ic_dialog_info)
+    setItems(items, object: DialogInterface.OnClickListener {
+        override fun onClick(p0: DialogInterface?, p1: Int) {
+            Log.d("setItems", "선택한 과일 : ${items[p1]}")
+        }
+    })
+    setPositiveButton("닫기", null)
+    show()
+}
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/189921756-adc03490-de91-4fbb-8660-366cd476c807.JPG" width="200" height="200">
+<br>
+<br>
+setMultiChoiceItems() 함수는 다중 선택을 위한 체크박스가 함께 출력되는 항목을 만들어 준다.
+<br>
+세 번째 매개변수가 항목을 선택할 때의 이벤트 핸들러이며 사용자가 항목을 선택하는 순간 onClick() 함수가 자동으로 호출된다.
+<br>
+onClick() 함수의 두 번째 매개변수로 선택한 항목의 인덱스가 전달되고,
+<br>
+세 번째 매개변수로 체크 상태가 전달된다.
+<pre>
+// setMultiChoiceItems() 예제
+setMultiChoiceItems(items, booleanArrayOf(true, false, true, false), object: DialogInterface.OnMultiChoiceClickListener {
+    override fun onClick(p0: DialogInterface?, p1: Int, p2: Boolean) {
+        Log.d("setMultiChoiceItems", "${items[p1]} 이 ${if(p2) "선택되었습니다." else "선택 해제되었습니다."}")
+    }
+})
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/189922717-78691d4e-ae17-41e3-9abd-f8dec9b7334a.JPG" width="200" height="200">
+<br>
+<br>
+setSingleChoiceItems() 함수는 하나만 선택할 수 있는 라디오 버튼으로 구성된 항목을 만들어 준다.
+<br>
+두 번째 매개변수로 처음 선택할 항목을 지정한다.
+<pre>
+// setSingleChoiceItems() 예제
+setSingleChoiceItems(items, 1, object: DialogInterface.OnClickListener {
+    override fun onClick(p0: DialogInterface?, p1: Int) {
+        Log.d("setSingleChoiceItems", "${items[p1]} 이 선택되었습니다.")
+    }
+})
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/189923319-1c9b6bb8-e3d6-41c5-a271-385a38ff5877.JPG" width="200" height="200">
+<br>
+<br>
+알림 창의 제목, 내용, 버튼을 구성하는 함수 이외에 속성을 설정하는 함수를 사용할 수 있다.
+<pre>
+open fun setCancelable(cancelable: Boolean): AlertDialog.Builder!
+open fun setCanceldOnTouchOutside(cancel: Boolean): Unit
+</pre>
+두 함수 모두 사용자의 행동에 따라 알림 창을 닫을 것인지를 설정한다.
+<br>
+setCancelable() 함수는 사용자가 기기의 뒤로가기 버튼을 눌렀을 때,
+<br>
+<br>
+setCanceldOnTouchOutside() 함수는 알림 창의 바깥 영역을 터치 했을 때 매개변수가 true이면 닫고 false 이면 닫지 않는다.
+<br>
+기본 값은 true이다.
+<pre>
+// 알림 창을 닫는 설정 예제
+AlertDialog.Builder(this).run {
+    setTitle("items Test")
+    setIcon(android.R.drawable.ic_dialog_info)
+    setItems(items, object: DialogInterface.OnClickListener {
+        override fun onClick(p0: DialogInterface?, p1: Int) {
+            Log.d("Alert", "선택한 과일 : ${items[p1]")
+        }
+    })
+    setCancelable(false)
+    setPositiveButton("닫기", null)
+    show()
+}.setCanceldOnTouchOutside(false)
 </pre>

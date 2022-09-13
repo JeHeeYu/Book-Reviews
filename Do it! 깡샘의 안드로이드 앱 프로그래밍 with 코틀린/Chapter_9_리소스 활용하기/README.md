@@ -197,3 +197,14 @@ else {
 여기서 Build.VERSION.SDK_INT는 앱이 실행되는 기기의 버전, 
 <br>
 Build.VERSION_CODES.R은 안드로이드 11버전 즉, API 레벨 30을 의미한다.
+## 마무리 실습
+[[메신저 앱의 인트로 화면 만들기]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_9_%EB%A6%AC%EC%86%8C%EC%8A%A4%20%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0/%EB%A7%88%EB%AC%B4%EB%A6%AC%20%EC%8B%A4%EC%8A%B5)
+<br>
+<br>
+[결과 화면]
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189878999-0695bebd-fc4f-410c-a244-4271cddc0246.JPG" width="200" height="400">
+<img src="https://user-images.githubusercontent.com/87363461/189878987-54ecfa48-6303-41d0-8ffa-766623e497a6.JPG" width="200" height="400">
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/189879000-4f103933-fccd-4c84-9e08-ac907bb458d1.JPG" width="400" height="200">
+<img src="https://user-images.githubusercontent.com/87363461/189878994-1732a00f-41c3-4d89-a16f-c34903584ca2.JPG" width="400" height="200">

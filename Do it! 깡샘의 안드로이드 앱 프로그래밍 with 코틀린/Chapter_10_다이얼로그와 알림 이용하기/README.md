@@ -532,6 +532,7 @@ AlertDialog.Builder(this).run {
     show()
 }.setCanceldOnTouchOutside(false)
 </pre>
+
 ### 커스텀 다이얼로그
 커스텀 다이얼로그는 개발자가 원하는 형태로 창을 구성한 다이얼로그로 커스텀 다이얼로그도 AlertDialog를 이용한다.
 <br>
@@ -545,9 +546,6 @@ LayoutInfalter 클래스는 레이아웃 XML 파일을 코드에서 초기화(�
 XML 파일은 텍스트 파일이라 코드에서 이용하려면 XML에 선언한 대로 객채를 생성해 메모리에 할당해야 한다.
 <br>
 이 작업을 LayoutInflater가 해준다.
-<br>
-<br>
-<img src="https://user-images.githubusercontent.com/87363461/190121915-850279d9-d8df-4cf6-98f1-9fb08900bae2.JPG" width="600 height="300">
 <br>
 <br>
 LayoutInflater로 레이아웃 XML 파일을 초기화하는 작업은 getSystemService() 함수로 LayoutInflater를 얻는다.
@@ -612,4 +610,3 @@ RingtoneManager.getDefaultUri() 함수를 이용해 소리의 식별값을 얻�
 val player: MediaPlayer = MediaPlayer.create(this, R.raw.fallbackring)
 player.start()
 </pre>
-

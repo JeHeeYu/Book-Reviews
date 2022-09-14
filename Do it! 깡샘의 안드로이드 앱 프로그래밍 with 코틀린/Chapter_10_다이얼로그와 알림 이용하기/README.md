@@ -1131,3 +1131,12 @@ val messageStyle = NotificationCompat.MessagingStyle(sender1).addMessage(message
 builder.setStyle(messageStyle)
 </pre>
 <img src="https://user-images.githubusercontent.com/87363461/190161032-8b8204de-1e05-45c9-a6e6-cc8305df776c.JPG" width="250" height="150">
+
+## 마무리 실습
+[[카카오톡 알림 만들기]](https://github.com/JeHeeYu/Book-Reviews/tree/main/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0/Chapter_10_%EB%8B%A4%EC%9D%B4%EC%96%BC%EB%A1%9C%EA%B7%B8%EC%99%80%20%EC%95%8C%EB%A6%BC%20%EC%9D%B4%EC%9A%A9%ED%95%98%EA%B8%B0/%EB%A7%88%EB%AC%B4%EB%A6%AC%20%EC%8B%A4%EC%8A%B5)
+<br>
+<br>
+[결과 화면]
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190174885-2cf14105-f5ec-4c68-b0a2-54e437742aef.JPG" width="200" height="400">

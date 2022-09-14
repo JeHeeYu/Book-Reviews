@@ -610,3 +610,471 @@ RingtoneManager.getDefaultUri() 함수를 이용해 소리의 식별값을 얻�
 val player: MediaPlayer = MediaPlayer.create(this, R.raw.fallbackring)
 player.start()
 </pre>
+
+## 진동 알림
+진동도 사용자 알림 효과로 많이 이용하며, 앱에서 진동이 울리게 하려면 매니페스트 파일에 퍼미션을 얻어야한다.
+<br>
+진동은 Vibrator 클래스를 이용하는데, Vibrator 객체를 얻는 방법이 API 레벨 31부터 변경되었다.
+31 이전 버전에서는 VIBRATOR_SERVICE로 식별되는 시스템 서비스를 이용했지만,
+<br>
+31 버전부터는 VIBRATOR_MANAGER_SERVICE로 식별되는 VibratorManager라는 시스템 서비스를 얻고 
+<br>
+이 시스템에서 Vibartor를 이용해야 한다.
+<pre>
+// 진동 객체 얻기
+val vibrator = if (Build.VERSION_SDK_INT >= Build.VERSION_CODES.S) {
+    val vibratorManager = this.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as Viabrator
+                          vibratorManager.defaultVibrator;                          
+}
+    else {
+        getSystemService(VIBRATOR_SERVICE) as Vibrator
+    }
+</pre>
+
+### 시간과 패턴을 지정해 진동 울리기 (API 레벨 1부터 제공)
+이 함수는 API 레벨 1부터 제공하던 함수였으나, 26 버전에서 새로운 함수를 제공하면서 deprecated 되었다
+<br>
+deprecated는 사용을 보장할 수 없으니 더는 사용하지 말라는 의미이다.
+<br>
+<br>
+이 API를 사용하기 위해서 레벨 호환성을 고려해야 한다.
+<br>
+<pre>
+open fun vibrate(milliseconds: Long): Unit
+open fun vibrate(pattern: LongArray!, repeat: Int): Unit
+</pre>
+첫 번째 함수의 매개변수는 Long 타입 하나로, 이 매개변수는 진동이 울리는 시간을 의미한다(500일 경우 0.5초 ms 단위)
+<br>
+<br>
+두 번째 함수는 매개변수가 2개인데, 진동을 반복해서 울리는 함수이다.
+<br>
+첫 번째 매개변수에는 진동 패턴을 배열로 지정한다. 
+<br>
+예를 들어 500, 100, 1500의 배열값을 전달하면 0.5초 울리고 1초 쉬고 1.5초 울린다.
+<br>
+두 번째 매개변수는 이 패턴을 얼마나 반복할지 지정한다.
+<br>
+만약 -1로 지정하면 반복하지 않고 패턴대로 한 번만 울리고, 0으로 지정하면 코드에서 cancel() 함수로 끄지 않는 한 계속 울린다.
+
+### 진동의 세기까지 지정해 진동 울리기 (API 레벨 26부터 제공하는 함수)
+API 레벨 26부터는 진동 정보를 VibratorEffect 객체로 지정할 수 있는 함수를 제공한다.
+<br>
+VibrationEffect 객체로는 진동이 울리는 시간 이외에 진동의 세기까지 제어할 수 있다.
+<pre>
+open fun vibrate(vibe: VibrationEffect!): Unit
+</pre>
+vibrate() 함수의 매개변수에 VibrationEffect 객체를 지정한다.
+<br>
+VibrationEffect는 진동 정보를 지정하는 함수를 제공한다.
+<pre>
+open static fun createOneShot(milliseconds: Long, amplitude: Int): VibrationEffect!
+</pre>
+이 함수로 만든 VibrationEffect 객체를 vibrate() 함수에 대입하면서 첫 번째 매개변수의 시간 동안 울린다(ms초)
+<br>
+그리고 두 번째 매개변수를 이용해 진동의 세기를 지정할 수 있다.
+<br>
+진동의 세기는 0 ~ 255 사이의 숫자로 표현하며, 0이면 진동이 울리지 않고 255면 기기에서 지원하는 가장 센 진동으로 울린다.
+<br>
+<br>
+이렇게 숫자를 직접 대입해도 되고 VibrationEffect.DEFAULT_AMPLITUDE 처럼 상수를 지정할 수도 있다.
+<pre>
+// 기본 세기로 진동 울리기
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.0) {
+    vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect
+}
+</pre>
+
+반복해서 진동을 울리는 createWaveform() 함수도 있다.
+<pre>
+// createWaveform() 함수 생성자
+open static fun createWaveform(timings: LongArray!, amplitudes: IntArray!, repeat: Int): VibrationEffect!
+</pre>
+첫 번째 매개변수는 진동이 울리는 시간의 패턴 배열, 두 번째 매개변수는 진동 세기의 패턴 배열, 세 번째 매개변수는 횟수이다.
+<pre>
+// 패턴대로 반복해서 울리기
+if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.0) {
+    vibrator.vibrate(VibrationEffect.createWaveform(longArrayOf(500, 1000, 500, 2000),
+    intARrayOf(0, 50, 0, 200), -1))
+}
+else {
+    vibrator.vibrate(longArrayOf(500, 1000, 500, 2000), -1)
+}
+</pre>
+createWaveform() 함수의 첫 번째와 두 번째 매개변수를 보면 각각 4개의 숫자 배열을 대입 했습니다.
+<br>
+이렇게 하면 처음 0.5초간은 진동이 울리지 않다가 1초간 50만큼의 세기로 올리고, 다시 0.5초간 울리지 않다가
+<br>
+마지막 2초간 200만큼의 세기로 울린다.
+
+## 알림 띄우기
+상대 바는 화면 상단의 한 줄을 의미하며 이곳에 배터리, 네트워크, 시간 등 시스템의 상태 정보가 출력된다.
+<br>
+이 상태 바에 앱의 정보를 출력하는 것을 알림(notification) 이라고 한다.
+<br>
+<br>
+원래 상태 바는 시스템에서 관리하는 곳이며 앱이 직접 제어할 수 없다.
+<br>
+그런데 앱에서 시스템에 의뢰하면 시스템에서 관리하는 상태 바에 앱의 알림을 출력할 수 있다.
+<br>
+따라서 앱의 화면을 구성하거나 사용자 이벤트를 처리하는 프로그래밍과는 구조가 다르고,
+<br>
+알림을 위해 제공하는 API 함수를 이용해야 한다.
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190139528-e1879903-2bae-48a2-95d2-9c87f9832499.JPG" width="600" height="300">
+<br>
+<br>
+알림은 NotificationManager의 notify() 함수로 발생한다.
+<br>
+notify() 함수에는 NotificationCompat.Builder가 만들어 주는 Notification 객체를 대입하며 이 객체에는 알림 정보가 저장된다.
+<br>
+그런데 NotificationCompat.Builder를 만들 때 NotificationChannel 정보를 대입해 주어야 한다.
+<br>
+<br>
+정리하자면 NotificationChannel로 알림 채널을 만들고,
+<br>
+이 채널 정보를 대입해 NotificationCompat.Builder를 만든 다음,
+<br>
+이 빌더로 Notification 객체를 만들고,
+<br>
+Notification 객체를 NotificationManager의 notify() 함수에 대입하는 구조이다.
+<br>
+<br>
+Notification을 만들려면 NotificationCompat.Builder가 필요한데 빌더를 만드는 방법이
+<br>
+API 레벨 26(Android 8) 버전부터 변경 되었다.
+<pre>
+// API 레벨 26 버전 이전
+Builder(context: Context!)
+// API 레벨 26 이상
+Builder(context: Context!, channelld: String!)
+</pre>
+API 레벨 26 버전에서 부터 채널이라는 개념이 추가되었는데, 이는 앱의 알림을 채널로 구분하겠다는 의도이다.
+<br>
+사용자가 환경 설정에서 어떤 앱의 알림을 받을지 말지를 설정할 수 있다.
+<pre>
+// 알림 채널 생성자
+NotificationChannel(id: String!, name: CharSequence!, importance: Int)
+</pre>
+매개변수로 채널의 식별값과 설정 화면에 표시할 채널 이름을 문자열로 지정한다.
+<br>
+세 번째 매개변수는 이 채널에서 발생하는 알림의 중요도이며 하기의 상수로 지정한다.
+<ul>
+<li><b>NotificationManager.IMPORTANCE_HIGH</b> : 긴급 상황으로 알림음이 울리며 헤드업으로 표시</li>
+<li><b>NotificationManager.IMPORTANCE_DEFAULT</b> : 높은 중요도이며 알림음이 울림</li>
+<li><b>NotificationManager.IMPORTANCE_LOW</b> : 중간 중요도이며 알림음이 울리지 않음</li>
+<li><b>NotificationManager.IMPORTANCE_MIN</b> : 낮은 중요도이며 알림음도 없고 상태 바에도 표시되지 않음</li>
+</ul>
+<br>
+채널의 각종 정보는 함수나 프로퍼티로 설정할 수 있다.
+<pre>
+fun setDescription(description: String!): Unit : 채널의 설명 문자열
+fun setShowBadge(showBadge: Boolean): Unit: 홈 화면의 아이콘에 배지 아이콘 출력 여부
+fun setSound(sound: Uri!, audioAttributes: AudioAttributes!): Unit : 알림음 재생
+fun enableLights(ligghts: Boolean): Unit : 불빛 표시 여부
+fun setLightColor(argb: Int): Unit : 불빛이 표시된다면 불빛의 색상
+fun enableVibration(vibration: Boolean): Unit : 진동을 울릴지 여부
+fun setVibrationPattern(vibrationPattern: LongArray!): Unit : 진동을 울린다면 진동의 패턴
+</pre>
+setDescription() 함수에 전달하는 문자열은 설정 화면에서 채널을 설명하는 곳에 보인다.
+<br>
+그리고 setShowBadge(true0)로 설정하면 홈 화면의 앱 아이콘에 확인하지 않은 알림 개수가 표시된 배지 아이콘이 보인다.
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190141994-594c0ba0-b6f4-4425-bb12-7b8895e1e366.JPG" width="200" height="200">
+<br>
+<br>
+배지 아이콘에 표시되는 숫자는 코드에서 지정하는 값이 아니며 사용자가 확인하지 않은 알림 개수가 자동으로 표시된다.
+<br>
+아이콘은 코드에서 setShowBadge(true)로 지정했더라도 사용자가 설정에서 변경하면 배지가 출력되지 않는다.
+<br>
+<br>
+enableVibration() 함수를 이용해 알림이 발생할 때 진동이 울리게 할 수 있으며, 만약 특정 패턴으로 울려야 한다면
+<br>
+setVibrationPattern() 함수를 함께 이용해 진동 패턴을 설정한다.
+<pre>
+// 알림 빌더 예제
+val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+val builder: NotificationCompat.Builder
+
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.0) {
+    val channelId = "one-channel"
+    val channelName = "My Channel One"
+    val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+    
+    // 채널에 다양한 정보 설정
+    channel.description = "My Channel One Description"
+    channel.setShowBadge(true)
+    
+    val uri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+    val audioAttributes = AudioAttributes.Builder()
+                          .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                          .setUsage(AudioAttributes.USAGE_ALARM)
+                          .build()
+    channel.setSound(uri, audioAttributes)
+    channel.enableLights(true)
+    channel.lightColor = Color.RED
+    channel.enableVibration(true)
+    channel.vibrationPattern = longArrayOf(100, 200, 100, 200)
+    
+    // 채널을 NotificationManager의 등록
+    manager.createNotificationChannel(channel)
+    
+    // 채널을 이용해 빌더 생성
+    builder = NotificationCOmpat.Builder(this, channelId)
+}
+else {
+    builder = NotificationCompat.Builder(this)
+}
+</pre>
+
+### 알림 객체
+알림 빌더를 만든 후 이 빌더를 이용해 Notification 객체를 만들어야 한다.
+<br>
+이 객체에 출력할 이미지, 문자열 등의 정보를 담고 알림이 발생하면 상태 바에 스몰 아이콘이 출력된다.
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190145080-9e128192-2b54-41ef-9495-fcb901754c73.JPG"  width="400" height="100">
+<img src="https://user-images.githubusercontent.com/87363461/190145087-82f09d59-4b62-410d-a884-ed8d51e60c55.JPG"  width="400" height="300">
+<br>
+<br>
+알림은 스몰 아이콘과 발생 시각, 제목, 내용 등으로 구성되며 이러한 정보를 Notification 객체에 설정해야 한다.
+<pre>
+// 알림 객체 설정
+builder.setSmallIcon(android.R.drawble.ic_notification_overlay)
+builder.setWhen(System.currentTimeMillis())
+builder.setContentTitle("Content Title")
+builder.setCOntentText("Content Message")
+</pre>
+빌더의 세터 함수를 이용해 알림의 구성 정보를 설정할 수 있다.
+<br>
+여기까지 작성했다면 NotificationManager 클래스의 notify() 함수를 이용해 알림을 띄운다.
+<pre>
+// 알림 발생
+manager.notify(11, builder.build())
+</pre>
+builder.build() 함수가 Notification 객체를 만들고 이로써 알림이 발생한다.
+<br>
+첫 번째 매개변숫값은 알림을 식별하는 데 사용하는 숫자이며 개발자가 임의로 지정한다.
+<br>
+이 식별값은 사용자 폰에 발생한 알림을 코드에서 취소할 때 사용하며 이때 cancel() 함수를 이용한다.
+<pre>
+// 알림 취소
+manager.cancel(11)
+</pre>
+사용자가 알림을 터치하면 이벤트가 발생할 수 있으며 이때 알림은 화면에서 자동으로 사라진다.
+<br>
+또한 사용자가 스와이프로 취소할 수 있다.
+<br>
+<br>
+스와이프나 터치로 알림이 사라지지 않게 하려면 빌더의 세터 함수로 지정해야 한다.
+<pre>
+// 알림 취소 막기
+builder.setAutoCancel(false)
+builder.setOngoing(true)
+</pre>
+setAutoCancel(false)로 지정 시 알림을 터치할 때 이벤트는 발생하지만 알림은 사라지지 않는다.
+<br>
+setOngoing(true)로 지정하면 사용자가 알림을 스와이프해도 사라지지 않는다.
+<br>
+<br>
+만약 2가지를 모두 설정했다면 사용자가 알림을 취소할 수 없으며 특정 순간에 cancel() 함수로 취소해야 한다.
+
+### 알림 터치 이벤트
+알림은 사용자에게 앱의 상태를 간단하게 알려 주는 기능을 하는데 , 사용자가 더 많은 정보를 요구할 수 있다.
+<br>
+그래서 대부분 앱은 사용자가 알림을 터치했을 때 앱의 액티비티 화면을 실행한다.
+<br>
+이렇게 구현하기 위해 알림의 터치 이벤트를 구현해야 한다.
+<br>
+<br>
+그런데 알림은 앱이 관할하는 화면이 아니며 시스템에서 관리하는 상태 바에 출력하는 정보이다.
+<br>
+그러므로 이 알림에서 발생한 터치 이벤트는 앱의 터치 이벤트로 처리할 수 없다.
+<br>
+<br>
+결국 앱에서는 사용자가 알림을 터치했을 때 실행해야 하는 정보를 Notification 객체에 담아 두고,
+<br>
+실제 이벤트가 발생하면 Notification 객체에 등록된 이벤트 처리 내용을 시스템이 실행하는 구조로 처리한다.
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190147059-3fb43d34-ee43-4df9-b97e-7c4dce3ec24f.JPG" width="400" height="300">
+<br>
+<br>
+사용자가 알림을 터치하면 앱의 액티비티 또는 브로드캐스트 리시버를 실힝해야 하는데,
+<br>
+이를 실행하기 위해 인텐트(Intent)를 이용해야 한다.
+<br>
+<br>
+이 인텐트는 앱의 코드에서 준비하지만 실제 컴포넌트를 실행하는 시점은 앱에서 정할 수 없다.
+<br>
+그래서 인텐트를 준비한 후 Notification 객체에 담아 이벤트 발생 시 시스템에 실행해 달라고 의뢰한다.
+<br>
+<br>
+이러한 의뢰는 PendingIntent 클래스를 이용하며 컴포넌트별 실행 의뢰 함수를 제공한다.
+<pre>
+static fun getActivity(context: Context!, requestCode: Int, intent: Intent!, flags: Int): PendingIntent!
+static fun getBroadcast(context: Context!, requestCode: Int, intent: Intent!, flags: Int): PendingIntent!
+static fun getService(context: Context!, requestCode: Int, intent: Intent!, flags: Int): PendingIntent!
+</pre>
+각 함수의 세 번째 매개변수에 인텐트 정보를 등록한다.
+<br>
+이 함수들의 네 번째 매개변수는 flag값으로 똑같은 알림이 발생했을 때 어떻게 처리해야 하는지를 나타낸다.
+<br>
+여기에 입력할 상수 변수로는 하기 하나를 지정한다.
+<ul>
+<li>FLAG_IMMUTABLE</li>
+<li>FLAG_CANCEL_CURRENT</li>
+<li>FLAG_MUTABLE</li>
+<li>FLAG_NO_CREATE</li>
+<li>FLAG_ONE_SHOW</li>
+<li>FLAG_UPDATE_CURRENT</li>
+</ul>
+<br>
+API 레벨이 31을 대상으로 한다면 FLAG_MUTABLE과 FLAG_IMMUTABLE 중 하나를 지정해 주어야 한다.
+<br>
+<br>
+알림을 터치했을 때 DetailActivity라는 액티비티의 실행 정보를
+<br>
+Notification 객체에 등록하고 터치 이벤트 등록은 빌더의 setContentIntent() 함수를 이용한다.
+<pre>
+// 알림 객체에 액티비티 실행 정보 등록
+val intent = Intent(this, DetailActivity::class.java)
+val pendingIntent = PendingIntent.getActivity(this, 10, intent, PendingIntent.FLAG_IMMUTABLE)
+builder.setContentIntent(pendingIntent) // 터치 이벤트 등록
+</pre>
+
+### 액션
+알림에는 터치 이벤트 이외에도 액션을 최대 3개까지 추가할 수 있다.
+<br>
+알림에서 간단한 이벤트는 액션으로 처리하며 앱의 알람 취소, 전화 앱의 수신이나 거부 등이 대표적인 예이다.
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190149805-28dbe4f9-20fc-4848-bcc2-2e2b5d71a95b.JPG" width="300" height="200">
+<br>
+<br>
+액션도 이벤트 처리가 목적으로 액션을 터치할 때 인텐트 정보를 PendingIntent로 구성해 등록해야 한다.
+<br>
+실제 사용자가 액션을 터치하면 등록된 인텐트가 시스템에서 실행되어 이벤트가 처리되는 구조이다.
+<pre>
+// 액션 등록 함수
+open fun addAction(action: Notification.Action!): Notification.Builder
+</pre>
+매개변수로 액션의 정보를 담는 Action 객체를 전달한다.
+<pre>
+// 액션 빌더 생성자
+</pre>
+액션 빌더의 생성자에 아이콘 정보와 액션 문자열, 사용자가 액션을 클릭했을 때 이벤트 PendingIntent 객체를 전달한다.
+<pre>
+// 액션 등록하기
+val actionIntent = Intent(this, OneReceiver::class.java)
+val actionPendingIntent = PendingIntent.getBroadcast(this, 20, actionIntent, PendingIntent.FLAG_IMMUTABLE)
+builder.addAction(NotificationCompat.Action.Builder(
+                  android.R.drawble.stat_notify_more, "Action", actionPendingIntent).build())
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/190151319-3a45b3c0-5508-4c27-91bd-af9272b055a5.JPG" width="300" height="200">
+
+### 원격 입력(RemoteInput)
+원격 입력이란 알림에서 사용자 입력을 직접 받는 기법이다.
+<br>
+에디트 텍스트 같은 사용자 입력 뷰를 사용하지 않고 원격으로 액션에서 직접 받아 처리할 수 있다.
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190151729-9c071118-6def-48df-af8d-dc99d6a59ef0.JPG" width="300" height="150">
+<br>
+<br>
+원격 입력도 액션의 한 종류로 RemoteInput에 사용자 입력을 받는 정보를 설정한 후 액션에 추가하는 구조이다.
+<pre>
+val KEY_TEXT_REPLY = "key_text_reply"
+val replyLabel: String = "답장"
+var remoteInput: RemoteInput = RemoteInput.Builder(KEY_TEXT_REPLY).run {
+    setLabel(replyLabel)
+    build()
+}
+</pre>
+RemoteInput 빌더에 들어가는 정보는 입력을 식별하는 값과 입력란에 출력되는 힌트 문자열이다.
+<br>
+식별값은 개발자가 임의로 작성할 수 있으며 사용자가 입력한 글을 가져올 때 사용한다.
+<br>
+<br>
+그런데 RemoteInput은 API 레벨 20에서 추가되었으므로 minSdk를 20 아래로 설정했다면 API 레벨 호환성을 고려해야 한다.
+<br>
+앱의 API 레벨로 if~else 문을 작성해도 되지만, 호환성을 돕는 라이브러리가 있다.
+<pre>
+androidx.core.app.RemoteInput
+</pre>
+RemoteInput도 액션이므로 액션의 터치 이벤트를 처리하기 위한 PendingIntent를 준비해야 한다.
+<pre>
+// 액션 인텐트 준비
+val replyIntent = Intent(this, ReplyReceiver::class.java)
+val replyPendingIntent = PendingIntent.getBroadcast(this, 30, replyIntent, PendingIntent.FLAG_MUTABLE)
+
+// 원격 입력 액션 등록하기
+builder.addAction(NotificationCompat.Action.Builder(
+                  R.drawble.send, "답장", replyPendingIntent).addRemoteInput(remoteInput).build))
+</pre>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190153049-6d29bf7a-8357-4246-b145-29df4da91087.JPG" width="600" height="150">
+
+### 프로그레스(Progress)
+앱에서 어떤 작업이 이루어지는 데 시간이 걸리는 것을 알람을 이용해 진행 상황을 프로그레스로 알려준다.
+<br>
+알림의 프로그레스 바는 화면을 따로 준비하지 않고 빌더에 setProgress() 함수만 추가해주면 자동으로 나온다.
+<pre>
+// 포로그레스 바 생성 함수
+open fun setProgress(max: Int, progress: Int, indeterminate: Boolean): Notification.Builder
+</pre>
+첫 번째 매개변수가 프로그레스 바의 최댓값이며 두 번째 매개변수가 진행값이다.
+<br>
+처음에 현잿값을 지정한 후 스레드같은 프로그램을 사용해 진행값을 계속 바꾸면서 상황을 알려 주면 된다.
+<br>
+그리고 만약 세 번째 매개변숫값이 true면 프로그레스 바는 왼쪽에서 오른쪽으로 계속 흘러가듯이 표현된다.
+<br>
+<pre>
+// 스레드을 이용해 10초 동안 프로그레스 바의 진행값을 증가시키는 예제
+
+
+builder.setProgress(100, 0, false)
+manager.notify(11, builder.build())
+
+thread {
+    for(i in 1..100) {
+        builder.setProgress(100, i, false)
+        manager.notify(11, builder.build())
+        SystemClock.sleep(100)
+    }
+}
+</pre>
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190154768-f1e623be-d15a-4abc-9d4d-fc15beb92a22.JPG" width="300" height="100">
+
+## 알림 스타일
+알림에 보이는 정보에 문자열 이외에 다양한 콘텐츠로 알림을 구성할 수 있다.
+### 큰 이미지 스타일
+알림에 큰 이미지를 출력할 때는 BigPictureStyle을 이용한다.
+<pre>
+// 큰 이미지 스타일
+val pigPicture = BitmapFactory.decodeResource(resources, R.drawble.test)
+val bigStyle = NotificationCompat.BigPictureStyle()
+bigStyle.bigPicture(big.Picture)
+builder.setStyle(bigStyle)
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/190157405-ab7b236c-d71a-4a4f-9467-777e6cab21c9.JPG" width="200" height="150">
+<br>
+<br>
+BigPictureStyle 객체의 bigPicture 프로퍼티에 출력할 이미지를 비트맵 형식으로 지정한다.
+
+### 긴 텍스트 스타일
+알림에 긴 문자열을 출력해 사용자가 앱을 실행하지 않아도 많은 정보를 알 수 있게 한다.
+<br>
+대표적으로 이메일 앱은 알림과 제목, 발신자, 일부 내용도 보여준다.
+<br>
+긴 문자열 알림은 BigTextStyle을 이용한다.
+<pre>
+// 긴 텍스트 스타일
+val bigTextStyle = NotificationCompat.BigTextStyle()
+bigTextStyle.bigText(resources.getString(R.string.long_text))
+builder.setStyle(bigTextStyle)
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/190158268-d2477b91-c56a-4387-85a9-f77ce048a4de.JPG" width="200" height="200">

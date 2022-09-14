@@ -31,7 +31,7 @@ fun noti() {
       .setStyle(Notification.CallStyle.forIncomingCall(caller, declineIntent, answerIntent)
 }
 </pre>
-API 레벨 호환성에 문제가 있는 API르 사용한 함수나 클래스 선언부 위에 @RequiresApi 애너테이션을 추가한다.
+API 레벨 호환성에 문제가 있는 API를 사용한 함수나 클래스 선언부 위에 @RequiresApi 애너테이션을 추가한다.
 <br>
 이렇게 추가하면 안드로이드 스튜디오에서 오류가 발생하지 않는다.
 <pre>
@@ -1078,3 +1078,56 @@ bigTextStyle.bigText(resources.getString(R.string.long_text))
 builder.setStyle(bigTextStyle)
 </pre>
 <img src="https://user-images.githubusercontent.com/87363461/190158268-d2477b91-c56a-4387-85a9-f77ce048a4de.JPG" width="200" height="200">
+<br>
+<br>
+
+### 상자 스타일
+상자 스타일 알림은 문자열을 목록으로 출력하는 InboxStyle을 사용한다.
+<pre>
+// 상자 스타일
+val style = NotificationCompat.InboxStyle()
+style.addLine("1코스 - 수락.불암산코스")
+style.addLine("2코스 - 용마.아차산코스")
+style.addLine("3코스 - 고덕.일자산코스")
+style.addLine("4코스 - 대모.우면산코스")
+builder.setStyle(stye)
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/190159325-bb70a87f-e1f7-4d56-9407-336f3cbf65cc.JPG" width="250" height="150">
+<br>
+<br>
+
+### 메시지 스타일
+메시지 스타일 알림은 여러 사람이 주고받은 메시지를 구분해서 출력할 때 사용한다.
+<br>
+메시지 스타일에 보일 메시지는 각각 Message 객체로 표현한다.
+<pre>
+// 메시지 객체
+Message(text: CharSequence, timestamp: Long, sender: Person?)
+</pre>
+하나의 메시지는 3가지 정보로 표현된다.
+<br>
+첫 번째 매개변수는 메시지 내용, 두 번째 매개변수는 메시지가 발생한 시각이다.
+<br>
+세 번째 매개변수는 Person 객체로 어떤 사람이 보낸지 설정해야 한다.
+<br>
+즉, Person은 알림에 출력될 한 사람의 정보를 담는 클래스이다.
+<pre>
+// Person 객체 생성, Person은 API 28레벨
+val sender1: Person = Person.Builder()
+                      .setName("kkang")
+                      .setIcon(IconCompat.createWithResource(this, R.drawble.person1))
+                      .build()
+val sender1: Person = Person.Builder()
+                      .setName("kim")
+                      .setIcon(IconCompat.createWithResource(this, R.drawble.person2))
+                      .build()
+
+// 메시지 객체 생성
+val message1 = NotificationCompat.MessagingStyle.Message("hello", System.CurrentTimeMillis(), sender1)
+val message2 = NotificationCompat.MessagingStyle.Message("hello", System.CurrentTimeMillis(), sender2)
+
+// 메시지 스타일 만들기
+val messageStyle = NotificationCompat.MessagingStyle(sender1).addMessage(message1).addMessage(message2)
+builder.setStyle(messageStyle)
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/190161032-8b8204de-1e05-45c9-a6e6-cc8305df776c.JPG" width="250" height="150">

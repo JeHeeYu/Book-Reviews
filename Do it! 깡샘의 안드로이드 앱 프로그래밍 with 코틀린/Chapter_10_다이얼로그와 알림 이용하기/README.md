@@ -532,3 +532,84 @@ AlertDialog.Builder(this).run {
     show()
 }.setCanceldOnTouchOutside(false)
 </pre>
+### 커스텀 다이얼로그
+커스텀 다이얼로그는 개발자가 원하는 형태로 창을 구성한 다이얼로그로 커스텀 다이얼로그도 AlertDialog를 이용한다.
+<br>
+<br>
+커스텀 다이얼로그를 만들기 위해 LayoutInflater라는 클래스를 이용해야 한다.
+<br>
+LayoutInfalter 클래스는 레이아웃 XML 파일을 코드에서 초기화(전개)하는 기능을 제공한다.
+<br>
+여기서 초기화란 XML 파일에 선언한 뷰를 코드에서 이용하고자 생성하는 작업을 말한다.
+<br>
+XML 파일은 텍스트 파일이라 코드에서 이용하려면 XML에 선언한 대로 객채를 생성해 메모리에 할당해야 한다.
+<br>
+이 작업을 LayoutInflater가 해준다.
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190121915-850279d9-d8df-4cf6-98f1-9fb08900bae2.JPG" width="600 height="300">
+<br>
+<br>
+LayoutInflater로 레이아웃 XML 파일을 초기화하는 작업은 getSystemService() 함수로 LayoutInflater를 얻는다.
+<br>
+그리고 inflate() 함수를 호출하면서 초기화할 레이아웃 XML 파일 정보를 매개변수로 전달한다.
+<pre>
+// XML 파일 초기화
+val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+val rootView = inflater.inflate(R.layout.activity_one, null)
+</pre>
+inflate() 함수의 반환값은 초기화된 XML의 루트 태그에 해당하는 객체이다.
+<br>
+만약 XML 파일의 루트 태그가 <LinearLayout>이라면 LinearLayout 객체를 반환한다.
+<br>
+<br>
+그런데 뷰 바인딩 기법을 이용한다면 XML 초기화 코드를 조금 더 쉽게 작성할 수 있다.
+<pre>
+// 뷰 바인딩을 적용한 XML 파일 초기화
+val binding = ActivityOneBinding.inflate(layoutInflater)
+val rootView = binding.root
+</pre>
+초기화할 XML에 해당하는 바인딩 클래스의 inflate() 함수를 호출하면서,
+<br>
+매개변수로 layoutInflater 객체를 전달만 해주면 자동으로 초기화되고 루트 뷰 객체를 얻을 수 있다.
+<br>
+<br>
+[커스텀 다이얼로그 예제]
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190126789-ae4bd9c4-0a9f-433b-9435-ecf4aaefcd0e.JPG" width="200" height="400">
+
+## 소리 알림
+사용자에게 짧은 소리로 특정한 상황을 알릴 때가 있는데, 예를 들어 문자나 카카오톡 앱이다.
+<br>
+이런 짧은 소리를 소리 알림음 이라고 한다.
+<br>
+<br>
+알림음은 카카오톡처럼 자체 녹음한 음원을 쓸 수도 있고 안드로이드 시스템에 등록된 소리를 사용할 수 있다.
+<br>
+시스템에 등록된 소리를 이용하는 방법은 알림(NOTIFICATION), 알람(ALARM), 벨소리(RINGTONE) 등이 있으며,
+<br>
+RingtonManager 클래스로 얻을 수 있다.
+<pre>
+// 소리 얻기
+val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+val ringtone = RingtoneManager.getRingtone(applicationContext, notification)
+ringtone.play()
+</pre>
+RingtoneManager.getDefaultUri() 함수를 이용해 소리의 식별값을 얻는다.
+<br>
+이 식별값은 Uri 객체이며 이 값을 RingtoneManager.getRingtone() 함수의 두 번째 매개변수로 전달한다.
+<br>
+그러면 Ringtone 객체를 얻으며. 이 객체의 play() 함수를 호출하면 소리가 재생된다.
+
+### 자체 음원 재생 방법
+음원 파일은 리소스로 등록해서 이용해야 하는데 음원 리소스 디렉터리는 res/raw이다.
+<br>
+<br>
+음원을 재생하는 클래스는 MediaPlayer로 이 클래스에 리소스 정보를 지정하고 start() 함수를 호출하면 음원이 재생된다.
+<pre>
+// 음원 재생하기
+val player: MediaPlayer = MediaPlayer.create(this, R.raw.fallbackring)
+player.start()
+</pre>
+

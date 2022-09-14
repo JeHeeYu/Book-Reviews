@@ -88,4 +88,90 @@ console도 global 객체 안에 들어있으며, 보통 디버깅을 위해 사�
 <li><b>console.dir(객체, 옵션)</b> : 객체를 콘솔에 표시할 때 사용</li>
 <li><b>console.trace(레이블)</b> : 에러가 어디서 발생했는지 추적할 수 있게 해줌</li>
 </ul>
+
 ### 타이머
+타이머 기능을 제공하는 함수들도 노드에서 gloab 객체 안에 들어있다.
+<br>
+set 타이머 함수들은 모두 아이디를 반환하며, 이 아이디를 사용하여 타이머를 취소할 수 있다.
+<pre>
+setTimeout(콜백 함수, 밀리초) : 주어진 밀리초 이후에 콜백 함수를 실행한다.
+setInterval(콜백 함수, 밀리초) : 주어진 미리초마다 콜백 함수를 실행한다.
+setImmeidate(콜백 함수) : 콜백 함수를 즉시 실행한다
+
+clearTimeout(아이디) : setTimeout을 취소한다.
+clearInterval(아이디) : setInterval을 취소한다.
+clearImmediate(아이디) : setImmediate를 취소한다.
+</pre>
+
+### __filename, __dirname
+노드에서 파일 사이에 모듈 관계가 있는 경우가 많아 현재 파일의 경로나 파일명을 알아야 한다.
+<br>
+노드는 __filename, __dirname 키워드로 경로에 대한 정보를 제공한다.
+<pre>
+console.log(__filename);
+console.log(__dirname);
+
+===== 실행 결과 =====
+C:\Users\zerocho\filename.js
+C:\Users\zerocho
+</pre>
+__filename은 현재 파일의 위치를 나타내며, __dirname은 현재 파일의 디렉터리 위치를 나타낸다.
+
+### require
+require 함수는 모듈을 불러오는 함수이고, 함수는 객체이므로 require는 객체로서 몇 가지 속성을 갖고 있다.
+<br>
+require는 반드시 파일 최상단에 위치할 필요없이 아무 곳에서나 사용할 수 있다.
+<br>
+<br>
+한 번 require 파일은 require.cache에 저장되므로 다음 번에 require할 때 새로 불러오지 않고 require.cache에 있는 것이 재사용 된다.
+<br>
+만약 새로 require 하길 원한다면 require.cache의 속성을 제거하면 된다.
+<pre>
+const express = require('express')
+const fs = ('fs')
+</pre>
+### process
+process 객체는 현재 실행되고 있는 노드 프로세스에 대한 정보를 담고 있다.
+<ul>
+<li><b>process.arch</b> : 프로세서의 아키텍처 정보</li>
+<li><b>process.version</b> : 설치된 노드의 버전</li>
+<li><b>process.pid</b> : 현재 프로세스의 아이디</li>
+<li><b>process.platform</b> : 운영체제 플랫폼 정보</li>
+<li><b>process.uptime()</b> : 프로세스가 시작된 후 흐른 시간으로 단위는 초</li>
+<li><b>process.execPath</b> : node.exe 즉, 노드의 경로</li>
+<li><b>process.cwd()</b> : 현재 프로세스가 실행되는 위치</li>
+<li><b>process.cpuUsage()</b> : 현재 CPU 사용 량</li>
+</ul>
+
+## 노드 내장 모듈
+### os
+os 모듈에는 웹 브라우저에 사용되는 자바스크립트의 운영체제 정보를 볼 수 있다.
+<ul>
+<li><b>os.arch()</b> : 프로세서의 아키텍처 정보</li>
+<li><b>os.platform()</b> : 운영체제 플랫폼 정보</li>
+<li><b>os.type()</b> : 운영체제 정보</li>
+<li><b>os.hostname()</b> : 컴퓨터의 이름</li>
+<li><b>os.release()</b> : 운영체제 버전</li>
+<li><b>os.homedir()</b> : 홈 디렉터리 경로</li>
+<li><b>os.cpus()</b> : 컴퓨터의 코어 정보</li>
+<li><b>os.tmpdir()</b> : 임시 파일 저장 경로</li>
+<li><b>os.freemem()</b> : 사용 가능한 메모리(RAM)</li>
+<li><b>os.totalmem()</b> : 전체 메모리 용량</li>
+</ul>
+
+### path
+path는 폴더와 파일의 경로르 쉽게 조작할 수 있도록 도와주는 모듈이다.
+<ul>
+<li><b>path.sep</b> : 경로의 구분자로 윈도우는 \, POSIX는 /</li>
+<li><b>path.delimiter</b> : 환경 변수의 구분자로 윈도우는 세미콜론(;), POSIX는 콜론(:)</li>
+<li><b>path.dirname(경로)</b> : 파일이 위치한 경로</li>
+<li><b>path.extname(경로)</b> : 파일의 확장자</li>
+<li><b>path.basename(경로, 확장자)</b> : 파일의 이름(확장자 포함)을 표시, 파일의 이름만 표시하고 싶다면 2번째 매개변수에 확장자 추가</li>
+<li><b>path.parse(경로)</b> : 파일 경로를 root, dir, base, ext, name으로 분리</li>
+<li><b>path.format(객체)</b> : path.parse()한 객체를 파일 경로로 합침</li>
+<li><b>path.normalize(경로)</b> : /나 \를 실수로 여러 번 사용했거나 혼용했을 때 정상적인 경로로 변환</li>
+<li><b>path.isAbsolute(경로)</b> : 파일의 경로가 절대경로인지 상대경로인지 true나 false 반환</li>
+<li><b>path.relative(기준경로, 비교경로)</b> : 경로를 두 개 넣으면 첫 번째 경로에서 두 번째 경로로 가는 법을 알려줌</li>
+<li><b>path.join(경로, ...)</b> : 여러 인수를 넣으면 하나의 경로로 합침</li>
+<li><b>path.resolve(경로, ...)</b> : path.join()과 비슷하지만 \를 만나면 절대 경로로 인식</li>
+</ul>

@@ -247,3 +247,93 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId)
     else -> super.onOptionsItemSelected(item)
 }
 </pre>
+
+### 리소스로 메뉴 구현
+액티비티의 메뉴는 대부분 정적으로 제공되므로 코드가 아니라 리소스 XML파일로 구성한다.
+<br>
+파일은 res 폴더 아래 menu 디렉터리에 만든다.
+<pre>
+< menu xmlns:android="http://schemas.android.com/apk/res/andrid"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+< item
+    android:id="@+id/menu1"
+    android:title="menu1" />
+< item
+    android:id="@+id/menu2"
+    android:icon="@android:drawble/ic_menu_add"
+    android:title="menu2"
+    app:showAsAction="always" />
+< item
+    android:id="@+id/menu3"
+    android:icon="@android:drawble/ic_menu_search"
+    android:title="menu2"
+    app:showAsAction="ifRoom" />
+</menu>
+</pre>
+메뉴 XML의 <item> 태그 하나가 메뉴 하나에 해당한다.
+<br>
+id 속성은 레이아웃 XML에서 뷰의 id값과 마찬가지로 메뉴를 식별하는데 사용한다.
+<br>
+title과 icon 속성은 메뉴 문자열과 아이콘을 지정한다.
+<br>
+메뉴는 기본으로 오버플로 메뉴로 나오며 만약 액션바에 아이콘으로 나타나게 하려면 showAsAction 속성을 이용한다.
+<pre>
+never(기본) : 항상 오버플로 메뉴를 출력
+ifRoom : 만약 액션바에 공간이 있다면 액션 아이템, 업다면 오버플로 메뉴 출력
+always : 항상 액션 아이템으로 출력
+</pre>
+<pre>
+// 액티비티 코드에 메뉴 XML 적용
+override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.menu_main, menu)
+    return super.onCreateOptionsMenu(menu)
+}
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/190884448-19202f49-c6c0-4fcf-80ef-ab3d23e503c4.JPG" width="150" height="100">
+<br>
+
+### 액션 뷰(Action View) 이용
+액션뷰는 액션바에서 특별한 기능을 제공하며 대표적으로 androidx.appcompat.widget.SearchView가 있다.
+<br>
+서치 뷰는 액션바에서 검색 기능을 제공한다.
+<pre>
+// 서치 뷰 사용
+< item android:id="@+id/menu_search"
+    android:title="search"
+    app:showAsAction="always"
+    app:actionViewClass="androidx.appcompat.widget.SearchView" />
+</pre>
+액션 뷰를 메뉴에 적용할 때 actionViewClass 속성을 이용하고, 이용할 액션뷰 클래스를 등록하면 된다.
+<br>
+등록하는 것만으로도 액션바에 검색 버튼이 생기고 버튼을 클릭하면 검색어를 입력받는 뷰가 나온다.
+<br>
+<br>
+XML이 아닌 코드에서 검색 관련된 기능을 구현하려면 SearchView 객체를 얻어야 한다.
+<br>
+서치 뷰가 메뉴로 제공되므로 SearchView를 등록한 MenuItem 객체를 얻고 MenuItem 객체에 등록된 SearchView 객체를 구하면 된다.
+<pre>
+override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    val inflater = menuInflater
+    inflater.inflate(R.menu.menu_main, menu)
+    val menuItem = menu?.findItem(R.id.menu_search)
+    val searchView = menuItem?.actionView as SearchView
+    searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListenser {
+        override fun onQueryTextChange(newText: String?): Boolean {
+            // 검색어 변경 이벤트
+            return true
+        }
+        override fun onQueryTextSubmit(query String?): Boolean {
+            // 키보드의 검색 버튼을 클릭한 순간 이벤트
+            return true
+        }
+    })
+    return true
+}
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/190884804-46797dd9-a2cd-488b-966f-aca1e4131cb6.JPG" width="300" height="100">
+<br>
+MenuItem 객체는 findItem() 함수의 매개변수에 MenuItem의 식별값을 주어 얻는다.
+<br>
+MenuItem에 등록된 액션 뷰는 actionView 속성으로 얻는다.
+<br>
+그리고 검색과 관련된 이벤트를 처리할 때는 SearchView의 setOnQueryTextListener() 함수로 이벤트 핸들러를 지정한다. 

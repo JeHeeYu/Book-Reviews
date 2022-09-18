@@ -166,3 +166,5 @@ supportActionBar?.setDisplayHomeAsUpEnabled(true) 구문으로 액션바에 업 
 만약 매니페스트 파일에 parentActivityName 속성이 설정되어 있지 않으면 자동으로 이전 화면으로 돌아가지 않는다.
 <br>
 이때는 onSupportNavigate() 함수에서 onBackPressed() 구문으로 코드를 작성해 주어야 한다.
+### 메뉴 구성
+메뉴는 액션바의 중요한 구성 요소로 액티비티 화면에서 사용자가 이벤트를 사용할 수 있도록 한다.

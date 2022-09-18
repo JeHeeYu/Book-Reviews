@@ -168,3 +168,82 @@ supportActionBar?.setDisplayHomeAsUpEnabled(true) 구문으로 액션바에 업 
 이때는 onSupportNavigate() 함수에서 onBackPressed() 구문으로 코드를 작성해 주어야 한다.
 ### 메뉴 구성
 메뉴는 액션바의 중요한 구성 요소로 액티비티 화면에서 사용자가 이벤트를 사용할 수 있도록 한다.
+<br>
+<br>
+액티비티에 메뉴를 추가하면 액션바 오른쪽에 오버플로 버튼이 나타난다.
+<br>
+사용자가 이 오버플로 버튼을 누르면 메뉴가 아래로 확장되어 나타난다.
+<br>
+그리고 오버플로 메뉴 중에서 몇몇은 액션바에 아이콘으로 나오게 할 수 있는데 이를 액션 아이템이라고 한다.
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/87363461/190883377-90995798-f5ad-4c44-8c04-6271a503aabd.JPG" width="200" height="250">
+<br>
+<br>
+액티비티에 메뉴를 추가하고 싶으면 onCreateOptionsMenu()와 onPrepareOptionsMneu() 함수를 이용한다.
+<br>
+두 함수는 액티비티의 메뉴를 구성할 때 자동으로 호출되는데, 차이점은 호출되는 시점이 다르다.
+<br>
+<br>
+opCreateOptionsMenu() 함수는 액티비티가 실행되면서 처음에 한 번만 호출된다.
+<br>
+그리고 액티비티에 정적인 메뉴를 구성할 때 사용한다.
+<br>
+<br>
+onPrepareOptionsMenu() 함수는 액티비티가 실행되면서 한 번 호출된 후 오버플로 메뉴가 나타날 때마다 반복해서 호출된다.
+<br>
+그리고 메뉴가 화면에 나올 때마다 동적으로 구성하고 싶은 경우 사용한다.
+<br>
+<br>
+그런데 액티비티의 메뉴는 주로 사용자 이벤트를 처리하려고 사용하는 것이 대부분이므로,
+<br>
+메뉴는 대부분 onCreateOptionsMenu() 함수를 이용해 구성한다.
+<pre>
+// onCreateOptionsMenu() 함수 생성자
+fun add(groupId: Int, itemId: Int, order: Int, title: CharSequence!): MenuItem!
+
+// 메뉴 구성 함수
+override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    val menuItem1: MenuItem? = menu?.add(0, 0, 0, "menu1")
+    val menuItem2: MenuItem? = menu?.add(0, 0, 0, "menu2")
+    return super.onCreateOptionsMenu(menu)
+}
+</pre>
+<img src="https://user-images.githubusercontent.com/87363461/190883584-92107d9b-d85a-4cd3-b702-01314eb763f6.JPG" width="150" height="100">
+<br>
+<br>
+onCreateOptionsMenu() 함수의 매개변수로 전달되는 Menu 객체를 메뉴바로 생각하면 되고, 
+<br>
+이 Menu 객체에 메뉴를 추가할 때 add 함수를 이용한다.
+<br>
+<br>
+두 번째 매개변수는 메뉴의 식별자로, 어떤 메뉴를 클릭했는지 식별할 때 사용한다.
+<br>
+<br>
+네 번째 매개변수는 메뉴의 문자열이다.
+<br>
+<br>
+add() 함수의 반환값은 MenuItem 객체이며 이 객체가 메뉴 하나를 의미한다.
+<br>
+<br>
+onCreateOptionsMenu() 함수로 메뉴를 구성하면 액션바에 오버플로 버튼이 나온다.
+<br>
+이 메뉴를 사용자가 선택했을 때 이벤트 처리는 onOptionsItemSelected() 함수를 이용한다.
+<br>
+이 함수의 매개변수는 이벤트가 발생한 메뉴 객체인 MenuItem이다.
+<br>
+MenuItem의 itemId 속성으로 이벤트가 발생한 메뉴 객체의 식별값을 얻어서 이벤트를 처리한다.
+<pre>
+// 메뉴 선택 시 이벤트 처리
+override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+    0 -> {
+        Log.d("Menu", "menu1 Click")
+        true
+    }
+    1 -> {
+        Log.d("Menu", "menu2 Click")
+        true
+    }
+    else -> super.onOptionsItemSelected(item)
+}
+</pre>

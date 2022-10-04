@@ -346,3 +346,107 @@ MenuItem에 등록된 액션 뷰는 actionView 속성으로 얻는다.
 <br>
 오른쪽 그림은 액티비티 창이 출력되면서 액션바를 출력하지 않는다.
 <br>
+<img src="https://user-images.githubusercontent.com/87363461/193797349-a09badc7-86a0-4394-bbb2-35e2a02dc9be.JPG" width="300" height="300">
+<br>
+<br>
+툴바를 사용하려면 액티비티 테마 설정에서 액션바가 화면에 출력되지 않게 해야 한다.
+<br>
+그리고 액티비티 화면을 구성하는 레이아웃 XML 파일에 툴바를 등록한다.
+<pre>
+< androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_parent"
+    style="@style/Widget.MaterialComponents.Toolbar.Primary" / >
+</pre>
+툴바를 XML에 등록 후 액션바의 내용이 툴바에 적용되도록 지정해 주어야 한다.
+<br>
+이때는 setSupportActionBar(binding.toolbar)를 이용한다.
+<pre>
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setSupportActionBar(binding.toolbar)
+    }
+}
+</pre>
+
+## 호환성을 고려한 기본 뷰 클래스
+플랫폼 API에서 제공하는 기본 뷰를 appcompat 라이브러리에서도 제공한다.
+<br>
+예를 들어 플랫폼 API에서 문자열을 출력하는 TextView 클래스를 appcompat 라이브러리에서는 AppCompatTextView라는 클래스로 제공한다.
+<br>
+<br>
+이처럼 플랫폼 API에서 제공하는 클래스를 appcompat 라이브러리에서도 제공해주는 이유는 호환성 문제를 해결하기 위해서다.
+<br>
+TextView를 사용하다 보면 문자열의 줄 높이를 지정하는 setLineHeight()라는 함수가 있는데, 이 함수는 API레벨 28에서 추가되었다.
+<br>
+따라서 setLineHeight() 함수를 사용하려면 호환성을 고려해 다음처럼 작성해야 한다.
+<pre>
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+    binding.platformTextView.lineHeight = 50
+}
+</pre>
+그런데 만약 TextView를 사용하지 않고 appcompat 라이브러리의 AppCompatTextView 클래스를 이용한다면 API레벨 호환성을 알아서 처리해준다.
+<pre>
+binding.appcompatTextView.lineHegiht = 50
+</pre>
+
+## 프래그먼트(Fragment)
+프래그먼트란 텍스트 뷰나 버튼처럼 액티비티 화면을 구성하는 뷰인데, 그 자체만으로는 화면에 아무것도 출력되지 않는다.
+<br>
+프래그먼트가 다른 뷰와 다른점은 액티비티처럼 동작한다는 것이다.
+<br>
+즉, 액티비티에 작성할 수 있는 모든 코든느 프래그먼트에서도 사용 가능하다.
+<br>
+<br>
+프래그먼트는 태블릿처럼 화면이 넓은 기기에서 동작하는 앱을 개발할 수 있도록 제공되었다.
+<br>
+한 화면은 하나의 액티비티 클래스에서 작성해야 하는데, 화면이 크면 액비티비 클래스에 너무 많은 코드를 해야 하는 문제가 있다.
+<br>
+<br>
+프래그먼트는 대부분 androidx.fragment 라이브러리를 이용해 구현하며 androidx.fragment 라이브러리에서 제공한다.
+<pre>
+dependencies {
+    implementation 'androidx.fragment:fragment-ktx:1.3.6'
+}
+</pre>
+프래그먼트 화면을 구성하기 위해 먼저 레이아웃 XML 파일을 작성해야 한다.
+<br>
+Fragment 클래스를 상속받으면 프래그먼트 클래스에서 최소한으로 작성해야 하는 함수는 onCreateView()이다.
+<br>
+이 함수가 자동 호출되며 반환한 View 객체가 화면에 출력된다.
+<pre>
+import androidx.fragment.app.Fragment
+class OneFragment : Fragment() {
+    lateinit var binding: FragmentOneBinding
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
+            binding.FragmentOneBinding.inflate(inflater, container, false)
+            return binding.root
+        }
+}
+</pre>
+프래그먼트도 뷰이므로 액티비티의 화면을 구성하는 레이아웃 XML에 등록화며 화면에 출력할 수도 있다.
+<br>
+이때는 <fragment> 태그로 액티비티 화면에 프래그먼트를 출력한다.
+<br>
+<fragment> 태그의 name 속성에 프래그먼트 클래스를 지정하면 된다.
+<pre>
+< fragment
+    android:name="com.example.test11.OneFramgent"
+    android:id="@id/framgentView"
+    android:layout_width="match_parent"
+    andoird:layout_height="match_parent" / >
+</pre>
+
+### 액티비티 코드에서 프래그먼트 출력
+코드에서 직접 프래그먼트 객체를 생성하기 위해 레이아웃 XML파일에 프래그먼트가 출력될 뷰가 있어야 한다.
+<pre>
+< LinearLayout
+    android:id="@+id/fragment_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    anroid:orientation="vertical"
+< /LinearLayout >
+</pre>

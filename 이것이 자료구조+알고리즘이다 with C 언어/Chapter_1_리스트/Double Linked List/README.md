@@ -153,33 +153,33 @@ Node* DLL_GetNodeAt(Node* head, int location)
 <pre>
 void DLL_RemoveNode(Node** head, Node* remove)
 {
-    if(*head == remove) {
-        *head = remove->nextNode;
+    if(*head == removeNode) {
+        *head = removeNode->nextNode;
         
         if((*head) != NULL) {
             (*head)->prevNode = NULL;
         }
         
         // 삭제할 노드의 가리키고 있는 값 초기화
-        remove->prevNode = NULL;
-        remove->nextNode = NULL;
+        removeNode->prevNode = NULL;
+        removeNode->nextNode = NULL;
     }
     else {
-        Node* temp = remove;
+        Node* temp = removeNode;
         
         // 삭제할 노드의 prevNode 포인터가 가리키던 노드를 이전 노드의 nextNode 포인터가 가리키게 변경
-        if(remove->prevNode != NULL) {
-            remove->prevNode->nextNode = temp->nextNode;
+        if(removeNode->prevNode != NULL) {
+            removeNode->prevNode->nextNode = temp->nextNode;
         }
         
         // 삭제할 노드의 nextNode 포인터가 가리키던 노드를 이전 노드의 nextNode 포인터가 가리키게 변경
-        if(remove->nextNode != NULL) {
-            remove->nextNode->prevNode = temp->prevNode;
+        if(removeNode->nextNode != NULL) {
+            removeNode->nextNode->prevNode = temp->prevNode;
         }
         
         // 삭제할 노드의 가리키고 있는 값 초기화
-        remove->prevNode = NULL;
-        remove->nextNode = NULL;
+        removeNode->prevNode = NULL;
+        removeNode->nextNode = NULL;
     }
 }
 </pre>

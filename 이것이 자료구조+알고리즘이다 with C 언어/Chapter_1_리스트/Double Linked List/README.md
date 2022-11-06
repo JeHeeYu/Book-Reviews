@@ -59,10 +59,10 @@ typedef struct tagNode
 // 노드 생성
 Node* DLL_CreateNode(ElementType newData)
 {
-    Node* newData = (Node*)malloc(sizeof(Node));
+    Node* newNode = (Node*)malloc(sizeof(Node));
     
-    newData->data = newData;      // 저장할 데이터
-    newData->prevNode = NULL;     // 앞 노드의 정보
+    newNode->data = newData;      // 저장할 데이터
+    newNode->prevNode = NULL;     // 앞 노드의 정보
     newNode->nextNode = NULL;     // 뒤 노드의 정보
     
     return newNode;
@@ -97,7 +97,7 @@ void DLL_AppendNode(Node** head, Node* newNode)
         *head = newNode;
     }
     // 헤드의 노드가 NULL이 아닐 경우 테일을 찾아 NewNode를 연결
-    eles {
+    else {
         // 테일에 연결
         Node* tail = (*head);
         
@@ -134,7 +134,7 @@ Node* DLL_GetNodeAt(Node* head, int location)
         current = current->nextNode;
     }
     
-    return Current;
+    return current;
 }
 </pre>
 
@@ -200,7 +200,7 @@ nextNode 포인터로는 다음 노드를 가리키게 한다.
 <pre>
 void DLL_InsertAfter(Node* current, Node* newNode)
 {
-    newNode->nextNpde = current->nextNode;
+    newNode->nextNode = current->nextNode;
     newNode->prevNode = current;
     
     if(current->nextNode != NULL) {

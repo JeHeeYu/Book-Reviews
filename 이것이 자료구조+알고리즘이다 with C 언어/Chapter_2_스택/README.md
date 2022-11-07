@@ -46,7 +46,7 @@ C언어에서 변수를 선언한 후 수명주기가 끝나면 변수를 자동
 <ul>
 <li>용량</li>
 <li>최상위 노드의 위치</li>
-<li></li>
+<li>저장할 메모리</li>
 </ul>
 <pre>
 typedef struct _Stack
@@ -76,9 +76,4 @@ int IsFull(const Stack* s);                 // 스택이 가득 찼는지 확인
 int Search(const Stack* s, int x);          // 스택에서 데이터 검색
 void Print(const Stack* s);                 // 스택 데이터 출력
 void Terminate(Stack* s);                   // 스택 메모리 삭제
-</pre>
-
-### 스택 메모리 초기화 Create
-<pre>
-
 </pre>

@@ -53,8 +53,32 @@ typedef struct _Stack
 {
     int capacity;
     int top;
+    int *buf;
 } Stack;
 </pre>
-capacity 변수는 스택의 용량을, top 변수는 스택의 최상위 위치를 가리킨다.
+capacity : 스택의 최대 용량을 나타내는 변수
+<br>
+top : 스택에 쌓여 있는 데이터를 나타내며, 비어 있을 경우 0(buf[0]), 가득 차 있을 경우 capacity(buf[top - 1]의 값과 같다.
+<br>
+buf : 스택으로 푸시된 데이터를 저장할 용도의 배열을 가리키는 변수로, Create 함수로 메모리 공간 할당을 한다.
 
-## 
+## 스택의 함수
+<pre>
+void Create(Stack* s, int capacity);        // 메모리 공간 초기화
+void Push(Stack* s, int x);                 // 스택에 데이터 푸쉬
+int Pop(Stack* s, int* x);                  // 스택에 데이터 팝
+int Peek(const Stack* s, int* x);           // 스택 최상위 메모리 확인
+void Clear(Stack* s);                       // 스택에 있는 모든 데이터 삭제
+int Capacity(const Stack* s);               // 스택 용량 확인
+int Size(const Stack* s);                   // 스택에 있는 데이터 수
+int IsEmpty(const Stack* s);                // 스택이 비어 있는지 확인
+int IsFull(const Stack* s);                 // 스택이 가득 찼는지 확인
+int Search(const Stack* s, int x);          // 스택에서 데이터 검색
+void Print(const Stack* s);                 // 스택 데이터 출력
+void Terminate(Stack* s);                   // 스택 메모리 삭제
+</pre>
+
+### 스택 메모리 초기화 Create
+<pre>
+
+</pre>

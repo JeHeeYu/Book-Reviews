@@ -42,7 +42,7 @@ C언어에서 변수를 선언한 후 수명주기가 끝나면 변수를 자동
 그리고 최상위 노드의 위치를 나타내는 변수를 두고 삽입과 제거 연산을 수행한다.
 <br>
 <br>
-스택의 구조체는 크게 2가지의 데이터 구조가 필요하다.
+스택의 구조체는 크게 3가지의 데이터 구조가 필요하다.
 <ul>
 <li>용량</li>
 <li>최상위 노드의 위치</li>
@@ -65,7 +65,7 @@ buf : 스택으로 푸시된 데이터를 저장할 용도의 배열을 가리�
 ## 스택의 함수
 <pre>
 void Create(Stack* s, int capacity);        // 메모리 공간 초기화
-void Push(Stack* s, int x);                 // 스택에 데이터 푸쉬
+int Push(Stack* s, int x);                 // 스택에 데이터 푸쉬
 int Pop(Stack* s, int* x);                  // 스택에 데이터 팝
 int Peek(const Stack* s, int* x);           // 스택 최상위 메모리 확인
 void Clear(Stack* s);                       // 스택에 있는 모든 데이터 삭제

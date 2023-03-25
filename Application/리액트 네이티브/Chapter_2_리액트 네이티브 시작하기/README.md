@@ -136,3 +136,102 @@ Android SDK 탭에서 SDK Platforms 필요 항목들을 설치한다.
 <br>
 
 ![image](https://user-images.githubusercontent.com/87363461/227705147-f4e03c02-3ae9-4b97-8548-4e8a9576a30b.png)
+
+<br>
+
+여기까지 Android Studio 설정이 완료 되었으면 시스템 환경 변수 설정을 해야한다.
+<br>
+시스템 환경 변수 편집 -> 환경 변수를 클릭하여 사용자 변수에 새로 만들기를 통해 다음과 같이 추가한다.
+
+- 변수 이름 : ANDROID_HOME
+- 변수 값 : %LOCALAPPDATA%\Android\Sdk
+
+여기서 변수 값에는 Android SDK 위치를 정확하게 입력해야 한다.
+<br>
+이 값은 SDK Manager 메뉴 - Android SDK Locations에서 확인할 수 있다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227705479-037e61cc-869d-4fea-ba8c-eeb27be661e8.png)
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227705504-6ce67f4b-bf3c-48bc-8584-37b6d83ede1c.png)
+
+
+<br>
+
+사용자 변수가 추가되면, 다시 시스템 변수에 있는 Path를 추가해야 한다.
+<br>
+시스템 변수 -> Path -> 새로 만들기를 추가하여 다음과 같이 추가한다.
+
+- 변수 값 + platform-tools
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227705567-61902caa-938f-4795-bd6e-76000b69116e.png)
+
+<br>
+
+여기 까지 작업을 완료하고 정상적으로 되었는지 확인하기 위해 프롬프트를 실행하고 아래 명령어를 실행한다.
+```
+adb --version
+```
+
+![image](https://user-images.githubusercontent.com/87363461/227705620-d1ef7f98-6678-4b68-8e94-a85589826329.png)
+
+<br>
+
+### 에뮬레이터 설정
+
+에뮬레이터를 설정하기 위해 먼저 Android Studio를 실행한다.
+<br>
+그리고 More Actions - Virtual Device Manager 항목을 클릭한다.
+<br>
+<br>
+생성한 디바이스가 없으므로 Create virtual device를 클릭한다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227705722-9e625cf8-0816-40f6-9e1b-a8d38f8dbe3d.png)
+
+<br>
+
+먼저 Phone 탭에서 Pixcel 3을 클릭하고 Next 버튼을 클릭한다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227705774-d7e7fca5-40d3-4bc8-93b2-fbee1fb6baa0.png)
+
+
+<br>
+
+이후 Q를 선택하고 Next -> Finish를 선택하면 최종적으로 설정이 완료된다.
+
+![image](https://user-images.githubusercontent.com/87363461/227705936-545344ec-fe10-49a8-b288-370d6bfd174a.png)
+
+
+<br>
+
+여기서 만약 아래 그림과 같이 에러가 발생하면 Release Name 옆에 다운로드 버튼을 클릭하면 된다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227705862-ef555474-6d0f-4166-a0ba-1dd9b86ffc4c.png)
+
+
+<br>
+
+### 에디터 다운로드
+> Visual Studio Code 다운로드 링크 : https://code.visualstudio.com/download
+
+에디터는 Visual Studio Code를 사용한다.
+<br>
+아래 이미지에서 Windows 버튼을 클릭하여 다운로드를 진행한다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227705993-6a88975d-715b-4fe7-95d1-6dfa8e487ae7.png)
+
+<br>
+

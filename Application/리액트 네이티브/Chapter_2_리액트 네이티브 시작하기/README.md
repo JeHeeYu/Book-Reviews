@@ -297,3 +297,29 @@ npm start
 정상적으로 실행된 것을 볼 수 있다.
 
 ![image](https://user-images.githubusercontent.com/87363461/227707238-3a780b8e-a9eb-440a-85cf-27eb96ece904.png)
+
+<br>
+
+### 리액트 네이티브 CLI 
+리액트 네이티브 CLI 장점은 Expo의 단점이다.
+<br>
+Expo는 CLI에 비해 비효율적이므로, 네이티브 CLI에서 필요한 기능이 있을 경우 모듈을 직접 만들어 사용할 수 있다.
+<br>
+하지만 Expo에 비해 배포가 불편하다.
+
+<br>
+<br>
+먼저 다음과 같은 명령어를 이용해서 리액트 네이티브 CLI 프로젝트를 생성한다.
+```
+npx react-native init react-native-CLI
+```
+명령어를 입력하고 프로세스를 실행할 경우를 물으면 y를 입력하고 생성한다.
+<br>
+성공 시 아래와 같은 이미지 및 문자가 표출된다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227708062-3dcca18b-3aa6-44bb-833b-62e4f095fa8c.png)
+
+
+<br>

@@ -323,3 +323,18 @@ npx react-native init react-native-CLI
 
 
 <br>
+
+생성이 완료 되었으면 프로젝트 폴더로 이동해서 프로젝트를 실행한다.
+> npx react-native run-android or npx react-native run-ios 명령어로도 실행 가능
+```
+cd [Project Name]
+npm run android
+
+// npm run ios iOS 실행 명령어
+```
+
+프로젝트가 정상 실행되는 것을 볼 수 있다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227708183-c0218cc6-a76a-4459-a08e-ba939a28a007.png)

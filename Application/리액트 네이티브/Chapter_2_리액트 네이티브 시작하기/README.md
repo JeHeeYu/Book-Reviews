@@ -235,3 +235,65 @@ adb --version
 
 <br>
 
+
+## 리액트 네이티브 프로젝트 만들기
+리액트 네이티브 프로젝트를 만들기 위한 방법으로 2가지로 Expo를 이용하는 방법과 리액트 네이티브 CLI를 이용하는 방법이 있다.
+
+<br>
+
+### Expo
+Expo는 쉽게 말해 리액트 네이티브를 편하게 사용할 수 있도록 미리 여러 가지 설정이 되어 있는 툴이라고 생각하면 된다.
+<br>
+Expo를 사용하기 위해 Expo 사이트에서 회원가입 후 Expo 프로젝트를 진행한다.
+> Expo 사이트 링크 : https://expo.dev/
+
+<br>
+
+Expo를 이용하여 리액트 네이티브를 생성하기 위해 터미널에서 아래와 같이 명령어를 입력한다.
+```
+npm install --global expo-cli
+```
+
+![image](https://user-images.githubusercontent.com/87363461/227706626-24f8cb7e-cca8-4460-805d-a4622008680c.png)
+
+<br>
+
+다운로드가 완료되면 아래 명령어로 Expo 프로젝트를 생성한다.
+```
+expo init [Project Name]
+```
+명령어를 입력하면 어떤 프로젝트를 생성할 것인지 선택할 수 있다.
+<br>
+여기선 balnk를 선택한다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227706691-fe4d10cf-c5cc-4521-bd97-ee6a3f03d5f9.png)
+
+<br>
+
+프로젝트 생성이 완료되면 생성된 프로젝트 폴더로 이동하여 프로젝트를 실행한다.
+```
+cd [Project Name]
+npm start
+```
+![image](https://user-images.githubusercontent.com/87363461/227706790-7ec0df62-9169-4425-ad75-23460150896a.png)
+
+<br>
+
+이후 안드로이드에서 실행하기 위해 실제 핸드폰 또는 에뮬레이터에서 expo를 설치해야 한다.
+<br>
+키보드 a를 눌러 안드로이드 에뮬레이터를 실행한다.
+<br>
+에뮬레이터에서 Google Play Store - Expo를 다운로드 후 실행한다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227707112-e502de79-3c96-46df-b78d-ed6936eb15e5.png)
+
+
+<br>
+
+정상적으로 실행된 것을 볼 수 있다.
+
+![image](https://user-images.githubusercontent.com/87363461/227707238-3a780b8e-a9eb-440a-85cf-27eb96ece904.png)

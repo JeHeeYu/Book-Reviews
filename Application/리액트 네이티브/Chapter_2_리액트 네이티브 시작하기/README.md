@@ -77,3 +77,62 @@ Android Studio를 다운로드 하기 위해 다운로드 홈페이지로 접속
 
 ![image](https://user-images.githubusercontent.com/87363461/227704117-25d800f2-c0aa-4aa0-bd5e-3f8ec391ded1.png)
 
+Android Studio 다운로드가 완료되면 Android Studio의 설정을 진행해야 한다.
+<br>
+먼저 Insall Type이 나오면 Custom을 클릭하여 진행한다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227704446-9d09e708-9e45-41ec-badf-bd0bbadeebad.png)
+
+<br>
+
+다음 Next를 하다 보면 SDK Components Setup 항목이 나온다.
+<br>
+아래 이미지와 같이 설정하고 Next를 클릭한다.
+> 여기서 맨 아래 항목인 Android Virtual Device 가 unavailable로 나오고 클릭이 안되는데, 상관 없음
+
+![image](https://user-images.githubusercontent.com/87363461/227704613-abdeb64c-050c-444b-82d9-5b8c7140d9dd.png)
+
+<br>
+
+이후 계속 Next를 클릭하여 설정을 진행한다.
+<br>
+<br>
+설정이 완료되면 아래와 같이 완료 화면이 나타난다.
+<br>
+More Actions - SDK Manager를 실행한다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227704791-42f44b16-b9fb-447f-905b-21b5f03c7671.png)
+
+<br>
+
+Android SDK 탭에서 SDK Platforms 필요 항목들을 설치한다.
+> 우측 하단 Show Packages Details를 클릭하여 전체 항목을 볼 수 있음
+
+- Android 11.0 (R)
+  - Android SDK Platform 30
+  - Google APIs Intel x86 Atom System Image
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227705033-a839c9e7-719a-4d29-bb9a-122b1897f262.png)
+
+<br>
+
+- Android 10.0 (Q)
+  - Android SDK Platform 29
+  - Intel x86_64 Atom System Image
+  - Google APIs ARM 64 v8a System Image
+
+- ![image](https://user-images.githubusercontent.com/87363461/227705062-5fb3d266-725b-464d-845c-1e223fcedda2.png)
+
+이후 바로 오른쪽 탭인 SDK Tools 를 클릭하여 전체 항목을 확인한다.
+<br>
+그 다음 Android SDK Buiild-Tools 아래 항목에서 29.0.2를 클릭하여 다운로드를 진행한다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227705147-f4e03c02-3ae9-4b97-8548-4e8a9576a30b.png)

@@ -44,6 +44,26 @@
 
 <br>
 
+### 커스텀 컴포넌트(Custom Component)
+커스텀 컴포넌트는 여러 컴포넌트을 조합하여 새로운 컴포넌트를 제작해서 사용하는 것을 말한다.
+<br>
+컴포넌트는 src 폴더 아래 components 폴더를 만들고 이 폴더에서 관리한다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227754146-92d91a71-614a-45aa-bf48-c2fe10c50859.png)
+
+<br>
+
+여기선 커스텀 버튼을 만드는 예제이다.
+<br>
+커스텀 버튼을 만들기 위해 TouchableOpacity 컴포넌트를 사용한다.
+<br>
+<br>
+components 폴더 아래 js 파일을 만들고, 커스텀 버튼을 정의한다.
+
+<br>
+
 ## JSX
 JSX는 자바스크립트 내에서 HTML을 작성한 것과 같은 코드들을 말한다.
 <br>

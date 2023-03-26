@@ -272,13 +272,7 @@ const App = () => {
 
 <br>
 
-
-## props와 state
-props와 state는 <b>컴포넌트가 UI뿐만 아니라 다양한 기능을 담당</b>할 수 있도록 하여 더욱 다양한 역할을 수행할 수 있도록 해준다.
-
-<br>
-
-### props
+## props
 먼저 props란 properties의 줄임말로, <b>부모 컴포넌트로부터 전달된 속성값 혹은 상속받은 속성값</b>을 말한다.
 <br>
 부모 컴포넌트가 자식 컴포넌트의 props를 설정하면 자식 컴포넌트에서는 해당 props를 사용할 수 있지만, 변경은 불가능하다.
@@ -436,3 +430,128 @@ CButton.propTypes = {
 ![image](https://user-images.githubusercontent.com/87363461/227761494-747b3d0d-27fb-44d3-b413-7020740a033f.png)
 
 <br>
+
+## state
+props는 부모 컴포넌트에서 받은 값으로 변경할 수 없는 반면, state는 컴포넌트 내부에서 생성되고 값을 변경할 수 있다.
+<br>
+이를 이용해 컴포넌트 상태를 관리한다.
+<br>
+<br>
+<b>상태(state)란 컴포넌트에서 변화할 수 있는 값을 나타내며, 상태가 변하면 컴포넌트는 리렌더링(re-rendering)</b>된다.
+<br>
+<br>
+과거 리액트 네이티브의 경우 함수형 컴포넌트에서 상태 관리를 할 수 없었으나
+<br>
+리액트 16.8 버전 이후 버전을 사용하는 리액트 네이티브 0.59 버전부터 Hooks라는 것을 사용해 함수형 컴포넌트에서도 상태관리를 할 수 있게 되었다.
+> Hooks FAQ : https://bit.ly/hooks-faq
+
+### useSate
+useState는 함수형 컴포넌트에서 상태를 관리할 수 있도록 도와주는 Hooks 중 하나이다.
+<br>
+사용법은 아래와 같이 사용한다.
+
+```
+const [state, setState] = useState(initialState);
+```
+
+useState는 상태를 관리하는 변수와 그 변수를 변경할 수 있는 세터(setter) 함수를 배열로 반환한다.
+<br>
+상태 변수는 직접 변경하는 것이 아니라 useState 함수에서 반환한 세터 함수를 이용해야 한다.
+<br>
+useState 함수를 호출할 때 파라미터에 생성되는 상태의 초깃값을 전달할 수 있고, 전달하지 않으면 undefined로 설정되어 에러가 발생할 수 있으므로 <b>항상 초깃값을 설정하는 것이 좋다</b>.
+<br>
+<br>
+useState 예제를 실행하기 위해 components 폴더 아래 Counter.js 파일을 생성하고 아래와 같이 코딩한다.
+
+```
+// Counter.js
+
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+import CButton from './CButton';
+
+const Counter = () => {
+    const [count, setCount] = useState(0);
+    return (
+        <View style={{ alignItems: 'center'}}>
+            <Text style={{ fontSize: 30, margin: 10}}>{count}</Text>
+            <CButton title="+1" onPress={() => setCount(count + 1)} />
+            <CButton title="-1" onPress={() => setCount(count - 1)} />
+        </View>
+    );
+};
+
+export default Counter;
+```
+
+useState 함수를 이용해 숫자의 상태를 관리할 count 변수와 변수 상태를 변경할 수 있는 setCount 세터 함수를 만들었다.
+<br>
+그리고 useState(0)과 같이 초깃값을 0으로 설정하였다.
+<br>
+<br>
+그리고 +1 버튼과 -1씩 버튼을 두어 버튼 클릭 시 count의 값이 변한다.
+
+```
+// App.js
+import { View, Text } from 'react-native';
+import React from 'react';
+import CButton from './components/CButton';
+import Counter from './components/Counter';
+
+const App = () => {
+    return (
+        <View
+            style={{
+                flex: 1,
+                backgroundColor: '#fff',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
+        >
+            <Counter />
+        </View>
+    );
+};
+
+export default App;
+```
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227761947-0bf61b9f-3a9c-4b98-a1bb-f80a493e6c67.png)
+
+### 여러 개의 useState
+컴포넌트에서 관리해야 할 상태가 여러 개라면 useState를 여러 번 사용하여 관리할 수도 있다.
+<br>
+관리해야 하는 상태의 수만큼 useState를 사용하면 된다.
+
+```
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+import CButton from './CButton';
+
+const Counter = () => {
+    const [count, setCount] = useState(0);
+    const [double, setDouble] = useState(0);
+
+    return (
+        <View style={{ alignItems: 'center'}}>
+            <Text style={{ fontSize: 30, margin: 10}}>count: {count}</Text>
+            <Text style={{ fontSize: 30, margin: 10}}>double: {double}</Text>
+            <CButton title="+" onPress={() => {
+                setCount(count + 1)
+                setDouble(double + 2)
+            }} />
+            <CButton title="-" onPress={() => {
+                setCount(count - 1)
+                setDouble(double - 2)
+            }} />
+        </View>
+    );
+};
+
+export default Counter;
+```
+
+![image](https://user-images.githubusercontent.com/87363461/227762071-2d53a80d-7212-4b76-bf19-42acf04e4c67.png)
+

@@ -553,5 +553,23 @@ const Counter = () => {
 export default Counter;
 ```
 
+[useState 예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Application/%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C/Chapter_3_%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8/useState_Example/src/App.js)
+
 ![image](https://user-images.githubusercontent.com/87363461/227762071-2d53a80d-7212-4b76-bf19-42acf04e4c67.png)
+
+
+## 이벤트(Event)
+리액트 네이티브는 사용자의 행동에 따라 상호 작용하는 이벤트를 다양하게 제공한다.
+<br>
+많은 이벤트가 있으며, 대표적으로 press, changed 등이 있다.
+
+### press Event
+press 이벤트는 사용자가 특정 버튼 등을눌렀을 때 발생하는 이벤트이다.
+<br>
+예를 들어 TouchableOpacity 컴포넌트에서 설정할 수 있는 press 이벤트의 종류는 총 4가지이다.
+
+- onPressIn : 터치가 시작될 때 항상 호출
+- onPressOut : 터치가 해제될 때 항상 호출
+- onPress : 터치가 해제될 때 onPressOut 이후 호출
+- onLongPress : 터치가 일정 시간 이상 지속되면 호출
 

@@ -64,6 +64,15 @@ components 폴더 아래 js 파일을 만들고, 커스텀 버튼을 정의한�
 
 <br>
 
+### [예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Application/%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C/Chapter_3_%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8/Custom_Button/src/components/CButton.js)
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227755232-83c37e4c-03e1-40ef-a82f-4e535c302ff0.png)
+
+
+<br>
+
 ## JSX
 JSX는 자바스크립트 내에서 HTML을 작성한 것과 같은 코드들을 말한다.
 <br>
@@ -261,5 +270,114 @@ const App = () => {
 
 
 
+<br>
 
 
+## props와 state
+props와 state는 <b>컴포넌트가 UI뿐만 아니라 다양한 기능을 담당</b>할 수 있도록 하여 더욱 다양한 역할을 수행할 수 있도록 해준다.
+
+<br>
+
+### props
+먼저 props란 properties의 줄임말로, <b>부모 컴포넌트로부터 전달된 속성값 혹은 상속받은 속성값</b>을 말한다.
+<br>
+부모 컴포넌트가 자식 컴포넌트의 props를 설정하면 자식 컴포넌트에서는 해당 props를 사용할 수 있지만, 변경은 불가능하다.
+<br>
+<br>
+만약 props의 변경이 필요한 경우 props를 설정 및 전달한 부모 컴포넌트에서 변경해야 한다.
+<br>
+
+### props 전달하고 사용하기
+부모 컴포넌트에서 props를 전달하기 위해서는 컴포넌트 내 속성을 지정해야 한다.
+```
+// App.js
+
+<CButton title="Button" />
+```
+<br>
+위 예시 코드처럼 Button 컴포넌트에 title 속성을 지정하면 Button 컴포넌트의 props로 title이 전달된다.
+<br>
+<br>
+자식 컴포넌트인 CButton에서 로그를 출력하면 props 값이 전달되는 것을 볼 수 있다.
+```
+// CButton.js
+
+const CButton = props => {
+    console.log(props);
+    return...
+}
+
+// 실행 결과
+
+{"title": "Button"}
+```
+이렇게 전달된 props의 값을 이용할 수도 있다.
+<br>
+아래 코드는 전달된 props의 title값으로 버튼에 출력되는 문자열을 변경하는 코드이다.
+```
+// CButton,js
+
+<Text style={{ color: 'white', fontSize: 24}}>{props.title}</Text>
+```
+
+<br>
+
+이렇게 props를 전달하는 방법 이외에도 태그 사이에 값을 입력해서 전달할 수도 있다.
+```
+// App.js
+
+<CButton title="Button">Children Props</CButton>
+```
+컴포넌트의 태그 사이에 전달된 값은 자식 컴포넌트의 props - children으로 전달된다.
+```
+// CButton.js
+
+<Text style={{ color: 'white', fontSize: 24}}>{props.children || props.title}</Text>
+```
+
+![image](https://user-images.githubusercontent.com/87363461/227755794-1d4e1f60-6bd9-459c-8227-1975d4ec0b1a.png)
+
+
+<br>
+
+### defaultProps
+만약 props를 지정하지 않으면 렌더링 시 어떤 값도 전달되지 않기 때문에 빈 값이 나타난다.
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227755823-ce1fd607-3e1c-440c-9d50-8b604640a4a6.png)
+
+<br>
+
+여러 사람과 함께 개발을 하다 보면 컴포넌트를 공용해서 사용하는 경우가 많다.
+<br>
+이런 상황에서 전달되어야 할 중요한 값이 전달되지 않으면 문제가 생기는데, 이러한 경우에 defaultProps를 지정한다.
+<br>
+즉, 빈 값이 나타나는 상황을 방지할 수 있다.
+```
+// CButton.js
+
+const CButton = props => { ... };
+
+CButton.defaultProps = {
+    title: 'default Button',
+};
+```
+props를 지정하지 않더라도 defaultProps가 들어가는 것을 볼 수 있다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227755917-beced892-071f-4558-8317-bc54facbd900.png)
+
+<br>
+
+### propTypes
+propTypes는 컴포넌트에 props를 잘못 전달하는 것을 방지하기 위한 방법이다.
+<br>
+props가 잘못 전달되었다는 것을 경고 메시지를 통해 알리는 방법이다.
+<br>
+<br>
+propsTypes을 사용하기 위해서는 prop-types 라이브러리를 다운로드 해야한다.
+> prop-types Link : https://github.com/facebook/prop-types
+```
+npm install prop-types
+```

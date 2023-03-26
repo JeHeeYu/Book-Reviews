@@ -299,6 +299,7 @@ props와 state는 <b>컴포넌트가 UI뿐만 아니라 다양한 기능을 담�
 <br>
 <br>
 자식 컴포넌트인 CButton에서 로그를 출력하면 props 값이 전달되는 것을 볼 수 있다.
+
 ```
 // CButton.js
 

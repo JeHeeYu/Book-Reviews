@@ -195,7 +195,7 @@ const App = () => {
 
 아래 예제는 스타일 파일과 App.js 파일을 나눈 예제이며, 위 동작들과 같은 동작을 한다.
 
-### [외부 스타일 예제 코드]()
+### [외부 스타일 예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Application/%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C/Chapter_4_%EC%8A%A4%ED%83%80%EC%9D%BC%EB%A7%81/External_Style/src/App.js)
 
 <br>
 
@@ -204,3 +204,9 @@ const App = () => {
 <br>
 
 ![image](https://user-images.githubusercontent.com/87363461/227766796-ba2c7a0e-472c-4e25-8a54-ca498ded0794.png)
+
+
+<br>
+
+
+## 리액트 네이티브 스타일

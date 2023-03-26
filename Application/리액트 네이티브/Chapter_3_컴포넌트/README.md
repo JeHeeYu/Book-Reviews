@@ -22,6 +22,26 @@
 또한 Button 컴포넌트도 있으며 리액트 네이티브 공식 홈페이지에서 여러 속성들 및 예제를 확인할 수 있다.
 > Button 컴포넌트 링크 : https://reactnative.dev/docs/button
 
+버튼 컴포넌트를 사용하면 title, onPress 속성 등을 지정할 수 있다.
+
+- title : 버튼 내부에 출력되는 텍스트
+- onPress : 버튼이 눌렀을 때 호출되는 함수 지정
+
+<br>
+
+### [예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Application/%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C/Chapter_3_%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8/Click_Alert.js)
+
+<br>
+
+위 예제 코드는 버튼 클릭 시 Alert가 발생하는 예제 코드이다.
+
+![image](https://user-images.githubusercontent.com/87363461/227753780-78a1cd4f-aa01-47d2-8a0e-43f5e20652f3.png)
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227753783-17704c36-28c4-4e0d-94e8-bd2a70e37751.png)
+
+
 <br>
 
 ## JSX

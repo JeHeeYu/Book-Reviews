@@ -586,3 +586,27 @@ press 이벤트는 사용자가 특정 버튼 등을눌렀을 때 발생하는 �
 <br>
 
 ![image](https://user-images.githubusercontent.com/87363461/227762530-bc0616a9-027c-4e3b-b6f9-ffaa13644347.png)
+
+
+### change Event
+change Event는 변화를 감지하는 이벤트로 값을 입력하는 TextInput 컴포넌트에서 많이 사용된다.
+<br>
+TextInput 컴포넌트에 있는 onChange 속성은 TextInput 컴포넌트에 입력된 텍스트가 변경될 때 호출된다.
+<br>
+그리고 호출되는 함수에 다음과 같은 형태로 인자를 전달한다.
+
+```
+{
+    ...,
+    "nativeEvent": {
+        "eventCount": ...,
+        "target": ...,
+        "text": ...,
+    },
+    ...
+}
+```
+
+onChange를 통해 전달되는 내용 중 필요한건 변화된 텍스트 뿐이므로, 이때 onChangeText는 조금 더 간편하게 사용할 수 있다.
+<br>
+onChangeText는 컴포넌트의 텍스트가 변경되었을 때 변경된 텍스트의 문자열만 인수로 전달하며 호출된다.

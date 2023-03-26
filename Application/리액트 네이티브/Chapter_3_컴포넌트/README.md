@@ -573,3 +573,16 @@ press 이벤트는 사용자가 특정 버튼 등을눌렀을 때 발생하는 �
 - onPress : 터치가 해제될 때 onPressOut 이후 호출
 - onLongPress : 터치가 일정 시간 이상 지속되면 호출
 
+<br>
+
+### [Press 이벤트 예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Application/%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C/Chapter_3_%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8/Press_Event/src/App.js)
+
+<br>
+
+### 실행 결과
+
+![image](https://user-images.githubusercontent.com/87363461/227762522-7c106242-9a7d-4b5f-a540-a963b10f68df.png)
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227762530-bc0616a9-027c-4e3b-b6f9-ffaa13644347.png)

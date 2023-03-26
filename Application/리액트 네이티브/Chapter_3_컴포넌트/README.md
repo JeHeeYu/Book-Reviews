@@ -382,3 +382,40 @@ propsTypes을 사용하기 위해서는 prop-types 라이브러리를 다운로�
 ```
 npm install prop-types
 ```
+<br>
+propsTypes를 이용하면 컴포넌트에서 전달받아야 하는 타입과 필수 여부를 저장할 수 있다.
+<br>
+저장하는 방법은 아래와 같이 popTypes에 설정한다.
+```
+// CButton.js
+
+import PropTypes from 'prop-types';
+
+CButton.prototype = {
+    title: PropTypes.number,
+};
+```
+title에는 문자열(string)이 넘어오지만, PropTypes를 이용해 title에 전달되어야 하는 값의 타입은 숫자(number)로 지정했다.
+<br>
+이런 경우 아래 이미지와 같이 경고 메시지가 발생하는 것을 볼 수 있다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227759386-52a87e68-39ad-46a7-ac77-f7fd25752d35.png)
+
+<br>
+
+또한 PropTypes를 이용하여 경고가 아닌 필수 여부도 지정할 수 있다.
+<br>
+필수 여부는 선언된 타입 뒤에 isRequired만 붙여주면 된다.
+```
+// CButton.js
+
+import PropTypes from 'prop-types';
+
+CButton.propTypes = {
+    title: PropTypes.number.isRequired,
+};
+```
+이렇게 PropTypes에는 문자열 또는 숫자 이외에도 함수(funct), 객체(object), 배열(array)등 다양한 타입을 지정할 수 있다.
+

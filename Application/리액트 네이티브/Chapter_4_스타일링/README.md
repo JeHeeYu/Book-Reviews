@@ -14,6 +14,8 @@ HTML과의 차이점은 HTML에서는 문자열 형태로 스타일을 입력하
 아래의 예제와 같이 객체의 형태로 전달한다.
 
 ```
+// 
+
 import { View, Text } from 'react-native';
 import React from 'react';
 
@@ -73,6 +75,8 @@ export default App;
 <br>
 
 ```
+// App.js
+
 import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 
@@ -127,6 +131,8 @@ export default App;
 이렇게 여러 개의 스타일을 적용할 경우는 배열을 이용하여 style 속성을 여러 개의 스타일로 지정하면 된다.
 
 ```
+// App.js
+
 import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 

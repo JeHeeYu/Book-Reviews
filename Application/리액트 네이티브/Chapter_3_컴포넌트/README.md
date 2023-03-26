@@ -610,3 +610,12 @@ TextInput 컴포넌트에 있는 onChange 속성은 TextInput 컴포넌트에 �
 onChange를 통해 전달되는 내용 중 필요한건 변화된 텍스트 뿐이므로, 이때 onChangeText는 조금 더 간편하게 사용할 수 있다.
 <br>
 onChangeText는 컴포넌트의 텍스트가 변경되었을 때 변경된 텍스트의 문자열만 인수로 전달하며 호출된다.
+
+<br>
+
+### [Change Event 예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Application/%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C/Chapter_3_%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8/Change_Event/src/App.js)
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227763951-4cd4e179-ee89-4c62-b866-82123697f143.png)
+

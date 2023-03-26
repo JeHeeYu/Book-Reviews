@@ -425,4 +425,14 @@ CButton.propTypes = {
 
 <br>
 
-### [props 예제 코드]()
+### [props 예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Application/%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C/Chapter_3_%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8/PropTypes_Example/src/App.js)
+
+<br>
+
+위 예제 코드는 props 값을 가져오는 여러 가지 방법이며, 각 버튼 클릭 시 props의 값을 확인할 수 있다.
+
+<br>
+
+![image](https://user-images.githubusercontent.com/87363461/227761494-747b3d0d-27fb-44d3-b413-7020740a033f.png)
+
+<br>

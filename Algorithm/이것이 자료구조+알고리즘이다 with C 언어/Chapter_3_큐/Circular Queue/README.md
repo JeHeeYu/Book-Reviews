@@ -233,7 +233,7 @@ if의 경우 전단이 후단보다 뒤에 있으니 그냥 - 연산만 하여 �
 후단이 현재 전단보다 앞에 있으므로, 전체 용량인 capacity에서 front 값을 빼고 rear 에 더하면 된다.
 
 
-### [예제 코드](https://github.com/JeHeeYu/Algorithm/blob/main/Queue/Circular%20Queue/CircularQueue.c)
+### [예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/%EC%9D%B4%EA%B2%83%EC%9D%B4%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%2B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%8B%A4%20with%20C%20%EC%96%B8%EC%96%B4/Chapter_3_%ED%81%90/Circular%20Queue/CircularQueue.c)
 
 ### 실행 결과
 ```

@@ -23,6 +23,6 @@
 
 ||||
 |:---:|:---:|:---:|
-|<img src="https://user-images.githubusercontent.com/87363461/188886444-53e65a85-cb42-48f0-8cd3-09b669059eea.JPG" width="120" height="180">|
-|[Do it! 안드로이드<br> 앱 프로그래밍](https://github.com/JeHeeYu/Book-Reviews/tree/main/Application/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0)|
+|<img src="https://user-images.githubusercontent.com/87363461/229502164-7a9646ff-c58f-43b0-89a3-f56eb2890458.PNG" width="120" height="180">|
+|[2023 수제비 정보처리기사 실기](https://github.com/JeHeeYu/Book-Reviews/tree/main/Certificate/2023%20%EC%88%98%EC%A0%9C%EB%B9%84%20%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0)|
 

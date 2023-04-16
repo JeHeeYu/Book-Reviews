@@ -13,3 +13,6 @@
 - [Chapter 7. 통합 구현](https://github.com/JeHeeYu/Book-Reviews/tree/main/Certificate/2023%20%EC%88%98%EC%A0%9C%EB%B9%84%20%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/Chapter%207.%20%ED%86%B5%ED%95%A9%20%EA%B5%AC%ED%98%84)
 
 - [Chapter 8. 인터페이스 설계 확인](https://github.com/JeHeeYu/Book-Reviews/tree/main/Certificate/2023%20%EC%88%98%EC%A0%9C%EB%B9%84%20%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/Chapter%208.%20%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4%20%EC%84%A4%EA%B3%84%20%ED%99%95%EC%9D%B8)
+
+
+- [Chapter 9. 프로그래밍 언어 활용](https://github.com/JeHeeYu/Book-Reviews/tree/main/Certificate/2023%20%EC%88%98%EC%A0%9C%EB%B9%84%20%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/Chapter%209.%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%96%B8%EC%96%B4%20%ED%99%9C%EC%9A%A9)

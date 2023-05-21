@@ -27,3 +27,8 @@
 ### [Chapter 8. 해시 테이블](https://github.com/JeHeeYu/Book-Reviews/tree/main/Algorithm/%EC%9D%B4%EA%B2%83%EC%9D%B4%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%2B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%8B%A4%20with%20C%20%EC%96%B8%EC%96%B4/Chapter_8_%ED%95%B4%EC%8B%9C%20%ED%85%8C%EC%9D%B4%EB%B8%94)
 
 ### [Chapter 9. 그래프](https://github.com/JeHeeYu/Book-Reviews/tree/main/Algorithm/%EC%9D%B4%EA%B2%83%EC%9D%B4%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%2B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%8B%A4%20with%20C%20%EC%96%B8%EC%96%B4/Chapter_9_%EA%B7%B8%EB%9E%98%ED%94%84)
+<ul>
+<li><a href="https://github.com/JeHeeYu/Book-Reviews/tree/main/Algorithm/%EC%9D%B4%EA%B2%83%EC%9D%B4%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%2B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%8B%A4%20with%20C%20%EC%96%B8%EC%96%B4/Chapter_9_%EA%B7%B8%EB%9E%98%ED%94%84/DFS%20BFS" target="_blank">DFS(Depth First Search)와 BFS(Breadth First Search)</li>
+<li><a href="https://github.com/JeHeeYu/Book-Reviews/tree/main/Algorithm/%EC%9D%B4%EA%B2%83%EC%9D%B4%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%2B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%8B%A4%20with%20C%20%EC%96%B8%EC%96%B4/Chapter_9_%EA%B7%B8%EB%9E%98%ED%94%84/Topological%20Sort" target="_blank">위상 정렬(Topological Sort)</li>
+  <li><a href="https://github.com/JeHeeYu/Book-Reviews/tree/main/Algorithm/%EC%9D%B4%EA%B2%83%EC%9D%B4%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%2B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%8B%A4%20with%20C%20%EC%96%B8%EC%96%B4/Chapter_9_%EA%B7%B8%EB%9E%98%ED%94%84/Minimum%20Spanning%20Tree%20" target="_blank">최소 신장 트리(Minimum Spanning Tree)</li>
+</ul>

@@ -394,7 +394,7 @@ E-F를 최소 신장 트리에 추가하고 분리 집합 {E}와 {F}를 합하�
 
 ## 최소 신장 트리 예제
 
-### [예제 코드](https://github.com/JeHeeYu/Algorithm/blob/main/Graph/Minimum%20Spanning%20Tree/minimum_spanning_tree.c)
+### [예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/%EC%9D%B4%EA%B2%83%EC%9D%B4%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%2B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%8B%A4%20with%20C%20%EC%96%B8%EC%96%B4/Chapter_9_%EA%B7%B8%EB%9E%98%ED%94%84/Minimum%20Spanning%20Tree%20/minimum_spanning_tree.c)
 
 ### 실행 결과
 

@@ -400,21 +400,246 @@ struct BetterFilter : Filter<Product>
 
   
   
-### 2-3.
+### 2-3. 리스코프 치환 원칙(LSP, Liskov Substitution Principle)
+리스코프 치환 원칙은 이 원칙의 원작자인 바바라 리스코프(Babara Liskov)의 이름에서 유래했다.
+<br>
+이 원칙은 어떤 자식 객체에 접근할 때 그 부모 객체의 인터페이스로 접근하더라도 아무런 문제가 없어야 한다는 것을 의미한다.
+<br>
+<br>
+즉, 자식 객체를 그 부모 객체와 동등하게 취급할 수 있어야 한다.
+<br>
+먼저 LSP가 준수되지 않는 경우의 예를 확인한다.
+<br>
+<br>
+예를 들어 아래의 코드는 직사각형 클래스로 이 클래스는 가로/세로 길이에 대한 get/set 및 면적 계산을 위한 멤버 함수를 가진다.
+
+```
+class Rectangle
+{
+protected:
+    int width, height;
+public:
+    Rectangle(const int width, const int height)
+        : width{width}, height{height} { }
+    
+    int get_width() const { return width };
+    virtual void set_width(const int width) { this->width = width; }
+    int get_height() const { return height; }
+    virtual void set_height(const int height) { this->height = height; }
+    int area() const { return width * height; } 
+};
+```
+
+그리고 아래 코드는 직사각형의 특별한 경우인 정사각형 클래스이며 이 객체는 가로/세로 get/set 멤버 함수를 모두 오버라이딩 한다.
+
+```
+class Square : public Rectangle
+{
+public:
+    Square(int size) : Rectangle(size, size) { }
+    void set_width(const int width) override {
+        this->width = height = width;
+    }
+    void set_height(const int height) override {
+        this->height = width = height;
+    }
+};
+```
+
+언뜻 보기에 문제가 없어 보이는 코드지만, 이러한 접근 방법은 문제를 일으킨다.
+<br>
+이 객체를 그 부모인 Rectangle 객체로서 접근한다면 의도치 않은 상황이 생긴다.
+
+```
+void process(Rectangle& r)
+{
+    int w = r.get_width();
+    r.set_height(10);
+    
+    cout << "expected area = " << (w * 10) << ", got " << r.area() << endl;
+}
+```
+
+가로 길이를 가져오고 세로를 10으로 설정하고, 가져온 가로 길이에 상수 10을 곱하여 넓이를 구하고 있다.
+<br>
+이 코드만 볼 때는 계산된 넓이가 틀릴 것 같지 않지만, Square 객체를 인자로 하여 이 함수를 호출하면 엉뚱한 넓이게 계산된다.
+
+```
+Square s{5};
+process(s);     // 기대된 결과 = 50, 구해진 값 = 25
+```
+
+이 코드에서 확인할 수 있는 부분은 파생된 서브 클래스 Square를 부모 클래스 Rectangle 타입으로 활용할 때 당장은 괜찮더라도 나중에 문제가 발견될 수 있다는 것이다.
+<br>
+<br>
+이러한 방법의 해결책은 아에 서브 클래스를 만들지 않거나, 서브 클래스를 만들더라도 아래와 같이 Factory 클래스를 두어 직사각형과 정사각형을 따로따로 생성하는 방법이다.
+
+```
+struct RectangleFactory
+{
+    static Rectangle create_rectangle(int w, int h);
+    static Rectnagle create_square(int size);
+};
+```
+
+### 2-4. 인터페이스 분리 원칙(ISP, Interface Segregation Principle)
+
+ISP를 설명하기 위해 아래 코드로 설명하는데, 이 코드는 복합 기능 프린터를 만드는 코드이다.
+<br>
+이 프린터는 프린트, 스캔, 팩스 기능이 합쳐져 있다.
+
+```
+struct MyFavouritePrinter
+{
+    void print(vector<Document*> docs) override;
+    void fax(vector<Document*> docs) override;
+    void scan(vector<Document*> docs) override;
+};
+```
+
+이제 이 프린터의 인터페이스를 추출한다. (하청 또는 외주에 맡기기 위하여)
+
+
+```
+struct IMachine
+{
+    virtual void print(vector<Document*> docs) = 0;
+    virtual void fax(vector<Document*> docs) = 0;
+    virtual void scan(vector<Document*> docs) = 0;
+};
+```
+
+여기서 문제가 발생하는데, 어떤 업체는 스캔 기능이나 팩스 기능이 필요하지 않을 수 있다.
+<br>
+단지 프린트만 만들고 싶을 수도 있다.
+<br>
+<br>
+하지만 이 인터페이스는 여하튼 모든 기능을 구현하도록 강제한다.
+<br>
+<br>
+여기서 진짜 문제점은 인터페이스 분리 원칙이 필요하는 바는 필요에 따라 구현할 대상이 선별할 수 있도록 인터페이스를 별개로 두어야 한다는 것이다.
+<br>
+프린트와 스캔은 서로 다른동작이므로(예를 들어 스캐너는 프린트를 못함) 인터페이스를 구분한다.
+
+```
+struct IPrinter
+{
+    virtual void print(vector<Document*> docs) = 0;
+}
+    
+struct IScanner
+{
+    virtual void scan(vector<Document*> docs) = 0;
+}
+```
+
+이제 프린터와 스캐너를 기능적으로 필요에 따라서 따로따로 구현할 수 있다.
+
+    
+
+```
+struct IPrinter
+{
+    void print(vector<Document*> docs) = 0;
+}
+    
+struct IScanner
+{
+    void scan(vector<Document*> docs) = 0;
+}
+```    
+    
+정리하자면, 한 덩어리의 복잡한 인터페이스를 목적에 따라 나눔으로써, 인터페이스 모든 항목에 대한 구현을 강제하지 않고 실제로 필요한 인터페이스만 구현하는 것이다.
+<br>
+만약 어떤 애플리케이션의 플러그인 모듈을 개발할 때 뭐가 뭔지 알 수 없는 혼란스럽기만 한 수십 개의 함수를 빈 껍데기 또는 null 리턴으로 구현하고 있다면 설계자가 인터페이스 분리 원칙을 위반한 것이다.
 
 
 
+### 2-5. 의존성 역전 원칙(Dependency Inversion Principle)   
+    
+로버트 마틴의 원전에서는 DIP를 아래와 같이 정의한다.
+
+1. 상위 모듈이 하위 모듈에 종속성을 가져서는 안 된다. 양쪽 모두 추상화에 의존해야 한다.
+<br>
+이것이 기본적으로 의미하는 것은, 예를 들어 로깅 기능이라면, 로그 리포팅 컴포넌트가 실 구현체인 ConsoleLogger에 의존해서는 안 되고 ILogger 인터페이스에만 의존해야 한다는 것이다.
+<br>
+이 경우 리포팅 컴포넌트를 상위 모듈로 취급하고, 반면에 로깅은 파일 입출력이나 스레드 처리에 중점을 두므로 하위 모듀로 취급한다.
+
+2. 추상화가 세부 사항에 의존해서는 안 된다. 세부 사항이 추상화에 의존해야 한다.
+<br>
+이 부분 또한 종속성이 실 구현 타입이 아니라 인터페이스 또는 부모 클래스에 있어야 한다는 것을 말한다.
+<br>
+<br>
+사실 의존성 역전 원칙이 지켜지도록 구현하려면 많은 작업이 필요하다.
+<br>
+위의 1, 2번 두 가지 요구사항이 기술하고 있는 것들을 명시적으로 코드로 나타내야 한다.
+<br>
+<br>
+예를 들어 리포팅은 ILogger에 의존해야 하는 부분은 아래와 같이 코드로 나타낼 수 있다.
 
 
+```
+class Reporting
+{
+    ILogger& logger;
 
+public:
+    Reporting(const ILogger& logger) : logger{logger} {}
+    void prepate_report()
+    {
+        logger.log_info("Preparing the report");
+        ...
+    }
+}:
+```
+    
+그런데 이 클래스를 인스턴스화하려면 구현 클래스를 호출해야 하는 문제가 있다.
+<br>
+만약 리포팅 클래스가 5개의 서로 다른 인터페이스를 사용해야 한다면 또는 ConsoleLogger가 자체적으로 다른 종속성을 가지고 있다면 아주 많은 코드를 작성해야 한다.
+<br>
+<br>
+다행히도 좋은 방법이 있는데, 오늘날 의존성 역전 원칙을 구현하는 가장 인기 있고 우아한 방법은 종속성 주입(Dependency Injection) 테크닉을 활용하는 것이다.
+<br>
+종속성 주입은 Boost.DI와 같은 라이브러리를 이용해 어떤 컴포넌트의 종속성 요건이 자동적으로 만족되게 한다는 의미이기도 하다.
+    
+    
+<br>
+<br>
+예를 들어 자동차가 있는데, 이 자동차는 엔진과 로그 기능을 필요로 한다.
+<br>
+즉, 두 기능에 자동차가 의존성을 가진다.
 
-
-
-
-
-
-
-
-
+```
+struct Engine
+{
+    float volume = 5;
+    int horse_power = 400;
+    friend ostream& operator<< (ostream& os, const Engine& obj)
+    {
+        return os
+            << "volume : " << obj.volume << " horse_power: " << obj.horse_power;
+    }
+};
+```   
+    
+이제 자동차에 엔진을 제공할 때 IEngine 인터페이스를 따로 추출할지 말지는 우리의 선택에 있다.
+<br>
+그렇게 할 수도 있고 안 할 수도 있는데, 이 부분은 설계 차원의 의사 결정이다.
+<br>
+<br>
+    
+우리가 정의할 자동차는 엔진과 로깅 두 컴포넌트 모두에 의존하므로 두 컴포넌트를 내부에서 접근할 수 있어야 한다.
+<br>
+이를 위해 포인터를 사용할 수도 있고, 참조를 할 수도 있고, unique_ptr/shared_ptr 또는 뭔가 다른 방법을 쓸 수도 있다.
+<br>
+<br>
+이러한 방식은 단위 테스트도 쉽게 할 수 있게 해주는데
+<br>
+단 한 줄만 수정하여 종속성이 있는 개체는 실제 동작하는 구현 객체를 사용할 수도 있고, 테스트용 더미 객체를 사용하게 바꿀 수도 있다.
+    
+    
+    
+    
+    
 
 

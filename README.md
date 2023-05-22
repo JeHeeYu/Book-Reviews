@@ -3,15 +3,15 @@
 
 ## Algorithm
 
-||||
-|:---:|:---:|:---:|
+|||
+|:---:|:---:|
 |<img src="https://user-images.githubusercontent.com/87363461/200107543-01dbbad4-ad93-464c-8aec-ccf2d37ddf25.JPG" width="160" height="230">|<img src="https://user-images.githubusercontent.com/87363461/227699608-ddfbbc17-7674-42bb-861f-0be084887a19.PNG" width="160" height="230">
 |[이것이 자료구조+<br>알고리즘이다<br>with C 언어](https://github.com/JeHeeYu/Book-Reviews/tree/main/Algorithm/%EC%9D%B4%EA%B2%83%EC%9D%B4%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%2B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%8B%A4%20with%20C%20%EC%96%B8%EC%96%B4)|[Do it! 알고리즘<br>코딩 테스트 C++편](https://github.com/JeHeeYu/Book-Reviews/tree/main/Algorithm/Do%20it!%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%EC%BD%94%EB%94%A9%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20C++%20%ED%8E%B8)
 
 ## Design Pattern
 
-||||
-|:---:|:---:|:---:|
+||
+|:---:|
 |<img src="https://github.com/JeHeeYu/Book-Reviews/assets/87363461/02dd69e8-d37f-4645-9428-752b208bf5a1" width="160" height="230">|
 |[모던 C++<br>디자인 패턴](https://github.com/JeHeeYu/Book-Reviews/tree/main/Design%20Pattern/%EB%AA%A8%EB%8D%98%20C++%20%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%8C%A8%ED%84%B4)|
 
@@ -28,8 +28,8 @@
 
 ## Certificate
 
-||||
-|:---:|:---:|:---:|
+||
+|:---:|
 |<img src="https://user-images.githubusercontent.com/87363461/229502164-7a9646ff-c58f-43b0-89a3-f56eb2890458.PNG" width="160" height="230">|
 |[2023 수제비<br>정보처리기사 실기](https://github.com/JeHeeYu/Book-Reviews/tree/main/Certificate/2023%20%EC%88%98%EC%A0%9C%EB%B9%84%20%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0)|
 

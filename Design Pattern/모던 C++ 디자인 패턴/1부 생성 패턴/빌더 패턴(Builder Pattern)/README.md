@@ -68,3 +68,7 @@ printf(list.str().c_str());
 <br>
 
 ## 단순한 빌더
+
+
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/db7abf92-3156-45a3-8678-268e9b212668)

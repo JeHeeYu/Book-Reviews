@@ -71,4 +71,4 @@ printf(list.str().c_str());
 
 
 
-![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/db7abf92-3156-45a3-8678-268e9b212668)
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/245b7400-752c-4204-86dd-5b83c4258d13)

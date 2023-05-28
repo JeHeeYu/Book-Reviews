@@ -186,20 +186,154 @@ for(auto& obj : vectorObjects)
 
 ## 일시적 어댑터
 
+아래 코드는 정상적으로 동작하지만, 문제가 되는 상황이 있다.
+```
+for(auto& obj : vectorObjects)
+{
+    for(auto& line : *obj)
+    {
+        LineToPointAdapter lpo{ line };
+        DrawPoints(dc, lpo.begin(), lpo.end());
+    }
+}
+```
+
+화면이 업데이트 될 때마다 DrawPoints()가 불리는 경우를 생각할 수 있다.
+<br>
+전혀 바뀐 겂이 없더라도 도형의 선분들이 어댑터에 의해 점으로 변환된다.
+<br>
+즉, 비효율적인 중복 작업이 발생하게 된다.
+<br>
+<br>
+이러한 작업을 피하기 위해 먼저 생각할 수 있는 방법은 캐싱을 이용하는 것이다.
+<br>
+즉, 모든 Point를 애플리케이션이 기동할 때 미리 어댑터를 이용해 정의해 두고 재활용하는 것이다.
+
+```
+vector<Point> points;
+for(auto& o : vectorObjects)
+{
+    for(auto& l : *o)
+    {
+        LineToPointAdapter lpo{ l };
+        for(auto& p : lop)
+            points.push_back(p);
+    }
+}
+```
+
+이렇게 준비해둔 Point들의 반복자를 DrawPoints()에 넘긴다.
+
+```
+DrawPoints(dc, points.begin(), points.end());
+```
+
+이제 반복 변환 작업은 없어졌다.
+<br>
+하지만 또 다른 문제가 생기는데, 원본 vectorObjects가 바뀌어 선분을 다시 점으로 변환해야 하는 경우의 문제이다.
+<br>
+이 경우는 미리 만들어 두고 재활용하는 방식을 사용할 수 없다.
+<br>
+비효율적인 반복 변환 작업을 피하기 위해 다시 캐싱을 활용한다.
+<br>
+<br>
+먼저, 반복 변환을 피하기 위해 각각의 선분을 유일하게 식별할 방법이 필요하다.
+<br>
+즉, 선분의 시작/끝점을 유일하게 식별할 수 있어야 한다.
+
+```
+struct Point
+{
+    int x, y;
+    
+    friend std::size_t hash_value(const Point& obj)
+    {
+        std::size_t seed = 0x725C686F;
+        boost::hash_combine(seed, obj.x);
+        boost::hash_combine(seed, obj.y);
+        
+        return seed;
+    }
+};
+
+struct Line
+{
+    Point start, end;
+    
+    friend std::size_t hash_value(const Line& obj)
+    {
+        std::size_t seed = 0x719E6B16;
+        boost::hash_combine(seed, obj.start);
+        boost::hash_combine(seed, obj.end);
+        
+        return seed;
+    }
+};
+```
+
+위 코드는 Boost의 해시 편의 기능을 이용하고 있다.
+<br>
+이제 점들을 캐싱하여 꼭 필요할 때만 선분에서 점을 생성하는 LineToPointCachingAdapter를 만들 수 있다.
+<br>
+캐시를 가졌다는 것을 제외하면 기존 LineToPointAdapter 구현과 거의 동일하다.
+
+<br>
+<br>
+
+먼저, 맵을 이용해 해시값과 점들을 연관시켜 캐시를 만든다.
+
+```
+static map<size_t, Points) cache;
+```
+
+size_t 타입은 Boost의 해시 함수가 리턴하는 타입과 동일하다.
+<br>
+이제 생성된 점을 순회하는 반복자를 다음과 같이 해시 값을 이용해 캐시에서 얻는다.
+
+```
+virtual Points::iterator begin() { return cache[line_hash].begin(); }
+virtual Points::iterator end() { return cache[line_hash].end(); }
+```
+
+구현하려는 알고리즘은 다음과 같다.
+<br>
+점들을 생성하기 전에 이미 생성되었는지 검사하고 만약 이미 생성되어 있으면 그냥 종료하고, 없으면 생성한 다음 캐시에 등록한다.
+
+```
+LineToPointCachingAdapter(Line& line)
+{
+    static boost::hash<Line> hash;
+    line_hash = hash(line); // line_hash는 이 클래스의 필드임
+    
+    iF(cache.find(line_hash) != cache.end())
+        return; // 이미 존재하므로 그냥 리턴
+        
+    Points poiunts;
+    
+    // 이전과 동일한 코드
+    
+    cache[line_hash] = points;
+}
+```
+
+이제 해시 함수와 캐싱 덕분에 변환 생성 작업 횟수를 드라마틱하게 줄일 수 있다.
+<br>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+## 요약
+어댑터는 매우 단순한 개념의 패턴이다.
+<br>
+사용할 수밖에 없는 인터페이스를 사용하고 싶은 인터페이스로 감쌀 수 있게 해준다.
+<br>
+<br>
+어댑터가 가진 유일한 난관은 서로 다른 인터페이스를 이어 붙여 나가는 과정에 있다.
+<br>
+어떤 경우에는 데이터 표현 방식을 맞추기 위해 임시 데이터를 만들어야 할 수도 있다.
+<br>
+그런 경우에는 캐싱을 활용하여 꼭 필요한 때만 임시 데이터가 생성되게 하여 변환 작업이 일어나는 것을 피한다.
+<br>
+<br>
+추가로, 캐시된 객체가 변경되었을 때 무효해진 데이터를 제거하는 기능도 구현할 필요가 있다.
 
 
 

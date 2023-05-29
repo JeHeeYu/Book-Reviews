@@ -66,6 +66,92 @@ for(i: 0 ~ N - 10) {
 
 ### 4. 코드 구현하기
 
+### [예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/Do%20it!%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%EC%BD%94%EB%94%A9%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20C%2B%2B%20%ED%8E%B8/Chapter%203.%20%EC%A0%95%EB%A0%AC/%EB%B2%84%EB%B8%94%20%EC%A0%95%EB%A0%AC/2750.cpp)
+
+<br>
+
+
+## 문제 016 버블 소트 (골드 2, 1377)
+
+[문제 링크](https://www.acmicpc.net/problem/1377)
+
+
+<br>
+
+### 1. 문제 분석하기
+버즐 정렬의 swap이 단 한 번도 일어나지 않은 루프가 언제인지 알아내는 문제이다.
+<br>
+버블 절열의 이중 for 문에서 안쪽 for 문 전체를 돌 때 swap이 일어나지 않았다는 것은 이미 모든 데이터가 정렬되어 있다는 의미이다.
+<br>
+<br>
+이때는 프로세스를 바로 종료해 시간 복잡도를 줄일 수 있다.
+<br>
+<br>
+하지만 이 문제는 N의 최대 범위가 500,000 이므로 버블 정렬로 문제를 풀면 시간을 초과할 수 있다.
+<br>
+그래서 버블 정렬이 아닌 다른 아이디어가 필요하다.
+
+#### 안쪽 for문이 몇 번 수행됐는지 구하는 다른 아이디어
+- 안쪽 루프는 1에서 n - j 까지 즉, 왼쪽에서 오른쪽으로 이동하면서 swap 수행
+- 이는 특정 데이터가 안쪽 루프에서 swap의 왼쪽으로 이동할 수 있는 최대 거리가 1이라는 뜻임
+- 즉, 데이터의 정렬 전 index와 정렬 후 index를 비교해 왼쪽으로 가장 많이 이동한 값을 찾으면 문제 해결 가능
+
+이 아이디어를 적용해서 문제를 풀어야 한다.
+
+<br>
+
+### 2. 손으로 풀어보기
+
+1. 기본으로 제공하는 sort() 함수로 배열을 정렬한다.<br>sort() 함수의 시간 복잡도는 O(nlogn)이다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/4ab6bd47-02b9-4b8e-aa5a-6a26cd0867b7)
+
+
+<br>
+
+2. 각 데이터마다 정렬 전 index값에서 정렬 후 index 값을 빼고 최댓값을 찾는다.<br>그리고 swap이 일어나지 않는 반복문이 한 번 더 실행되는 것을 감안해 최댓값에 1을 더한다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/e6eae059-8924-489e-9b81-494e5c00b12c)
+
+
+
+<br>
+
+
+### 3. 슈도코드 작성하기
+
+```
+N(데이터 개수)
+A(데이터 저장 배열)
+
+for(N만큼 반복) {
+    배열 A 저장
+}
+
+배열 A 정렬
+
+for(N만큼 반복) {
+    배열 데이터(A[i]) 정렬 전 index - 정렬 후 index 계산 값의 최댓값을 찾아 저장
+}
+
+최댓값 + 1을 정답으로 출력
+```
+
+
+<br>
+
+
+### 4. 코드 구현하기
+
+### [예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/Do%20it!%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%EC%BD%94%EB%94%A9%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20C%2B%2B%20%ED%8E%B8/Chapter%203.%20%EC%A0%95%EB%A0%AC/%EB%B2%84%EB%B8%94%20%EC%A0%95%EB%A0%AC/1377.cpp)
+
+
+
+
 
 
 

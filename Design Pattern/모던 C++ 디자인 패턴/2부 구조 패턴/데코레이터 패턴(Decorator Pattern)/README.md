@@ -362,26 +362,204 @@ cout << "Entering function\n";
 cout << "Exiting function\n";
 ```
 
+이러한 방식은 익숙하고 정상적으로 동작한다.
+<br>
+하지만 이해 관계를 분리하는 디자인 철학(separation of concerns) 관점에서는 바람직하지 않다.
+<br>
+<br>
+로깅 기능을 분리하여 다른 부분과 얽히지 않고 재사용과 개선을 마음 편하게 할 수 있다면 훨씬 더 효과적이다.
+<br>
+<br>
+이렇게 하는 데에는 여러 접근 방법이 있을 수 있다.
+<br>
+<br>
+한 가지 방법은 문제의 동작과 관련된 전체 코드 단위를 통째로 어떤 로깅 컴포넌트에 람다로서 넘기는 것이다.
+<br>
+아래는 이러한 방법을 위한 로깅 컴포넌트의 정의이다.
+
+```
+struct Logger
+{
+    function<void()> func;
+    string name;
+    
+    Logger(const function<void()>& func, const sring& name)
+        : func{func}, name{name} {}
+        
+    void operator()() const
+    {
+        cout << "Entering " << name << endl;
+        func();
+        cout << "Exiting " << name << endl;
+    }
+};
+```
+
+이 로깅 컴포넌트는 다음과 같이 활용할 수 있다.
+
+```
+Logger([]() {cout << "Hello" << endl; }, "HelloFunction")();
+// 출력 결과
+// Entering HelloFunction
+// Hello
+// Exiting HelloFunction
+```
+
+코드 블록을 std::function으로서 전달하지 않고 템플릿 인자로 전달할 수도 있다.
+<br>
+이 경우 로딩 클래스가 다음과 같이 조금 달라진다.
+
+```
+template <typename Func>
+struct Logger2
+{
+    Func func;
+    string name;
+    
+    Logger2(const Func& func, const string& name)
+        : func{func}, name{name} {}
+        
+    void operator() const
+    {
+        cout << "Entering " << name << endl;
+        func();
+        cout << "Exiting " << name << endl;
+    }
+};
+```
+
+이 로깅 컴포넌트의 사용법은 완전히 같다.
+<br>
+로깅 인스턴스를 생성하기 위해 다음과 같이 편의 함수를 만든다.
+
+```
+template <typename Func> auto make_logger2(Func func, const string& name)
+{
+    return Logger2<Func>{ func, name }; // () = call now
+}
+```
+
+그리고 아래와 같이 활용한다.
+
+```
+auto call = make_logger2([]() {cout << "Hello!" << endl; }, "HelloFunction");
+call();
+```
+
+이렇게 하면 데코레이터를 생성할 수 있는 기반이 마련되었다는 것에 의미가 있다.
+<br>
+즉, 임의의 코드 블록을 데코레이션 할 수 있고 데코레이션된 코드 블록을 필요할 때 호출할 수도 있다.
+<br>
+<br>
+이제 좀 더 어려운 경우가 있다.
+<br>
+만약 로그를 남기고 싶은 함수의 리턴 값을 넘겨야 한다는 경우의 상황이다.
+<br>
+<br>
+예를 들어 아래와 강티 add() 함수가 있다.
+
+```
+double add(double a, double b)
+{
+    cout << a << "+" << b << "=" << (a + b) << endl;
+    return a + b;
+}
+```
+
+이 함수에 로그를 남기면서 동시에 리턴 값도 넘겨야 하는 상황이다.
+<br>
+그냥 LOgger에서 값을 리턴하면 실제로 그렇게 되지는 않는다.
+<br>
+그래도 불가능하지는 않다.
+<br>
+<br>
+Logger를 아래와 같이 변경한다.
+
+```
+template <typename R, typename... Args>
+struct Logger3<R(Args...)>
+{
+    Loger3(function<R(Args...)> func, const string& name)
+        : func{func}, name{name} {}
+        
+    R operator() (Args ...args)
+    {
+        cout << "Entering " << name << endl;
+        R result = func(args...);
+        cout << "Exiting " << name << endl;
+        
+        return result;
+    }
+    
+    function<R(Args ...)> func;
+    
+    string name;
+}
+```
+
+위 코드에서 템플릿 인자 R은 리턴 값의 타입을 의미한다.
+<br>
+그리고 Args는 파라미터 팩이다.
+<br>
+<br>
+이 데코레이터는 함수를 가지고 있다가 필요할 때 호출할 수 있게 해준다.
+<br>
+유일하게 다른 점은 operator()가 R 타입의 리턴 값을 가진다는 점이다.
+<br>
+<br>
+즉, 리턴 값을 잃지 않고 받아낼 수 있다.
+
+<br>
+<br>
+데코레이터 생성 편의 함수를 이에 맞게 수정하면 아래와 같다.
+
+```
+template <typename R, typename... Args>
+auto make_logger3(R (*func)(Args...), const string& name)
+{
+    return Logger3<R(Args...)>(
+        std::function<R(Args...)>(func), name);
+}
+```
+
+이 편의 함수는 한 가지 달라진 점이 있다.
+<br>
+std::function 대신에 일반 함수 포인터를 첫 번째 인자로 받고 있다.
+<br>
+<br>
+이 편의 함수를 이용하면 다음과 같이 add()를 데코레이션하고 호출할 수 있다.
+
+```
+auto logger_add = make_logger3(add, "Add");
+auto result = logged_add(2, 3);
+```
+
+그리고 make_logger3를 종속성 주입으로 대체할 수도 있다.
+<br>
+종속성 주입 방식을 이용하면 다음과 같은 장점이 생긴다.
+
+- 실제 로깅 컴포넌트 대신 Null 객체를 전달하여 로깅 작업을 동적으로 끄거나 켤 수 있음
+- 로깅할 코드의 실제 실행을 막을 수도 있음<br>이 부분도 로깅 컴포넌트를 다르게 제공함으로써 구현할 수 있음
 
 
+## 요약
+데코레이터 패턴은 열림-닫힘 원칙(OCP, Open-Close Principle)을 준수하면서도 클래스에 새로운 기능을 추가할 수 있게 해준다.
+<br>
+데코레이터의 핵심적인 틍징은 데코레이터들을 합성할 수 있다는 것이다.
+<br>
+<br>
+객체 하나에 복수의 데코레이터들을 순서와 무관하게 적용할 수 있다.
+<br>
+<br>
+데코레이터의 종류를 요약하면 다음과 같다.
 
+- <b>동적 데코레이터</b> : 데코레이션할 객체의 참조를 저장하고 런타임에 동적으로 합성할 수 있음<br>대신 원본 객체가 가진 멤버들에 접근할 수 없음
+- <b>정적 데코레이터</b> : 믹스인 상속(템플릿 파라미터를 통한 상속)을 이용해 컴파일 시점에 데코레이터를 합성함<br>이 방법은 런타임 융통성은 가질 수 없음<br>즉, 런타임에 객체를 다시 합성할 수 없으나 원본 객체의 멤버들에 접근할 수 있는 장점이 있음<br>그리고 생성자 포워딩을 통해 객체를 완전하게 초기화할 수 있음
+- <b>함수형 데코레이터</b> : 코드 블록이나 특정 함수에 다른 동작을 덧씌워 합성할 수 있음
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+다중 상속이 지원되지 않는 프로그래밍 언어에서는 데코레이터 패턴을 이용해 여러 객체를 연관시켜 다형성을 흉내 낸다.
+<br>
+즉, 연관시킨 여러 객체의 인터페이스를 데코레이터로 합성하여 단일한 인터페이스 집합을 제공한다.
 
 
 

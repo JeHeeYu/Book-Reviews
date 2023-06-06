@@ -169,3 +169,51 @@ Fibonacci(2)는 테이블의 0번과 1번에 저장된 값을 더해서 그 결�
 <br>
 이렇게 찾고자 하는 n번째 피보나치 수 계산이 끝난다.
 
+<br>
+
+## 동적 계획법 기반 피보나치 수 구하기 알고리즘 구현
+
+다음 코드가 동적 계획법 버전 Fiboancci() 함수이다.
+
+```
+ULONG Fibonacci(int n)
+{
+    int i;
+    
+    ULONG result;
+    ULONG* fibonacciTable;
+    
+    if(n == 0 || n == 1) {
+        return n;
+    }
+    
+    fibonacciTable = (ULONG*)malloc(sizeof(ULONG) * (n + 1));
+    
+    fibonacciTable[0] = 0;
+    fibonacciTable[1] = 1;
+    
+    for(i = 2; i <= n; i++) {
+        fibonacciTable[i] = fibonacciTable[i - 1] + fibonacciTable[i - 2];
+    }
+    
+    result = fibonacciTable[n];
+    
+    free(fibonacciTable);
+    
+    return result;
+}
+```
+
+### [동적 계획법을 이용한 피보나치 예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/%EC%9D%B4%EA%B2%83%EC%9D%B4%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%2B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%8B%A4%20with%20C%20%EC%96%B8%EC%96%B4/Chapter_13_%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%95/FibonacciDP.c)
+
+### 실행 결과
+```
+46
+Fibonacci(46) = 1836311903
+
+10
+Fibonacci(10) = 55
+
+20
+Fibonacci(20) = 6765
+```

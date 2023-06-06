@@ -260,3 +260,85 @@ return 소수임
 ### 4. 코드 구현하기
 
 ### [예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/Do%20it!%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%EC%BD%94%EB%94%A9%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20C%2B%2B%20%ED%8E%B8/Chapter%204.%20%ED%83%90%EC%83%89/%EA%B9%8A%EC%9D%B4%20%EC%9A%B0%EC%84%A0%20%ED%83%90%EC%83%89/2023.cpp)
+
+<br>
+
+## 문제 025. ABCDE (골드 5, 13023)
+
+[문제 링크](https://www.acmicpc.net/problem/13023)
+
+<br>
+
+### 1. 문제 분석하기
+N의 최대 범위가 2,000이므로 알고리즘의 시간 복잡도를 고려할 때 자유롭다.
+<br>
+그리고 문제에서 요구하는 A, B, C, D, E의 관계는 재귀 함수의 형태와 비슷하다.
+<br>
+<br>
+주어진 노드에 DFS를 수행하고 재귀의 깊이가 5 이상이면 1, 아니라면 0을 출력한다.
+<br>
+<br>
+DFS의 시간 복잡도는 O(V + E)이므로 최대 4,000, 모든 노드를 진행했을 때 4,000 * 2,000, 즉, 8,000,000 이므로 DFS를 사용해도 제한 시간 내에 문제를 풀 수 있다.
+
+<br>
+
+### 2. 손으로 풀어 보기
+
+1. 그래프 데이터를 인접 리스트로 저장한다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/bc99dc82-78ed-4ad9-92e3-045d4d22093b)
+
+
+<br>
+
+2. 모든 노드에서 DFS를 수행한다.<br>수행할 때 재귀 호출마다 깊이를 더하고 깊이가 5가 되면 1을 출력하고 프로그램을 종료한다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/f13f4641-e5eb-4a8f-9e18-f30f97d1b6b2)
+
+
+<br>
+
+3. 모든 노드를 돌아도 1이 출력되지 않았다면 0을 출력한다.
+
+<br>
+
+### 3. 슈도코드 작성하기 
+
+```
+N(노드 개수), M(에지 개수)
+A(그래프 데이터 저장 인접 리스트)
+visited(방문 기록 저장 배열)
+arrive(도착 확인 변수)
+
+A 인접 리스트 크기 초기화
+visited 배열 초기화
+
+for(M의 개수만큼 반복) {
+    인접 리스트 A에 그래프 데이터 저장
+}
+
+for(N의 개수만큼 반복) {
+    노드마다 DFS 실행
+    if(arrive) 반복문 종료 // 깊이가 5에 도달한 적이 있다면
+}
+
+if(arrive) 1 출력
+else 0 출력
+
+DFS( // DFS 구현
+    if(깊이가 5 || arrive) {
+        arrive = true;
+        함수 종료
+    }
+    visited 배열에 현재 노드 방문 기록
+    현재 노드의 연결 노드 중 방문하지 않은 노드에 대해 DFS 실행(호출마다 깊이는 1씩 증가)
+    visited 배열에 현재 노드 방문 삭제
+```
+
+### 4. 코드 구현하기
+
+### [예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/Do%20it!%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%EC%BD%94%EB%94%A9%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20C%2B%2B%20%ED%8E%B8/Chapter%204.%20%ED%83%90%EC%83%89/%EA%B9%8A%EC%9D%B4%20%EC%9A%B0%EC%84%A0%20%ED%83%90%EC%83%89/13023.cpp)

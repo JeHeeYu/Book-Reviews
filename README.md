@@ -15,6 +15,14 @@
 |<img src="https://github.com/JeHeeYu/Book-Reviews/assets/87363461/02dd69e8-d37f-4645-9428-752b208bf5a1" width="160" height="230">|
 |[모던 C++<br>디자인 패턴](https://github.com/JeHeeYu/Book-Reviews/tree/main/Design%20Pattern/%EB%AA%A8%EB%8D%98%20C++%20%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%8C%A8%ED%84%B4)|
 
+
+## Embedded
+
+||
+|:---:|
+|<img src="https://github.com/JeHeeYu/Book-Reviews/assets/87363461/e055aa5b-455d-40f7-854f-b09bb2ca24e7" width="160" height="230">|
+|[EMBEDDED RECIPES](https://github.com/JeHeeYu/Book-Reviews/tree/main/Embedded/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C%20%EB%A0%88%EC%8B%9C%ED%94%BC)|
+
 ## Application
 
 
@@ -23,8 +31,6 @@
 |<img src="https://user-images.githubusercontent.com/87363461/188886444-53e65a85-cb42-48f0-8cd3-09b669059eea.JPG" width="160" height="230">|<img src="https://user-images.githubusercontent.com/87363461/227699896-8735005b-e6f1-4c8e-af54-7d8c81ddce22.PNG" width="160" height="230">|<img src="https://user-images.githubusercontent.com/87363461/230757468-c87eb262-d337-470a-95b6-f7a4dab0e609.PNG" width="160" height="230">|
 |[Do it! 안드로이드<br> 앱 프로그래밍](https://github.com/JeHeeYu/Book-Reviews/tree/main/Application/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0)|[리액트 네이티브](https://github.com/JeHeeYu/Book-Reviews/tree/main/Application/%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C)|[Do it! 플러터<br>앱 프로그래밍](https://github.com/JeHeeYu/Book-Reviews/tree/main/Application/Do%20it!%20%ED%94%8C%EB%9F%AC%ED%84%B0%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)
 
-<br>
-<br>
 
 ## Certificate
 

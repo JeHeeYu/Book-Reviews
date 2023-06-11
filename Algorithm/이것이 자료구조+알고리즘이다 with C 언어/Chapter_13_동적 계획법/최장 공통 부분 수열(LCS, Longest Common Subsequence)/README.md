@@ -170,26 +170,164 @@ LCS() 함수는 자기 자신을 재귀 호출하는 분기문 블록을 두 군
 
 ## 동적 계획법 기반 LCS 알고리즘
 LCS 문제를 동적 계획법으로 풀 때 다음과 같이 동적 계획법 설계 절차를 따른다.
+1. 문제를 부분 문제로 나눔
+2. 가장 작은 부분 문제부터 해를 구한 뒤 테이블에 저장
+3. 테이블에 저장된 부분 문제의 해를 이용하여 점차적으로 상위 부분 문제의 최적해를 구함
+
+LCS 문제에서는 LCS 테이블의 각 요소가 각 부분 문제이다.
+<br>
+그리고 테이블의 오른쪽 아래 방향으로 내려가면서 나타나는 요소들이 부분 문제를 포함하는 상위 문제이닫.
+<br>
+가장 오른쪽 아래 모서리에 있는 요소가 전체 문제이다.
+<br>
+<br>
+따라서 테이블의 왼쪽 위 모서리부터 시작해서 오른쪽 아래로 내려가면서 계산을 수행하면 가장 작은 문제부터 해를 구하고 이를 기반으로 상위 문제의 해를 구하게 된다.
+<br>
+<br>
+마지막으로 오른쪽 아래 모서리에 이르게 디면 전체 LCS 길이의 해를 얻을 수 있다.
+<br>
+<br>
+LCS의 점화식에 따르면 i = 0이거나 j = 0인 경우 Table[i, j] = 0이다.
+<br>
+따라서 모든 j에 대해서 Table[0, j]를 0으로 만들고 모든 i에 대해 Table[i, 0]을 0으로 만든다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/e9cf13e9-04b5-46a6-9551-991b639e02de)
+
+<br>
+
+그 다음부터는 테이블의 1번 행(두 번째 행)과 1번 열(두 번째 열)부터 LCS 길이를 구해 채워나가면 된다.
+<br>
+LCS 길이를 구하는 것은 점화식의 두 번째(X[i]와 Y[j]가 같은 경우)와 세 번째(i, j가 모두 0보다 크고 X[i]와 Y[j]가 다른 경우)를 이용하면 된다.
+<br>
+<br>
+X[i]와 Y[j]가 같은 경우에는 Table[i, j]에 Table[i - 1, j - 1] + 1을 대입하면 되고, i와 j가 모두 0보다 크고 X[i]와 Y[j]가 서로 다를 때는 Tab;e[i - 1, j]나 Table[i, j - 1] 중 큰 값을 Table[i, j]에 대입하면 된다.
+<br>
+<br>
+이렇게 테이블 왼쪽 위부터 오른쪽 아래까지 훑으면서 계산해나가면 X의 길이를 m, Y의 길이를 n이라고 했을 때 Table[m, n]을 구하는 데 최악의 경우라도 O(nm) 정도의 수행 시간이 소요된다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/a6139ed6-2fc4-40d8-b770-40f06193577e)
 
 
+<br>
+
+다음 코드는 동적 계획법으로 새롭게 작성한 LCS() 함수이다.
+
+```
+int LCS(char* x, char* y, int i, int j, LCSTable* table)
+{
+    int m = 0;
+    int n = 0;
+
+    for(m = 0; m <= i; m++) {
+        table->data[m][0] = 0;
+    }
+    
+    for(n = 0; n <= j; n++) {
+        table->data[0][n] = 0;
+    }
+    
+    for(m = 1; m <= i; m++) {
+        for(n = 1; n <= j; n++) {
+            if(x[m - 1] == y[n - 1]) {
+                table->data[m][n] = table->data[m - 1][n - 1] + 1;
+            }
+            else {
+                if(table->data[m][n - 1] >= table->data[m - 1][n]) {
+                    table->data[m][n] = table->data[m][n - 1];
+                }
+                else {
+                    table->data[m][n] = table->data[m - 1][n];
+                }
+            }
+        }
+    }
+    
+    return table->data[i][j];
+}
+```
+
+이 함수를 이용하면 두 문자열의 LCS 길이를 O(nm) 시간 안에 알아낼 수 있게 되었다.
+<br>
+하지만 더 수정해야 할 부분이 있는데, LCS 길이를 구하려던 것이 아니라 LCS 자체를 구하려고 했던 것이다.
+<br>
+<br>
+LCS는 LCS() 함수를 이용해서 만든 LCS 테이블에서 얻을 수 있다.
+<br>
+LCS 테이블의 오른쪽 아래 모서리부터 시작해서 왼쪽 위 모서리로 올라가면서 각 LCS 요소를 추적해내는 것이다.
+<br>
+<br>
+LCS 테이블에서 LCS를 추적하는 알고리즘은 다음과 같다.
+1. 오른쪽 아래 모소리 요소를 시작 셀로 지정하고, LCS의 요소를 담기 위한 리스트를 하나 준비
+2. 현재 위치한 셀의 값이 왼쪽, 왼쪽 위, 위 셀의 값보다 크면 현재 셀의 값을 리스트 헤드에 삽입하고 왼쪽 위 셀로 이동
+3. 현재 위치한 셀의 조건이 2번 과정에 해당하지 않으면 현재 셀의 값과 왼쪽 셀의 값이 같고 위 셀의 값보다 큰 경우 왼쪽으로 이동, 이동만 할 뿐이며 리스트에는 아무것도 넣지 않음
+4. 2번 과정과 3번 과정 중 어느 경우에도 해당하지 않으면 위 셀로 이동하며, 리스트에 아무것도 넣지 않음
+5. i = 0 또는 j = 0이 될 때까지 2 ~ 4번 과정 반복
+
+다음 그림은 LCS() 함수를 만들어낸 LCS 테이블인데, LCS를 테이블 끝에서 추적해오는 예를 보여준다.
+
+<br>
 
 
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/7aef68a1-0379-4803-a715-af5d4459069f)
 
 
+<br>
 
+다음은 LCS 알고리즘을 구현한 LCS() 함수이다.
 
+```
+int LCS_TraceBack(char* x, char* y, int m, int n, LCSTable* table, char* lcs)
+{
+    if(m == 0 || n == 0) {
+        return;
+    }
+    
+    if(table->data[m][n] > table->data[m][n - 1]
+        && table->data[m][n] > table->data[m - 1][n]
+        && table->data[m][n] > table->data[m - 1][n - 1])  {
+            char tempLCS[100];
+            strcpy(tempLCS, lcs);
+            sprintf(lcs, "%c%s", x[m - 1], tempLCS);
+            
+            LCS_TraceBack(x, y, m, n - 1, table, lcs);
+        }
+        else if(table->data[m][n] > table->data[m - 1][n]
+                && table->data[m][n] == table->data[m][n - 1]){
+            LCS_TraceBack(x, y, m, n - 1, table, lcs);
+        }
+        else {
+            LCS_TraceBack(x, y, m - 1, n, table, lcs);
+        }
+}
+```
 
+### [LCS 예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/%EC%9D%B4%EA%B2%83%EC%9D%B4%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0+%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%8B%A4%20with%20C%20%EC%96%B8%EC%96%B4/Chapter_13_%EB%8F%99%EC%A0%81%20%EA%B3%84%ED%9A%8D%EB%B2%95/%EC%B5%9C%EC%9E%A5%20%EA%B3%B5%ED%86%B5%20%EB%B6%80%EB%B6%84%20%EC%88%98%EC%97%B4(LCS,%20Longest%20Common%20Subsequence)/LCS,%20Longest%20Common%20Subsequence.c)
 
+### 실행 결과
 
+```
+    G U T E N   M O R G E N .  
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+G 0 1 1 1 1 1 1 1 1 1 1 1 1 1 
+O 0 1 1 1 1 1 1 1 2 2 2 2 2 2 
+O 0 1 1 1 1 1 1 1 2 2 2 2 2 2 
+D 0 1 1 1 1 1 1 1 2 2 2 2 2 2 
+  0 1 1 1 1 1 2 2 2 2 2 2 2 2 
+M 0 1 1 1 1 1 2 3 3 3 3 3 3 3 
+O 0 1 1 1 1 1 2 3 4 4 4 4 4 4 
+R 0 1 1 1 1 1 2 3 4 5 5 5 5 5 
+N 0 1 1 1 1 2 2 3 4 5 5 5 6 6 
+I 0 1 1 1 1 2 2 3 4 5 5 5 6 6 
+N 0 1 1 1 1 2 2 3 4 5 5 5 6 6 
+G 0 1 1 1 1 2 2 3 4 5 6 6 6 6 
+. 0 1 1 1 1 2 2 3 4 5 6 6 6 7 
 
-
-
-
-
-
-
-
-
+LCS:G MORN." (Length:7)
+```
 
 
 

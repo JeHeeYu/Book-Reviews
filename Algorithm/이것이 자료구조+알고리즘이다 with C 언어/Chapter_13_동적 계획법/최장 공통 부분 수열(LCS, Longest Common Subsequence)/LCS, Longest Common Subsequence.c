@@ -94,7 +94,7 @@ void LCS_TraceBack(char* x, char* y, int m, int n, LCSTable* table, char* lcs)
             strcpy(tempLCS, lcs);
             sprintf(lcs, "%c%s", x[m - 1], tempLCS);
             
-            LCS_TraceBack(x, y, m, n - 1, table, lcs);
+            LCS_TraceBack(x, y, m - 1, n - 1, table, lcs);
         }
         else if(table->data[m][n] > table->data[m - 1][n]
                 && table->data[m][n] == table->data[m][n - 1]){
@@ -118,7 +118,7 @@ void LCS_PrintTable(LCSTable* table, char* x, char* y, int lengthX, int lengthY)
     
     printf("\n");
     
-    for(i = 0; i < lengthX; i++) {
+    for(i = 0; i < lengthX + 1; i++) {
         if(i == 0) {
             printf("%2s", "");
         }

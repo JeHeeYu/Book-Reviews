@@ -1,4 +1,4 @@
-# 분할 정복 정리 내용
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/b882585f-3c81-4f34-b22c-913a3604b355)# 분할 정복 정리 내용
 
 ## 분할 정복 알고리즘 개념
 분할 정복 알고리즘은 문제를 더 이상 나눌 수 없을 때까지 나누고, 이렇게 나뉜 문제들을 각각 풀어 결국 전체 문제의 답을 얻는 기법이다.
@@ -105,15 +105,65 @@
 <br>
 
 먼저 A와 B의 첫 번째 요소끼리 비교를 수행한다.
+<br>
+A의 첫 번째 요소는 1, B의 첫 번째 요소는 2이므로 A의 것이 더 작으므로 C에 1을 입력하고 A에서 1을 삭제한다.
 
+<br>
 
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/e06661a5-b506-4395-b49d-2dfa09219130)
 
+<br>
 
+다음으로 A의 4와 B의 2를 비교한다.
+<br>
+2가 작으니 2를 B에서 삭제하고 C에 입력한다.
 
+<br>
 
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/bc6f8ecc-b47f-4aa4-a3b3-29ca4565d5c3)
 
+<br>
 
+이번에는 A의 4와 B의 3을 비교한다.
+<br>
+3이 작으니 이를 B에서 제거하고 C에 입력한다.
 
+<br>
 
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/fb501df7-ae75-4cf8-9f46-22063f23f236)
 
+<br>
+
+다시 A의 4와 B의 7을 비교한다.
+<br>
+C에 4를 입력하고 더 작은 A의 4는 A에서 삭제한다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/8ea57d39-dd4e-4b11-b823-b5ce609a8271)
+
+<br>
+
+이와 같이 데이터 A와 B에 남은 첫 번째 요소를 비교하고 C에 옮겨 넣는 일을 계속 하다보면 B에 9 하나만 남게 된다.
+<br>
+A에는 비교할 데이터가 남아 있지 않으므로 이를 C에 입력하고 B에서 삭제한다.
+<br>
+<br>
+이로써 A와 B가 모두 비게 되었고 C는 정렬된 데이터가 되었다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/08ea2082-7a4a-41d0-acc6-54208c1ab462)
+
+<br>
+
+## 병합 정렬 알고리즘 구현
+분할 정복에 기반하여 설계된 알고리즘은 재귀 호출을 이용해 쉽게 구현할 수 있다.
+<br>
+병합 정렬도 재귀 호출을 이용하여 나누고 병합하는 과정을 구현할 수 있다.
+<br>
+<br>
+병합 정렬 알고리즘을 구현하는 MergeSort() 함수는 크게 세 가지 작업을 수행한다.
+<br>
+첫 번째로 데이터를 반으로 나누고, 두 번째로 반으로 나눈 데이터를 매개 변수로 삼아 스스로를 재귀 호출하고, 마지막으로 둘로 나눈 데이터를 다시 병합한다.
 

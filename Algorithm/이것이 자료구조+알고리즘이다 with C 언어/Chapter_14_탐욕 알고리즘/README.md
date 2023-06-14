@@ -648,3 +648,16 @@ b를 압축 해제 버퍼에 추가하고 뿌리 노드로 돌아가서 다시 �
 <br>
 <br>
 000100001011111을 압축 해제해서 'aaabaacdd'를 얻었으므로 원본과 동일하다.
+
+<br>
+
+### [예제 코드](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/%EC%9D%B4%EA%B2%83%EC%9D%B4%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%2B%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%8B%A4%20with%20C%20%EC%96%B8%EC%96%B4/Chapter_14_%ED%83%90%EC%9A%95%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/Huffman.c)
+
+### 실행 결과
+
+```
+Original Size : 160 Encoded Size : 71
+Original : This Is Algorithms.
+Encoded : 10111000101100000111110000111111010001011110111000100011100111011100110
+Decoded : This Is Algorithms.
+```

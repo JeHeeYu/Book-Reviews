@@ -223,11 +223,42 @@ typedef struct tagPosition
 
 ### 알고리즘의 구현
 미로 탈출 알고리즘은 다음 4단계 과정으로 이루어진다.
+1. 시작점 S를 현재 위치로 지정하고 이동 방향을 북으로 설정
+2. 현 위치에서 가고자 하는 방향으로 이동 가능한 여부를 확인 (벽과 지나왔던 길은 이동 불가능한 길)
+3. 2단계에서 이동 가능한 방향임이 확인되면 그 곳으로 이동하고, 이동이 불가능한 방향이라고 확인되면 방향(북-남-동-서 순서)을 바꿔 다시 2단계 실행, 현 위치에서 북, 남, 동, 서 어떤 방향으로도 이동할 수 없음이 확인되면 이전 위치로 돌아감
+4. 출구를 찾거나 미로 내의 모든 길을 방문할 때까지 2 ~ 3단계 반복
 
+2단계를 처리하는 함수는 GetNextStep(), 3단계를 처리하는 함수는 MoveTo() 라고 이름을 붙인다.
+<br>
+그리고 1단계와 4단계를 처리하는 함수의 이름은 Solve()라고 짓는다.
+<br>
+<br>
+이들의 호출 관계는 대강 Solve() 함수가 시작점 S를 찾아 현 위치를 초기화하고, 다음 위치로 이동하기 위해 MoveTo() 함수를 호출한다.
+<br>
+MoveTo() 함수는 현 위치를 매개 변수로 GetNextStep() 함수를 호출하여 이동할 위치를 구해 그곳으로 이동하고, 그곳에서도 다시 MoveTo() 함수를 호출하여 새로운 위치로 이동한다.
+<br>
+<br>
+만약 GetNextStep()이 북, 남, 동, 서 어떤 방향으로도 이동할 수 없다고 판정한다면 MoveTo() 함수를 반환하여 이전 위치로 돌아간다.
+<br>
 
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/55ca52a3-aa5d-4641-b5b7-b88f5330e7db)
 
+<br>
 
+Solve(), MoveTo(), GetNextStep() 함수의 원형은 다음과 같다.
 
+```
+int Solve(MazeInfo* maze);
+int MoveTo(MazeInfo* maze, Position* current, int direction);
+int GetNextStep(MazeInfo* maze, Position* current, int direction, Position* next);
+```
+
+## 미로 탈출 알고리즘 예제 프로그램
+이 프로그램은 미로 데이터를 받도록 구성되어 있다.
+<br>
+'S', 'G', '#', ' ' 등으로 표시되어 있는 미로 데이터 파일을 입력 받으면 그것을 읽어 들여 Solve() 함수에 매개 변수로 넘긴다.
+<br>
+미로 데이터를 읽는 함수의 이름은 GetMaze() 이다.
 
 
 

@@ -112,19 +112,131 @@
 <br>
 
 ### 자료구조 정의
-먼저 해를 담을 자료구조로 체스판과 같은 N^2 크기의 배열이 필요하다.
+언뜻 보면 먼저 해를 담을 자료구조로 체스판과 같은 N^2 크기의 배열이 필요하다.
+<br>
+하지만 N개의 퀸 문제에서 N^2 크기의 자료구조를 사용하기에는 너무 비효율적이다.
+<br>
+N개의 퀸 문제의 해를 담는 데에는 그냥 N개의 배열 하나면 충분하다.
+<br>
+<br>
+다음과 같은 N개의 배열에서 각 요소의 인덱스 행 번호, 각 요소에 담긴 값은 열 번호로 사용하면 된다.
+
+```
+int columns[8];
+
+columns[0] = 0; // 0행 열
+columns[1] = 4; // 1행 4열
+columns[2] = 7; // 2행 7열
+columns[3] = 5; // 3행 5열
+columns[4] = 2; // 4행 2열
+columns[5] = 6; // 5행 6열
+columns[6] = 1; // 6행 1열
+columns[7] = 3; // 7행 3열
+```
+
+### 알고리즘 구현
+N개의 퀸의 해를 찾는 함수는 FindSolutionForQueen() 이라고 이름 짓는다.
+<br>
+이 함수도 재귀 호출을 이용하여 백트래킹을 처리한다.
+<br>
+<br>
+이 함수의 매개변수는 다음과 같다.
+- columns : 부분해
+- row : 새 퀸이 놓인 행 번호
+- numberOfQueens : 체스판의 크기
+- solutionCount : 해의 개수
+
+이 함수가 가장 먼저 할 일은 새로 놓은 퀸이 기존의 퀸들에게 위협받는지 알아내는 것이다.
+<br>
+이 함수가 호출할 IsThreatened() 함수는 부분해를 담고 있는 columns 배열과 새로 놓은 퀸이 행 번호를 매개 변수로 받아 위험 여부를 판단한다.
+<br>
+만약 새로 놓은 퀸이 기존의 퀸들을 위협한다면 함수를 반환하여 백트래킹한다.
+<br>
+즉, 그 이전 붑ㄴ해로 돌아가서 다음 후보를 시도하는 것이다.
+<br>
+<br>
+일단 IsThreatened() 함수를 통과했다면 이는 새로 놓은 퀸을 부분해로 인정한다는 의미이다.
+<br>
+IsThreatened() 함수를 통과한 부분해가 마지막 부분해라면 (row == numberOfQueens - 1) 이는 하나의 해가 완성되었다는 뜻이므로 해를 출력한다.
+<br>
+<br>
+아직 해를 더 찾아야 한다면 다시 FindSolutionForQueen() 함수를 재귀 호출한다.
+
+```
+void FindSolutionForQueen(int columns[], int row, int numberOfQueens, int* solutionCount)
+{
+    if(IsThreatened(columns, row)) {
+        return;
+    }
+    
+    if(row == numberOfQueens - 1) {
+        printf("Solution #%d : \n", ++(*solutionCount));
+        PrintSolution(columns, numberOfQueens);
+    }
+    else {
+        int i;
+        
+        for(i = 0; i < numberOfQueens; i++) {
+            columns[row + 1] = i;
+            FindSolutionForQueen(columns, row + 1, numberOfQueens, solutionCount);
+        }
+    }
+}
+```
+
+그 후 IsThreatened() 함수를 보면 이 함수는 새로 놓은 퀸이 먼저 놓인 퀸들과 위협 관계인지 판단하는 역할을 한다.
+- 수직 방향 위험 알아내기 : 이전 단계에서 놓은 퀸들이 위치한 열 중 새로 놓은 퀸 위치의 열과 같은 것이 있는지 확인하고, 있다면 새로 놓인 퀸은 다른 퀸을 수직으로 위협
+- 수평 방향 위협 알아내기 : 이전 단계에서 놓은 퀸들이 위치한 행 중 새로 놓은 퀸이 위치한 행과 같은 것이 있는지 확인하고, 있다면 새로 놓인 퀸은 다른 퀸을 수평으로 위협
+- 대각선 방향 위협 알아내기 : 두 퀸의 위치가 다음 등식을 만족하면 두 퀸은 대각선으로 상호 위협함
+
+```
+|행1-행2|=|열1-열2|
+```
+
+예를 들어 다음과 같이 퀸[3, 4]와 퀸[6, 7]은 |3-6|=3=|4-7|을 만족하므로 서로를 대각선 방향으로 위협한다.
 <br>
 
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/7c835541-9449-4c67-b6fa-915cd5b786fe)
 
+<br>
 
+다음 코드는 앞의 내용을 구현한 IsThreatened() 함수로 2개의 매개 변수가 존재한다.
+- columns : 부분해
+- newRow : 새로운 퀸이 놓인 행의 번호
 
+이 두 매개 변수로부터 새 퀸의 열 번호를 얻을 수 있다.
+<br>
+columns[newRow] 에는 새 퀸이 놓인 열 번호가 들어 있다.
+<br>
+<br>
+이 함수는 columns 배열을 순차적으로, 즉 0번 행부터 새 퀸이 놓인 행의 앞 행까지 돌면서 새 퀸의 위험 여부를 판단한다.
+<br>
+여기서 위협 여부를 판단하는 if 블록에 수평 방향 위협을 판단하는 부분이 없다.
+<br>
+그 이유는 IsThreatened() 함수를 호출하는 FindSolutionForQueen() 함수 자체가 새로운 행을 매개 변수로 입력 받아 실행되기 때문이다.
+<br>
+<br>
+그러므로 수평 위협은 고려 대상에서 제외된다.
 
+```
+int IsThreatened(int columns[], int newRow)
+{
+    int currentRow = 0;
+    int threatened = 0;
+    
+    while(currentRow < newRow) {
+        if(columns[newRow] == columns[currentRow] || abs(columns[newRow] - columns[currentRow]) == abs(newRow - currentRow)) {
+            threatened = 1;
+            break;
+        }
+        
+        currentRow++;
+    }
+    
+    return threatened;
+}
+```
 
+<br>
 
-
-
-
-
-
-
-
+## N개의 퀸 문제 풀이 예제 프로그램

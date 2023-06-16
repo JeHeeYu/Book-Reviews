@@ -43,4 +43,51 @@
 1bit 씩도 Transfer 가능하며, 공통 버스를 이용하는 시스템인 셈으로 각각의 레지스터는 4bit 래치이며, 4개의 MUX에 연결되어 있다.
 <br>
 <br>
-S1, S0가 MUX Control 신호이며,
+S1, S0가 MUX Control 신호이며, S1, S0에 의하여 MUX의 Enable Port 번호가 결정ㅈ된다.
+<br>
+<br>
+예를 들어,
+<br>
+S1 = 0, S0 = 0 = 0번 Port Enable
+<br>
+S1 = 0, S0 = 1 = 1번 Port Enable
+<br>
+S1 = 1, S0 = 0 = 2번 Port Enable
+<br>
+S1 = 1, S0 = 1 = 3번 Port Enable
+<br>
+와 같이 되는 형식이다.
+<br>
+<br>
+이 상황을 보면 S1, S0이 각각 1, 0 일 경우 MUX의 2번 Port만 데이터 입력이 가능한데,
+<br>
+MUX 각각의 2번 Port는 왼쪽에서 부터 C3, C2, C1, C0가 연결되어 있어서 Register C가 버스를 독점하게 되는 구조이다.
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/3951d095-d828-4b50-8b42-1bf7b87deabc)
+
+<br>
+
+이런 식으로 따져 진리표를 그려보면 아래와 같다.
+
+```
+S1    S0        EnablePort       Register
+0     0             0               A
+0     1             1               B
+1     0             2               C
+1     1             3               D
+```
+
+이런 시스템이라면 S1, S0 신호선을 잘 이용해서 그때 필요한 버스 사용권을 각각의 레지스터들에게 할당할 수 있다.
+<br>
+<br>
+보통은 이런 S1, S0을 아비터라는 신호등이 자신의 Algorithm Policy에 의거하여 수용권을 부여한다.
+<br>
+<br>
+버스에는 주소 버스, 데이터 버스, 제어 및 상태 버스 등 3가지 종류의 버스가 있다.
+<br>
+주소 버스에는 현재 MCU가 Access 하려는 주소가 번쩍, 즉 MCU에서 나오는 단방향 신호이다.
+<br>
+데이터 버스는 양방향으로서 MCU가 데이터를 주고 받을 수 있다.
+<br>
+제어 버스는 단방향일 수도 양방향일 수도 있다.

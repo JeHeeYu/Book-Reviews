@@ -1,4 +1,4 @@
-![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/ecaf188c-9b7f-44be-8d7b-81f48cd58fab)# Timing 및 Spec 읽기 정리 내용
+# Timing 및 Spec 읽기 정리 내용
 
 ## 타이밍(Timing)
 타이밍을 제대로 확인하기 위해서는 스위치 특성을 이해해야 하는데, 게이트에서는 입력 신호가 들어온 후 출력 신호가 나오기까지 약간의 시간이 걸린다.

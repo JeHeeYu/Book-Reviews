@@ -1,5 +1,11 @@
 # 읽은 기술 서적 관련 내용 정리
 
+## Language
+||
+|:---:|
+|<img src="https://github.com/JeHeeYu/Book-Reviews/assets/87363461/103f81a5-c2ca-4312-8ff6-52de8ede3780" width="160" height="230">|
+|[초보자를 위한<br>SQL 200제](https://github.com/JeHeeYu/Book-Reviews/tree/main/Language/%EC%B4%88%EB%B3%B4%EC%9E%90%EB%A5%BC%20%EC%9C%84%ED%95%9C%20SQL%20200%EC%A0%9C)|
+
 
 ## Algorithm
 

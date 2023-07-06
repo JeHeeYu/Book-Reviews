@@ -1,5 +1,12 @@
 # 읽은 기술 서적 관련 내용 정리
 
+## Language
+
+||
+|:---:|
+|<img src="https://github.com/JeHeeYu/Book-Reviews/assets/87363461/62cacd80-b109-450b-9ff5-763478c4466a" width="160" height="230">|
+|[혼자 공부하는 SQL](https://github.com/JeHeeYu/Book-Reviews/tree/main/Language/%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20SQL)|
+
 ## Algorithm
 
 |||

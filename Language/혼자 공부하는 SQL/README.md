@@ -1,3 +1,7 @@
 # 혼자 공부하는 SQL 목차
 
 ### [Chapter 01. 데이터베이스와 SQL](https://github.com/JeHeeYu/Book-Reviews/tree/main/Language/%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20SQL/Chapter%2001.%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%99%80%20SQL)
+
+### [Chapter 02. Chapter 02. 실전용 SQL 미리 맛보기](https://github.com/JeHeeYu/Book-Reviews/tree/main/Language/%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20SQL/Chapter%2002.%20%EC%8B%A4%EC%A0%84%EC%9A%A9%20SQL%20%EB%AF%B8%EB%A6%AC%20%EB%A7%9B%EB%B3%B4%EA%B8%B0)
+- [02-1 건물을 짓기 위한 설계도, 데이터베이스 모델링](https://github.com/JeHeeYu/Book-Reviews/tree/main/Language/%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20SQL/Chapter%2002.%20%EC%8B%A4%EC%A0%84%EC%9A%A9%20SQL%20%EB%AF%B8%EB%A6%AC%20%EB%A7%9B%EB%B3%B4%EA%B8%B0/02-1%20%EA%B1%B4%EB%AC%BC%EC%9D%84%20%EC%A7%93%EA%B8%B0%20%EC%9C%84%ED%95%9C%20%EC%84%A4%EA%B3%84%EB%8F%84%2C%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%20%EB%AA%A8%EB%8D%B8%EB%A7%81)
+- [02-2 데이터베이스 시작부터 끝까지](https://github.com/JeHeeYu/Book-Reviews/tree/main/Language/%ED%98%BC%EC%9E%90%20%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%20SQL/Chapter%2002.%20%EC%8B%A4%EC%A0%84%EC%9A%A9%20SQL%20%EB%AF%B8%EB%A6%AC%20%EB%A7%9B%EB%B3%B4%EA%B8%B0/02-2%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%20%EC%8B%9C%EC%9E%91%EB%B6%80%ED%84%B0%20%EB%81%9D%EA%B9%8C%EC%A7%80)

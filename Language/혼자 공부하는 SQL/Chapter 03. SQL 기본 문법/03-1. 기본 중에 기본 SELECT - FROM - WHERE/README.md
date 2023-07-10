@@ -63,3 +63,52 @@ WHERE 다음에는 조건식이 나오는데, 조건식을 다양하게 표현�
 <br>
 
 ### 실습용 데이터베이스 만들기
+
+1. market_db.sqml 다운로드
+
+
+
+2. MySQL Workbench를 실행해서 열려 있는 쿼리 창은 모두 닫는다.<br>그리고 File - Open SQL Scription 메뉴를 선택하고 앞에서 다운로드한 'market_db.sql'을 선택한 후 열기 버튼을 클릭한다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/51a62b1c-1b32-4563-b314-a034c507906f)
+
+<br>
+
+3. Execute 아이콘을 클릭해서 SQL을 실행하면 Rsult Grid 창의 하단 member 1 탭을 클릭해서 회원 테이블(member)의 완성된 상태를 확인한다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/1b284750-70b7-4d57-b352-8101dde7a5a4)
+
+
+<br>
+
+4. 이번에는 Result Grid 창의 하단에서 buy 2 탭을 클릭 후 구매 테이블(buy)을 확인해 본다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/a4c8eb95-1c64-4b0a-bab0-7c7530edcfa9)
+
+<br>
+
+### market_db.sql 파일 내용 살펴보기
+
+```
+DROP DATABASE IF EXISTS market_db;
+```
+
+DROP DATABASE는 market_db를 삭제하는 문장이다.
+<br>
+이는 market_db.sql을 처음 실행할 때는 필요 없다.
+<br>
+하지만 책을 학습하다 보면 다시 market_db.sql을 실행할 일이 있기 때문의 기존의 DB를 삭제하는 것이다.
+
+<br>
+
+```
+CREATE DATABASE market_db;
+```
+
+데이터베이스를 새로 만든다.

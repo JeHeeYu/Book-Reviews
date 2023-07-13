@@ -212,3 +212,19 @@ INSERT INTO buy VALUES(NULL, 'BLK', '지갑', NULL, 30, 2);
 구매 테이블(buy)의 첫 번째 열인 순번(num)은 자동으로 입력되므로 그 자리에는 NULL이라고 써주면 된다.
 <br>
 그러면 알아서 1, 2, 3 ... 으로 증가하면서 입력되고, 여기서는 처음이므로 1이 입력된다.
+
+<br>
+
+### 데이터 조회하기
+market_db.sql 파일의 마지막 2개 행에서는 입력된 내용을 확인하기 위해서 SELECT로 조회한다.
+
+```
+SELECT * FROM member;
+SELECT * FROM buy;
+```
+
+
+<br>
+
+
+## 기본 조회하기: SELECT ~ FROM

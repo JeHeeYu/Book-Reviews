@@ -100,4 +100,15 @@ remove() 함수는 삭제할 원소 값 하나를 매개변수로 받는다.
 <br>
 저장된 데이터 타입에서 등호 연산이 지원되지 않으면 remove() 함수를 사용할 수 없으며, 이 경우 컴파일러는 에러를 발생시킨다.
 
-### 1.5.3 연습 문제 3: 연결 리스트에서 remove_if() 함수를 이용한 조건부 원소 삭제
+### 1.5.3 연습 문제 3: [연결 리스트에서 remove_if() 함수를 이용한 조건부 원소 삭제](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/%EC%BD%94%EB%94%A9%20%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC%20%EC%9C%84%ED%95%9C%20%EC%9E%90%EB%A3%8C%20%EA%B5%AC%EC%A1%B0%EC%99%80%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20with%20C%2B%2B/1%EC%9E%A5%20%EB%A6%AC%EC%8A%A4%ED%8A%B8%2C%20%EC%8A%A4%ED%83%9D%2C%20%ED%81%90/1.5%20std%3A%3Aforward_list/citizen.cpp)
+
+<br>
+
+### 실행 결과
+
+```
+전체 시민들: [Kim, 22] [Lee, 25] [Park, 18] [Jin, 16] 
+투표권이 있는 시민들: [Kim, 22] [Lee, 25] 
+내년에 투표권이 생기는 시민들: [Park, 18]
+```
+

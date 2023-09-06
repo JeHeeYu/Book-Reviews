@@ -195,3 +195,13 @@ std::array는 깊은 비교(Deep Comperison)를 위한 관계 연산자(Relation
 1반을 복사하여 2반 생성:[Kim, 15], [Lee, 15], [Park, 16]
 1반과 2반을 합쳐 3반 생성: [Kim, 15], [Lee, 15], [Park, 16], [Kim, 15], [Lee, 15], [Park, 16]
 ```
+
+<br>
+
+### 1.3.2 연습 문제 2 : [빠르고 범용적인 데이터 저장 컨테이너 만들기](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/%EC%BD%94%EB%94%A9%20%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC%20%EC%9C%84%ED%95%9C%20%EC%9E%90%EB%A3%8C%20%EA%B5%AC%EC%A1%B0%EC%99%80%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20with%20C%2B%2B/1%EC%9E%A5%20%EB%A6%AC%EC%8A%A4%ED%8A%B8%2C%20%EC%8A%A4%ED%83%9D%2C%20%ED%81%90/1.3%20std%3A%3Aarray/save_container.cpp)
+
+### 실행 결과
+
+```
+1 0 97 3.2 0
+```

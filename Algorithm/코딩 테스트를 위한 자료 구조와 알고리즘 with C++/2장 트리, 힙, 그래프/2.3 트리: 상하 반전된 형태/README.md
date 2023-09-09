@@ -36,7 +36,75 @@ IT부장 아래에 앱개발팀장(을)를 추가했습니다.
 
 ### 2.3.2 트리 순회
 
-### 전위(preorder) 순회
+### 전위 순회(Preorder Traversal)
 이 방법은 노드를 먼저 방문하고, 그 다음은 현재 노드의 왼쪽 하위 녿를, 마지막으로 현재 노드의 오른쪽 하위 노드를 재귀적인 방식으로 방문한다.
 <br>
 여기서 '전위(pre)'는 상위 노드를 하위 노드보다 먼저 방문한다는 뜻을 말한다.
+<br>
+<br>
+연습 문제 7번을 전위 순회 방식으로 탐색하면 다음과 같다.
+```
+CEO, 부사장, IT부장, 보안팀장, 앱개발팀장, 마케팅부장, 물류팀장, 홍보팀장
+```
+전위 순회는 항사 부모 노드를 방문한 후 다음 왼쪽 자식 노드, 오른쪽 자식 노드를 차례로 방문한다.
+<br>
+이러한 방식의 순회를 루트 노드만이 아닌 루트 노드 아래의 모든 서브 트리에 대해 적용한다.
+<br>
+<br>
+전위 순회는 다음과 같이 구현할 수 있다.
+```
+static void preOrder(node* start)
+{
+    if(!start)
+        return;
+
+    std::cout << start->position << ", ";
+    preOrder(start->first);
+    preOrder(start->second);
+}
+```
+
+<br>
+
+### 중위 순회(In-Order Traversal)
+중위 순회는 왼쪽 노드를 먼저 방문하고, 그 다음 현재 노드, 마지막으로 오른쪽 노드를 방문하는 방법을 말한다.
+<br>
+<br>
+연습 문제 7번을 중위 순회 방식으로 탐색하면 다음과 같다.
+```
+보안팀장, IT부장, 앱개발팀장, 부사장, 물류팀장, 마케팅부장, 홍보팀장, CEO
+```
+중위 순회는 다음과 같이 구현할 수 있다.
+```
+static void inOrder(node* start)
+{
+    if(!start)
+        return;
+
+    inOrder(start->first);
+    std::cout << start->position << ", ";
+    inOrder(start->second);
+}
+```
+
+<br>
+
+### 후위 순회(Post-Order Traversal)
+후위 순회는 두 자식 노드를 먼저 방문한 후 현재 노드를 방문하는 방법을 말한다.
+<br>
+연습 문제 7번을 중위 순회 방식으로 탐색하면 다음과 같다.
+```
+보안팀장, 앱개발팀장, IT부장, 물류팀장, 홍보팀장, 마케팅부장, 부사장, CEO
+```
+후위 순회는 다음과 같이 구현할 수 있다.
+```
+static void postOrder(node* start)
+{
+    if(!start)
+        return;
+
+    postOrder(start->first);
+    postOrder(start->second);
+    std::cout << start->position << ", ";
+}
+```

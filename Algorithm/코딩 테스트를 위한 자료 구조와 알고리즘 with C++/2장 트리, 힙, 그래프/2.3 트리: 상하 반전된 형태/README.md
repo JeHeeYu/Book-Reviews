@@ -124,3 +124,7 @@ CEO,
 IT부장, 마케팅부장,
 보안팀장, 앱개발팀장, 물류팀장, 홍보팀장,
 ```
+
+<br>
+
+### 연습 문제 8 : [레벨 순서 순회 구현하기](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/%EC%BD%94%EB%94%A9%20%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC%20%EC%9C%84%ED%95%9C%20%EC%9E%90%EB%A3%8C%20%EA%B5%AC%EC%A1%B0%EC%99%80%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20with%20C%2B%2B/2%EC%9E%A5%20%ED%8A%B8%EB%A6%AC%2C%20%ED%9E%99%2C%20%EA%B7%B8%EB%9E%98%ED%94%84/2.3%20%ED%8A%B8%EB%A6%AC%3A%20%EC%83%81%ED%95%98%20%EB%B0%98%EC%A0%84%EB%90%9C%20%ED%98%95%ED%83%9C/level_order_traversal.cpp)

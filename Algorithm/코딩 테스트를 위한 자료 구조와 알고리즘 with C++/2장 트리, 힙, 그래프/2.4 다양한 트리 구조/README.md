@@ -113,3 +113,132 @@ BST에서 원소를 삭제하는 작업은 단순히 노드를 삭제하는 것�
 그리고 검색 범위가 수식처럼 T(N / 2) 형태로 줄어드는 것도 항상 성립되지 않는다.
 <br>
 그러므로 시간 복잡도가 O(log N)이라는 것도 항상 정확하다고 볼 수 없다.
+
+<br>
+
+### 2.4.3 연습 문제 9 : [BST 구현하기](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/%EC%BD%94%EB%94%A9%20%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC%20%EC%9C%84%ED%95%9C%20%EC%9E%90%EB%A3%8C%20%EA%B5%AC%EC%A1%B0%EC%99%80%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20with%20C%2B%2B/2%EC%9E%A5%20%ED%8A%B8%EB%A6%AC%2C%20%ED%9E%99%2C%20%EA%B7%B8%EB%9E%98%ED%94%84/2.4%20%EB%8B%A4%EC%96%91%ED%95%9C%20%ED%8A%B8%EB%A6%AC%20%EA%B5%AC%EC%A1%B0/BST.cpp)
+
+<br>
+
+### 실행 결과
+
+```
+중위 순회 : 2 4 8 10 11 12 15 20 28 
+12를 삭제한 후 중위 순회 : 2 4 8 10 11 15 20 28 
+15에서 왼쪽으로 이동 : 10에서 오른쪽으로 이동 : 11에서 오른쪽으로 이동 : 
+원소 12는 트리에 없습니다.
+```
+
+<br>
+
+### 2.4.4 균형 트리
+
+예를 들어 먼저 BST에 다음과 같은 순서로 원소를 삽입한다.
+```
+bst tree;
+tree.insert(10);
+tree.insert(9);
+tree.insert(11);
+tree.insert(8);
+tree.insert(7);
+tree.insert(6);
+tree.insert(5);
+tree.insert(4);
+```
+
+이렇게 구성된 BST를 그림으로 표현하면 다음과 같다.
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/04b9d213-1ca2-44e0-b289-28048522205e)
+
+<br>
+
+이 그림을 보면 전체 트리가 왼쪽으로 편향되어 있는 것을 볼 수 있다.
+<br>
+이 상태에서 트리의 find() 함수를 사용하여 bst.find(4) 코드를 실행하면 아래와 같은 형태로 검색을 수행한다.
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/b06b3106-8c5f-4acc-b131-596b3812a49e)
+
+<br>
+
+이 경우 비교 횟수가 원소 개수와 거이 같아진다.
+<br>
+이번에는 다른 예를 들기 위해 아래와 같이 BST를 만든다.
+```
+bst tree;
+tree.insert(7);
+tree.insert(5);
+tree.insert(9);
+tree.insert(4);
+tree.insert(6);
+tree.insert(10);
+tree.insert(11);
+tree.insert(8);
+```
+
+이와 같은 트리를 그림으로 표현하면 다음과 같다.
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/3743782d-4bee-4efd-a3bb-dd4fb3aa3cc1)
+
+<br>
+
+이 트리는 편향되지 않은 상태인데, 이러한 트리를 균형이 잡혔다고 한다.
+<br>
+이 상태에의 트리에서는 4를 찾는 단계가 크게 감소한다.
+<br>
+<br>
+즉, find() 함수의 시간 복잡도는 단순히 원소 개수에만 영향을 받는 것이 아니라 트리의 형태에 대해서도 영항을 받는다.
+<br>
+<br>
+검색 단계를 면밀히 살펴보면 항상 트리의 아래쪽으로 한 단계씩 나아가는 것을 알 수 있다.
+<br>
+그리고 결국 더 이상 자식 노드가 없는 리프 노드(Leaf Node)에서 끝나게 된다.
+<br>
+<br>
+여기서 찾고자 하는 원소를 발견하면 해당 노드를 반환하고, 없으면 NULL을 반환한다.
+<br>
+따라서 검색에 필요한 단계의 수는 BST의 최대 레벨 수보다도 작다.
+<br>
+<br>
+BST의 레벨 수를 BST의 높이(height)라고 부르기 때문에 원소 검색의 실제 시간 복잡도는 O(높이)로 표현할 수 있다.
+<br>
+<br>
+결국 원소 검색의 시간 복잡도를 최적화하려면 트리의 높이가 최적화되어야 한다.
+<br>
+이러한 작업을 트리의 균형 잡기라고 한다.
+<br>
+트리의 균형을 잡기 위해서는 원소 삽입 또는 삭제 후에 트리 구성을 조정해야 한다.
+<br>
+<br>
+이렇게 조정되어 편향성이 줄어든 이진 검색 트리를 높이-균형 BST(Height-Balance) 라고 한다.
+
+<br>
+
+
+### 2.4.5 N-항 트리
+N-항 트리(N-ary Tree)는 각 노드가 N개의 자식을 가질 수 있다.
+<br>
+N은 임의의 양수이므로 N개의 자식 노드는 벡터를 이용하여 저장할 수 있다.
+<br>
+<br>
+N항 트리는 다음과 같이 구현한다.
+```
+struct nTree
+{
+    int data;
+    std::vector<nTree*> children;
+};
+```
+이 코드에서 각각의 노드는 임의 개수의 자식을 거느릴 수 있다.
+<br>
+그러므로 전체 트리도 임의의 형태를 가지게 된다.
+<br>
+<br>
+컴퓨터 분야에서 N항 트리를 사용하는 대표적인 예는 다음과 같다.
+- 컴퓨터 파일 시스템 구조
+- 컴파일러
+
+<br>

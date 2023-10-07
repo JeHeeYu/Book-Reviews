@@ -85,3 +85,44 @@
 <br>
 <br>
 즉, 충돌이란 해시 함수가 서로 다른 키에 대해 같은 해시 값을 반환함으로써, 다수의 키가 같은 값을 갖게 되는 현상을 말한다.
+
+<br>
+
+### 연습 문제 13 : [정수 값을 저장하는 간단한 사전](https://github.com/JeHeeYu/Book-Reviews/blob/main/Algorithm/%EC%BD%94%EB%94%A9%20%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC%20%EC%9C%84%ED%95%9C%20%EC%9E%90%EB%A3%8C%20%EA%B5%AC%EC%A1%B0%EC%99%80%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20with%20C%2B%2B/3%EC%9E%A5%20%ED%95%B4%EC%8B%9C%20%ED%85%8C%EC%9D%B4%EB%B8%94%EA%B3%BC%20%EB%B8%94%EB%A3%B8%20%ED%95%84%ED%84%B0/3.2%20%ED%95%B4%EC%8B%9C%20%ED%85%8C%EC%9D%B4%EB%B8%94/hash_map_example.cpp)
+
+<br>
+
+### 실행 결과
+
+```
+2을(를) 삽입했습니다.
+25을(를) 삽입했습니다.
+10을(를) 삽입했습니다.
+해시 맵에서 25을(를) 찾았습니다.
+100을(를) 삽입했습니다.
+해시 맵에서 100을(를) 찾았습니다.
+해시 맵에서 2을(를) 찾지 못했했습니다.
+25을(를) 삭제했습니다.
+```
+
+13번 문제에서 이전에 삽입한 값 대부분을 찾을 수 있다.
+<br>
+다만 숫자 100을 삽입하면 100 % 7 = 2이므로 기존에 삽입된 정수 2를 덮어쓰게 되고, 이후에는 2를 찾지 못한다.
+<br>
+<br>
+이것이 충돌이다.
+<br>
+아래는 연습 문제 13번에 대한 동작 그림이다.
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/46cad19a-4e21-48b5-b2df-141ac953fc66)
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/19c5b51e-797b-4d2a-bb63-e32cef8835a1)
+
+<br>
+
+![image](https://github.com/JeHeeYu/Book-Reviews/assets/87363461/8176f050-861e-42f3-8a6a-e93de3625134)
+
+<br>

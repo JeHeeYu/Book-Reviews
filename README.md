@@ -37,7 +37,11 @@
 |:---:|:---:|:---:|
 |[Do it! 안드로이드<br> 앱 프로그래밍](https://github.com/JeHeeYu/Book-Reviews/tree/main/Application/Do%20it!%20%EA%B9%A1%EC%83%98%EC%9D%98%20%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20with%20%EC%BD%94%ED%8B%80%EB%A6%B0)|[리액트 네이티브](https://github.com/JeHeeYu/Book-Reviews/tree/main/Application/%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%84%A4%EC%9D%B4%ED%8B%B0%EB%B8%8C)|[Do it! 플러터<br>앱 프로그래밍](https://github.com/JeHeeYu/Book-Reviews/tree/main/Application/Do%20it!%20%ED%94%8C%EB%9F%AC%ED%84%B0%20%EC%95%B1%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)
 
-# Git
+## Git
+
+|<img src="https://github.com/JeHeeYu/Book-Reviews/assets/87363461/ba9f1f8e-552d-4a41-959e-d3fcf31a1833" width="160" height="230">|
+|:---:|
+|[Git 교과서](https://github.com/JeHeeYu/Book-Reviews/tree/main/Git/Git%20%EA%B5%90%EA%B3%BC%EC%84%9C)|
 
 ## Certificate
 
